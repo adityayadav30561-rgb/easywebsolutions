@@ -13,15 +13,14 @@ import {
   type FieldErrors,
 } from "@/lib/contact";
 import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
-  "block w-full rounded-xl border border-line-strong bg-white px-4 py-3 text-[0.9375rem] text-ink placeholder:text-slate-400 " +
-  "transition-[border-color,box-shadow] duration-300 outline-none hover:border-ink/25 " +
-  "focus:border-violet-600 focus:ring-4 focus:ring-violet/15 aria-[invalid=true]:border-red-500 aria-[invalid=true]:focus:ring-red-500/15";
+  "block w-full rounded-none border-0 border-b border-line-strong bg-transparent px-0 py-3 text-lg text-ink placeholder:text-grey " +
+  "transition-[border-color] duration-300 outline-none hover:border-ink/40 focus:border-violet " +
+  "aria-[invalid=true]:border-red-600";
 
 function Field({
   id,
@@ -40,7 +39,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 flex items-baseline justify-between text-sm font-medium text-ink">
+      <label htmlFor={id} className="label flex items-baseline justify-between text-ink">
         <span>
           {label}
           {required && (
@@ -49,17 +48,16 @@ function Field({
             </span>
           )}
         </span>
-        {!required && <span className="text-xs font-normal text-slate">Optional</span>}
+        {!required && <span className="text-grey">Optional</span>}
       </label>
       {children}
       {hint && !error && (
-        <p id={`${id}-hint`} className="mt-1.5 text-xs text-slate">
+        <p id={`${id}-hint`} className="mt-2 text-xs text-grey">
           {hint}
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="mt-1.5 flex items-center gap-1.5 text-sm text-red-600">
-          <Icon name="x" size={14} />
+        <p id={`${id}-error`} className="mt-2 text-sm text-red-700">
           {error}
         </p>
       )}
@@ -124,17 +122,15 @@ export function ContactForm({ defaultNeed = "", interest = "" }: { defaultNeed?:
   if (status === "success") {
     return (
       <div role="status" className="flex min-h-[28rem] flex-col items-center justify-center px-4 py-16 text-center">
-        <span className="flex size-16 items-center justify-center rounded-full bg-gradient-to-br from-violet-300 to-violet-600 text-white shadow-[0_14px_30px_-12px_rgb(124_58_237/0.7)]">
-          <Icon name="check" size={28} strokeWidth={2.2} />
-        </span>
-        <h2 className="mt-8 text-3xl font-semibold">Thank you{submittedName ? `, ${submittedName}` : ""}.</h2>
-        <p className="mt-4 max-w-md text-slate">
+        <span aria-hidden="true" className="signal h-[3px] w-16" />
+        <h2 className="display mt-10 text-[3rem] text-ink sm:text-[4rem]">Thank you{submittedName ? `, ${submittedName}` : ""}.</h2>
+        <p className="mt-6 max-w-md text-lg text-ink-700">
           Your enquiry has been sent. We&apos;ll review the details and get back to you by email as soon as we can.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink hover:text-violet-600"
+          className="label mt-10 inline-flex min-h-11 items-center gap-2 text-ink hover:text-violet-700"
         >
           Send another enquiry
         </button>
@@ -148,14 +144,13 @@ export function ContactForm({ defaultNeed = "", interest = "" }: { defaultNeed?:
   const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent("Website enquiry")}`;
 
   return (
-    <form noValidate onSubmit={onSubmit} aria-describedby="form-note" className="space-y-6">
-      <p id="form-note" className="text-sm text-slate">
+    <form noValidate onSubmit={onSubmit} aria-describedby="form-note" className="space-y-10">
+      <p id="form-note" className="text-sm text-grey">
         Fields marked <span className="text-violet-600">*</span> are required.
       </p>
 
       {interest && (
-        <div className="flex items-center gap-3 rounded-xl border border-violet/20 bg-violet-50/70 px-4 py-3 text-sm text-ink-800">
-          <Icon name="sparkle" size={17} className="shrink-0 text-violet-600" />
+        <div className="flex items-center gap-3 border-l-2 border-violet bg-violet-50 px-4 py-3 text-sm text-ink-800">
           <span>
             Enquiring about: <strong className="font-semibold">{packageLabels[interest]}</strong>
           </span>
@@ -163,7 +158,7 @@ export function ContactForm({ defaultNeed = "", interest = "" }: { defaultNeed?:
         </div>
       )}
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-10 sm:grid-cols-2">
         <Field id="name" label="Name" required error={errors.name}>
           <input
             id="name"
@@ -213,30 +208,33 @@ export function ContactForm({ defaultNeed = "", interest = "" }: { defaultNeed?:
         />
       </Field>
 
-      <Field id="need" label="What do you need?">
-        <div className="relative">
-          <select id="need" name="need" defaultValue={validNeed} className={cn(inputClass, "appearance-none pr-11")}>
-            <option value="">Select an option</option>
-            {needOptions.map((o) => (
-              <option key={o.value} value={o.value}>
+      <fieldset>
+        <legend className="label mb-4 flex w-full items-baseline justify-between text-ink">
+          <span>Project type</span>
+          <span className="text-grey">Optional</span>
+        </legend>
+        <div className="flex flex-wrap gap-2">
+          {needOptions.map((o) => (
+            <label key={o.value} className="relative cursor-pointer">
+              <input type="radio" name="need" value={o.value} defaultChecked={validNeed === o.value} className="peer sr-only" />
+              <span className="flex min-h-11 items-center rounded-[6px] border border-line-strong px-4 text-sm text-ink-700 transition-colors duration-300 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-violet hover:border-ink">
                 {o.label}
-              </option>
-            ))}
-          </select>
-          <Icon name="arrow-right" size={16} className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 rotate-90 text-slate" />
+              </span>
+            </label>
+          ))}
         </div>
-      </Field>
+      </fieldset>
 
       <fieldset>
-        <legend className="mb-2 flex w-full items-baseline justify-between text-sm font-medium text-ink">
+        <legend className="label mb-4 flex w-full items-baseline justify-between text-ink">
           <span>Budget</span>
-          <span className="text-xs font-normal text-slate">Optional</span>
+          <span className="text-grey">Optional</span>
         </legend>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           {budgetOptions.map((b) => (
             <label key={b} className="relative cursor-pointer">
               <input type="radio" name="budget" value={b} className="peer sr-only" />
-              <span className="flex min-h-11 items-center justify-center rounded-xl border border-line-strong bg-white px-3 text-center text-sm font-medium text-ink-700 transition-all duration-300 peer-checked:border-violet-600 peer-checked:bg-violet-50 peer-checked:text-violet-700 peer-focus-visible:ring-4 peer-focus-visible:ring-violet/20 hover:border-ink/25">
+              <span className="flex min-h-12 items-center justify-center rounded-[6px] border border-line-strong px-3 text-center text-sm text-ink-700 transition-colors duration-300 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-violet hover:border-ink">
                 {b}
               </span>
             </label>
@@ -248,7 +246,7 @@ export function ContactForm({ defaultNeed = "", interest = "" }: { defaultNeed?:
         <textarea
           id="message"
           name="message"
-          rows={5}
+          rows={4}
           required
           aria-required="true"
           aria-invalid={Boolean(errors.message)}
@@ -265,7 +263,7 @@ export function ContactForm({ defaultNeed = "", interest = "" }: { defaultNeed?:
       </div>
 
       {status === "error" && serverError && (
-        <div role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm text-red-800">
+        <div role="alert" className="border-l-2 border-red-600 bg-red-50 px-4 py-3.5 text-sm text-red-800">
           <p className="font-medium">{serverError}</p>
           <p className="mt-1">
             You can also email us directly at{" "}
@@ -278,14 +276,14 @@ export function ContactForm({ defaultNeed = "", interest = "" }: { defaultNeed?:
       )}
 
       <div className="flex flex-col-reverse gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs leading-relaxed text-slate sm:max-w-xs">
+        <p className="text-xs leading-relaxed text-grey sm:max-w-xs">
           We only use your details to respond to your enquiry. See our{" "}
           <Link href="/privacy" className="underline underline-offset-2 hover:text-ink">
             Privacy Policy
           </Link>
           .
         </p>
-        <Button type="submit" size="lg" arrow={status !== "submitting"} disabled={status === "submitting"} className="w-full sm:w-auto">
+        <Button type="submit" arrow={status !== "submitting"} disabled={status === "submitting"} className="w-full sm:w-auto">
           {status === "submitting" ? "Sending…" : "Send Enquiry"}
         </Button>
       </div>

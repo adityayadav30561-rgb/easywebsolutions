@@ -27,6 +27,7 @@ npm run lint       # ESLint
 | `/about`        | Approach, mission, values                                  |
 | `/contact`      | Enquiry form + contact details                             |
 | `/privacy`, `/terms` | Legal templates                                        |
+| `/credits`      | Photography credits                                        |
 
 CTAs pre-fill the contact form: `/contact?package=professional`, `/contact?plan=plus`, `/contact?need=optimization`.
 
@@ -40,8 +41,9 @@ All placeholders are centralised and marked `PLACEHOLDER` in code.
 2. **Contact details** — email, phone and WhatsApp number in `src/config/site.ts`.
 3. **Social links** — Instagram / LinkedIn / Facebook URLs in `src/config/site.ts`.
 4. **Testimonials** — `src/data/testimonials.ts` (only publish real, approved quotes).
-5. **Portfolio** — `src/data/projects.ts` contains clearly labelled *concept* projects. Add real client work with
-   `status: "client"`, an `image` screenshot (e.g. `/public/work/name.webp`) and only measured results.
+5. **Portfolio** — `src/data/projects.ts` contains clearly labelled *concept* projects (a licensed photograph with a
+   code-drawn website over it). Add real client work with `status: "client"`, an `image` screenshot
+   (e.g. `/public/work/name.webp`) and only measured results.
 6. **Legal pages** — `/privacy` and `/terms` are templates; have them reviewed for your jurisdiction.
 
 ## Contact form delivery
@@ -60,23 +62,32 @@ configured the endpoint returns `503` and the form shows a fallback email link, 
 ```
 src/
   app/                 routes, metadata, sitemap, robots, OG image, API route
+  assets/images/       licensed photography (see docs/IMAGE-SOURCES.md)
   components/
     layout/            Navbar, MobileMenu, Footer, Logo
-    sections/          PageHero, PricingCard, ComparisonTable, PortfolioCard, FAQ, CTASection, …
+    sections/          PageHero, ServiceRow, ProjectShowcase, ProcessJourney, PricingCard (PackageSheet,
+                       CarePlanCard), ComparisonTable, WorkGrid, FAQ, Testimonial, CTASection
     sections/home/     homepage-only sections
-    visuals/           HeroVisual, ProjectMockup, BrowserFrame (code-drawn mockups)
+    visuals/           ProjectMockup, ProjectCover, DeviceShowcase, BrowserFrame
     contact/           ContactForm
-    ui/                Button, Icon, SectionHeading, RevealObserver
+    ui/                Button, Photo, Type (Label, DisplayLines), Icon, ScrollEffects
   config/site.ts       brand, contact details, navigation
-  data/                pricing, care plans, services, projects, FAQs, testimonials
+  data/                pricing, care plans, services, projects, FAQs, testimonials, images
   lib/                 SEO helper, contact validation, utils
 ```
 
 Content lives in `src/data` and `src/config` — pages and components never hardcode repeated content.
 
-## Design system
+## Design system — "Structure & Light"
 
-Tokens are defined in `src/app/globals.css` (`@theme`): ink `#101522`, violet `#8B5CF6` / `#A78BFA` / `#F5F1FF`,
-paper `#FAFAFC`, slate `#64748B`. Headings use **Sora**, body text **Inter** (self-hosted via `next/font`).
-Scroll reveals use a single IntersectionObserver and respect `prefers-reduced-motion`; page transitions use the
-View Transitions API where supported.
+- **Palette:** near-black `#090C12`, navy `#0D1320`, white, off-white `#F7F7F5`, grey `#6B7280`. Purple
+  (`#8B5CF6` / `#A78BFA`) is the *signal* — a thin line of light, an underline, an index number — never a background.
+- **Type:** Sora for uppercase display statements (tight 0.9 line-height, negative tracking) and Inter for body/UI.
+  Small tracked labels (`(01) SERVICES`) carry the editorial structure.
+- **Shape:** mostly hard edges and hairlines; radius is reserved for buttons (8px) and small chips (4–6px).
+- **Imagery:** licensed architectural and craft photography, treated in CSS (monochrome, violet grade, dark overlay).
+  Every file is listed with source and licence in [`docs/IMAGE-SOURCES.md`](docs/IMAGE-SOURCES.md) and credited at
+  `/credits`. Images are statically imported (`src/data/images.ts`) so Next.js serves AVIF/WebP with blur placeholders.
+- **Motion:** CSS load choreography in the hero, line-by-line display reveals, mask reveals for images, light
+  parallax and a pinned horizontal process journey on desktop — all driven by one small scroll engine
+  (`ScrollEffects`) and disabled under `prefers-reduced-motion`.

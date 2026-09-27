@@ -21,10 +21,10 @@ export function BrowserFrame({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-[1.6cqw] border",
+        "overflow-hidden rounded-[1.1cqw] border",
         dark
-          ? "border-white/10 bg-[#141a2b] shadow-[0_30px_80px_-30px_rgb(16_21_34/0.7)]"
-          : "border-[rgb(15_23_42/0.08)] bg-white shadow-[var(--shadow-float)]",
+          ? "border-white/10 bg-[#141a2b] shadow-[var(--shadow-window-dark)]"
+          : "border-[rgb(15_23_42/0.08)] bg-white shadow-[var(--shadow-window)]",
         className,
       )}
       style={style}

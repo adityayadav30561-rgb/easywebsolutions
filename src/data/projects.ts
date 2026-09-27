@@ -7,14 +7,14 @@
  * `image`, and add verified results. Never add metrics that haven't been measured.
  */
 
+import type { PhotoKey } from "./images";
+
 export const projectCategories = [
   "All",
   "Business",
   "Technology",
   "Services",
   "E-commerce",
-  "Professional",
-  "Other",
 ] as const;
 
 export type ProjectCategory = Exclude<(typeof projectCategories)[number], "All">;
@@ -35,6 +35,11 @@ export type MockupTheme = {
 
 export type Project = {
   slug: string;
+  /** Licensed photograph used as the art-directed backdrop (src/data/images.ts) */
+  cover: PhotoKey;
+  coverPosition?: string;
+  /** Short editorial line used on the portfolio */
+  kicker: string;
   name: string;
   industry: string;
   category: ProjectCategory;
@@ -58,6 +63,9 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "brand-business-website",
+    cover: "workTechTower",
+    coverPosition: "50% 30%",
+    kicker: "Clarity for a company that sells complexity.",
     name: "Brand & Business Website",
     industry: "Technology",
     category: "Technology",
@@ -98,6 +106,9 @@ export const projects: Project[] = [
   },
   {
     slug: "local-services-website",
+    cover: "workLocalCraft",
+    coverPosition: "50% 50%",
+    kicker: "Built for the customer holding a phone and a problem.",
     name: "Local Services Website",
     industry: "Home Services",
     category: "Services",
@@ -138,9 +149,12 @@ export const projects: Project[] = [
   },
   {
     slug: "professional-practice-website",
+    cover: "workProfessionalWindows",
+    coverPosition: "50% 40%",
+    kicker: "Calm, credible and easy to act on.",
     name: "Professional Practice Website",
     industry: "Professional Services",
-    category: "Professional",
+    category: "Services",
     services: ["Web design", "Content structure", "Development"],
     description: "A calm, credible website for a professional practice, structured around services and consultations.",
     status: "concept",
@@ -178,6 +192,9 @@ export const projects: Project[] = [
   },
   {
     slug: "online-store-concept",
+    cover: "workStoreLamp",
+    coverPosition: "50% 60%",
+    kicker: "A storefront that gets out of the product’s way.",
     name: "Online Store Concept",
     industry: "Retail",
     category: "E-commerce",
@@ -218,6 +235,9 @@ export const projects: Project[] = [
   },
   {
     slug: "hospitality-venue-website",
+    cover: "workVenueTram",
+    coverPosition: "50% 55%",
+    kicker: "Atmosphere first. Bookings one tap away.",
     name: "Hospitality & Venue Website",
     industry: "Hospitality",
     category: "Business",
@@ -258,9 +278,12 @@ export const projects: Project[] = [
   },
   {
     slug: "community-organisation-website",
+    cover: "workCommunityStudio",
+    coverPosition: "50% 50%",
+    kicker: "Accessible by default, easy to keep current.",
     name: "Community Organisation Website",
     industry: "Non-profit",
-    category: "Other",
+    category: "Business",
     services: ["Web design", "Accessibility", "Content structure"],
     description: "An accessible, content-friendly website that helps a community organisation share its work and invite involvement.",
     status: "concept",

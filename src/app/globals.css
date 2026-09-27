@@ -1,78 +1,49 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------
-   Design tokens — derived from the EasyWebSolns logo.
-   Purple is an accent; navy, white and soft greys carry the layout.
-------------------------------------------------------------------- */
+/* ==================================================================
+   EasyWebSolns — "Structure & Light"
+   Black / white / navy carry the layout. Purple is the signal: a single
+   line of light that runs through the site (drawn from the logo's
+   forward-moving arrow). Photography is architectural and monochrome.
+   ================================================================== */
 @theme {
-  --color-ink: #101522;
-  --color-ink-800: #1e293b;
-  --color-ink-700: #334155;
-  --color-slate: #64748b;
-  --color-slate-400: #94a3b8;
+  --color-ink: #0d1320;
+  --color-night: #090c12;
+  --color-ink-800: #1b2231;
+  --color-ink-700: #2b3344;
+  --color-grey: #6b7280;
+  --color-grey-400: #9ca3af;
+  --color-grey-300: #c9ccd2;
 
   --color-violet: #8b5cf6;
   --color-violet-300: #a78bfa;
   --color-violet-600: #7c3aed;
   --color-violet-700: #6d28d9;
-  --color-violet-50: #f5f1ff;
-  --color-violet-100: #ede7fe;
+  --color-violet-50: #f2eeff;
 
-  --color-paper: #fafafc;
-  --color-mist: #f8f7fc;
-  --color-line: rgb(15 23 42 / 0.08);
-  --color-line-strong: rgb(15 23 42 / 0.14);
+  --color-paper: #f7f7f5;
+  --color-paper-200: #eeeeea;
+  --color-line: rgb(13 19 32 / 0.1);
+  --color-line-strong: rgb(13 19 32 / 0.18);
+  --color-line-dark: rgb(255 255 255 / 0.1);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-cinema: cubic-bezier(0.76, 0, 0.24, 1);
 
-  --shadow-card: 0 1px 2px rgb(16 21 34 / 0.04), 0 2px 8px -2px rgb(16 21 34 / 0.05);
-  --shadow-card-hover: 0 2px 4px rgb(16 21 34 / 0.04), 0 18px 40px -16px rgb(16 21 34 / 0.18);
-  --shadow-float: 0 1px 1px rgb(16 21 34 / 0.03), 0 24px 60px -24px rgb(16 21 34 / 0.28);
-  --shadow-glow: 0 0 0 1px rgb(139 92 246 / 0.35), 0 24px 60px -28px rgb(124 58 237 / 0.45);
+  --shadow-window: 0 1px 1px rgb(9 12 18 / 0.04), 0 40px 80px -30px rgb(9 12 18 / 0.45);
+  --shadow-window-dark: 0 40px 90px -30px rgb(0 0 0 / 0.8);
 
-  --animate-float: float 9s var(--ease-soft) infinite;
-  --animate-float-slow: float 12s var(--ease-soft) infinite;
-  --animate-drift: drift 22s ease-in-out infinite alternate;
+  --animate-drift-slow: drift 18s ease-in-out infinite alternate;
 
-  @keyframes float {
-    0%,
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
-    50% {
-      transform: translate3d(0, -8px, 0);
-    }
-  }
-  @keyframes menu-in {
-    from {
-      opacity: 0;
-      clip-path: inset(0 0 100% 0);
-    }
-    to {
-      opacity: 1;
-      clip-path: inset(0 0 0 0);
-    }
-  }
-  @keyframes menu-item {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 12px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
   @keyframes drift {
     0% {
-      transform: translate3d(-4%, -2%, 0) scale(1);
+      transform: translate3d(0, 0, 0);
     }
     100% {
-      transform: translate3d(4%, 3%, 0) scale(1.08);
+      transform: translate3d(0, -10px, 0);
     }
   }
 }
@@ -80,54 +51,41 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
     scroll-padding-top: 6rem;
+    background: var(--color-night);
   }
-
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
-
   body {
-    background: #ffffff;
+    background: #fff;
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "cv11", "ss01";
   }
-
   h1,
   h2,
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.025em;
     text-wrap: balance;
   }
-
   p {
     text-wrap: pretty;
   }
-
   ::selection {
-    background: rgb(139 92 246 / 0.18);
-    color: var(--color-ink);
+    background: var(--color-violet);
+    color: #fff;
   }
-
   :focus-visible {
-    outline: 2px solid var(--color-violet-600);
+    outline: 2px solid var(--color-violet);
     outline-offset: 3px;
-    border-radius: 6px;
   }
 }
 
 @layer components {
   .container-site {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1440px;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
@@ -136,129 +94,216 @@
       padding-inline: 2rem;
     }
   }
-  @media (min-width: 1280px) {
+  @media (min-width: 1024px) {
     .container-site {
-      padding-inline: 2.5rem;
+      padding-inline: 3rem;
     }
   }
 
-  /* Small uppercase section label: "01 — SERVICES" */
-  .eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
+  /* Display type: uppercase, tight, architectural */
+  .display {
+    font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-violet-600);
+    letter-spacing: -0.045em;
+    line-height: 0.9;
   }
 
-  .text-gradient {
-    background: linear-gradient(100deg, var(--color-ink) 10%, var(--color-violet-600) 55%, var(--color-violet-300) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Small tracked label: "SELECTED WORK" */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
   }
 
-  .text-gradient-light {
-    background: linear-gradient(100deg, #ffffff 20%, var(--color-violet-300) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Monochrome photo treatment */
+  .photo-mono {
+    filter: grayscale(1) contrast(1.08);
   }
 
-  /* Premium card surface */
-  .card {
-    background: #ffffff;
-    border: 1px solid var(--color-line);
-    border-radius: 20px;
-    box-shadow: var(--shadow-card);
-    transition:
-      transform 350ms var(--ease-premium),
-      box-shadow 350ms var(--ease-premium),
-      border-color 350ms var(--ease-premium);
+  /* Purple colour grade: multiply a violet wash over a mono image */
+  .grade-violet {
+    position: relative;
+    isolation: isolate;
   }
-  .card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-card-hover);
-    border-color: rgb(139 92 246 / 0.28);
-  }
-
-  /* Hairline gradient border (used on the premium tier) */
-  .gradient-border {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(#ffffff, #ffffff) padding-box,
-      linear-gradient(140deg, rgb(139 92 246 / 0.55), rgb(16 21 34 / 0.12) 45%, rgb(167 139 250 / 0.5)) border-box;
-  }
-
-  /* Subtle film-grain for dark sections and the hero */
-  .noise::after {
+  .grade-violet::after {
     content: "";
     position: absolute;
     inset: 0;
+    background: linear-gradient(160deg, rgb(139 92 246 / 0.55), rgb(13 19 32 / 0.35) 55%, rgb(9 12 18 / 0.6));
+    mix-blend-mode: multiply;
     pointer-events: none;
-    opacity: 0.06;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .fine-grid {
-    background-image:
-      linear-gradient(to right, rgb(16 21 34 / 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(16 21 34 / 0.045) 1px, transparent 1px);
-    background-size: 64px 64px;
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* The signal line — purple light used sparingly */
+  .signal {
+    background: linear-gradient(90deg, var(--color-violet-600), var(--color-violet-300));
   }
 }
 
-/* ------------------------------------------------------------------
-   Scroll reveal. Content is only hidden when scripting is available,
-   so it never disappears for users without JavaScript.
-------------------------------------------------------------------- */
+/* ==================================================================
+   Scroll-driven reveals (JS adds .is-in). Content is only hidden when
+   scripting runs and motion is allowed.
+   ================================================================== */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   [data-reveal] {
     opacity: 0;
-    transform: translate3d(0, 18px, 0);
+    transform: translate3d(0, 24px, 0);
     transition:
-      opacity 700ms var(--ease-premium),
-      transform 700ms var(--ease-premium);
-    transition-delay: var(--reveal-delay, 0ms);
+      opacity 900ms var(--ease-premium),
+      transform 900ms var(--ease-premium);
+    transition-delay: var(--d, 0ms);
   }
-  [data-reveal="fade"] {
-    transform: none;
-  }
-  [data-reveal="scale"] {
-    transform: scale(0.98) translate3d(0, 12px, 0);
-  }
-  [data-reveal].is-visible {
+  [data-reveal].is-in {
     opacity: 1;
     transform: none;
   }
+
+  /* Image reveals: a mask opens upward while the image settles */
+  [data-reveal="mask"] {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1300ms var(--ease-cinema);
+    transition-delay: var(--d, 0ms);
+  }
+  [data-reveal="mask"] > * {
+    transform: scale(1.18);
+    transition: transform 1800ms var(--ease-premium);
+    transition-delay: var(--d, 0ms);
+  }
+  [data-reveal="mask"].is-in {
+    clip-path: inset(0 0 0 0);
+  }
+  [data-reveal="mask"].is-in > * {
+    transform: none;
+  }
+
+  /* Display lines rise out of their own baseline */
+  [data-reveal="lines"] {
+    opacity: 1;
+    transform: none;
+  }
+  [data-reveal="lines"] .ln > span {
+    display: inline-block;
+    transform: translate3d(0, 105%, 0);
+    transition: transform 1100ms var(--ease-premium);
+    transition-delay: calc(var(--d, 0ms) + var(--i, 0) * 90ms);
+  }
+  [data-reveal="lines"].is-in .ln > span {
+    transform: none;
+  }
+
+  /* Rules draw across */
+  [data-reveal="rule"] {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1400ms var(--ease-cinema);
+    transition-delay: var(--d, 0ms);
+  }
+  [data-reveal="rule"].is-in {
+    transform: none;
+  }
+}
+.ln {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
 }
 
-/* Hero entrance — CSS only, so it never waits on hydration. */
+/* Hero load choreography — CSS only, independent of hydration */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-in {
-    animation: hero-in 900ms var(--ease-premium) both;
-    animation-delay: var(--hero-delay, 0ms);
+  .enter {
+    animation: enter 1200ms var(--ease-premium) both;
+    animation-delay: var(--d, 0ms);
   }
-  @keyframes hero-in {
+  .enter-line > span {
+    display: inline-block;
+    animation: rise 1200ms var(--ease-premium) both;
+    animation-delay: calc(var(--d, 0ms) + var(--i, 0) * 110ms);
+  }
+  .draw {
+    animation: draw 1400ms var(--ease-cinema) both;
+    animation-delay: var(--d, 0ms);
+    transform-origin: left;
+  }
+  .settle {
+    animation: settle 1800ms var(--ease-premium) both;
+    animation-delay: var(--d, 0ms);
+  }
+  @keyframes enter {
     from {
       opacity: 0;
-      transform: translate3d(0, 14px, 0);
-      filter: blur(4px);
+      transform: translate3d(0, 16px, 0);
     }
     to {
       opacity: 1;
       transform: none;
-      filter: none;
+    }
+  }
+  @keyframes rise {
+    from {
+      transform: translate3d(0, 105%, 0);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes draw {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes settle {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: none;
     }
   }
 }
 
-/* Page transitions (View Transitions API, progressive enhancement). */
+@keyframes scroll-cue {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 320ms;
+  animation-duration: 380ms;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -270,6 +315,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  [data-parallax] {
+    transform: none !important;
   }
   ::view-transition-group(*),
   ::view-transition-old(*),

@@ -1,18 +1,21 @@
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
 import { Hero } from "@/components/sections/home/Hero";
-import { ValueStrip } from "@/components/sections/home/ValueStrip";
-import { ProblemSolution } from "@/components/sections/home/ProblemSolution";
-import { ServicesSection } from "@/components/sections/home/ServicesSection";
-import { FeaturedWork } from "@/components/sections/home/FeaturedWork";
-import { CarePreview, PricingPreview, ProcessSection, WhyUs } from "@/components/sections/home/HomeSections";
+import { Intro } from "@/components/sections/home/Intro";
+import { Services } from "@/components/sections/home/Services";
+import { SelectedWork } from "@/components/sections/home/SelectedWork";
+import { ProcessJourney } from "@/components/sections/ProcessJourney";
+import { Packages } from "@/components/sections/home/Packages";
+import { Care } from "@/components/sections/home/Care";
+import { Why } from "@/components/sections/home/Why";
+import { AboutSplit } from "@/components/sections/home/AboutSplit";
 import { Testimonial } from "@/components/sections/Testimonial";
 import { CTASection } from "@/components/sections/CTASection";
 
 export const metadata = pageMetadata({
   title: "EasyWebSolns — Websites That Work For You",
   description:
-    "Website design, development and ongoing care for growing businesses. Fast, modern websites that build trust, generate enquiries and help you grow online.",
+    "Website design, development, optimization and care for growing businesses. Modern websites that make you easier to trust, understand and choose.",
   path: "/",
 });
 
@@ -34,28 +37,21 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Hero />
-      <ValueStrip />
-      <ProblemSolution />
-      <ServicesSection />
-      <FeaturedWork />
-      <ProcessSection />
-      <PricingPreview />
-      <CarePreview />
-      <WhyUs />
+      <Intro />
+      <Services />
+      <SelectedWork />
+      <ProcessJourney />
+      <Packages />
+      <Care />
+      <Why />
+      <AboutSplit />
       <Testimonial />
-      <div className="pt-24 sm:pt-32">
-        <CTASection
-          title={
-            <>
-              Ready to build a website <br className="hidden sm:block" />
-              <span className="text-gradient-light">that works for you?</span>
-            </>
-          }
-          description="Tell us about your business and what you want your website to achieve."
-          primary={{ label: "Start a Project", href: "/contact" }}
-          secondary={{ label: "View Our Work", href: "/work" }}
-        />
-      </div>
+      <CTASection
+        lines={["Let's build", "something", <span key="w" className="text-violet-300">that works.</span>]}
+        description="Tell us what you're building, what isn't working, or what you'd like to improve."
+        primary={{ label: "Start a Project", href: "/contact" }}
+        secondary={{ label: "View Our Work", href: "/work" }}
+      />
     </>
   );
 }

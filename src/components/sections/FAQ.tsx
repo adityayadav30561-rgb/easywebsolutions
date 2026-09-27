@@ -2,7 +2,6 @@
 
 import { useId, useState } from "react";
 import type { Faq } from "@/data/faqs";
-import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 
 /** Accessible accordion: real buttons, aria-expanded, animated grid-rows reveal. */
@@ -11,30 +10,34 @@ export function FAQ({ items }: { items: Faq[] }) {
   const baseId = useId();
 
   return (
-    <div className="divide-y divide-line border-y border-line">
+    <div className="border-t border-ink">
       {items.map((item, i) => {
         const isOpen = open === i;
         const btnId = `${baseId}-q${i}`;
         const panelId = `${baseId}-a${i}`;
         return (
-          <div key={item.question}>
-            <h3 className="font-sans">
+          <div key={item.question} className="border-b border-line-strong">
+            <h3>
               <button
                 id={btnId}
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="group flex w-full items-center justify-between gap-6 py-6 text-left text-[1.0625rem] font-medium text-ink transition-colors hover:text-violet-700 sm:text-lg"
+                className="group grid w-full grid-cols-[2.5rem_1fr_auto] items-baseline gap-4 py-7 text-left"
               >
-                {item.question}
-                <span
-                  className={cn(
-                    "flex size-9 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-[var(--ease-premium)]",
-                    isOpen ? "rotate-45 border-violet/30 bg-violet-50 text-violet-600" : "border-line text-slate group-hover:border-violet/30",
-                  )}
-                >
-                  <Icon name="plus" size={16} />
+                <span className="font-display text-sm text-grey-400 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-xl font-semibold tracking-[-0.02em] text-ink transition-colors group-hover:text-violet-700 sm:text-2xl">
+                  {item.question}
+                </span>
+                <span aria-hidden="true" className="relative size-4 self-center">
+                  <span className="absolute top-1/2 left-0 h-[1.5px] w-4 -translate-y-1/2 bg-ink" />
+                  <span
+                    className={cn(
+                      "absolute top-0 left-1/2 h-4 w-[1.5px] -translate-x-1/2 bg-ink transition-transform duration-500 ease-[var(--ease-premium)]",
+                      isOpen && "scale-y-0",
+                    )}
+                  />
                 </span>
               </button>
             </h3>
@@ -48,7 +51,7 @@ export function FAQ({ items }: { items: Faq[] }) {
               )}
             >
               <div className="overflow-hidden" inert={!isOpen}>
-                <p className="max-w-3xl pr-12 pb-7 text-[0.9375rem] leading-relaxed text-slate sm:text-base">{item.answer}</p>
+                <p className="max-w-2xl pb-8 pl-14 text-[1rem] leading-relaxed text-ink-700">{item.answer}</p>
               </div>
             </div>
           </div>

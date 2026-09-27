@@ -1,5 +1,4 @@
 import type { Cell } from "@/data/pricing";
-import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 
 type Props = {
@@ -7,65 +6,60 @@ type Props = {
   columns: { name: string; price: string }[];
   rows: { label: string; values: readonly Cell[] }[];
   highlight?: number;
+  tone?: "light" | "dark";
 };
 
-function Value({ v }: { v: Cell }) {
+function Value({ v, dark }: { v: Cell; dark: boolean }) {
   if (v === true)
     return (
-      <span className="inline-flex size-6 items-center justify-center rounded-full bg-violet-50 text-violet-600">
-        <Icon name="check" size={13} strokeWidth={2.4} />
+      <span className="inline-flex items-center justify-center">
+        <svg aria-hidden="true" viewBox="0 0 16 16" className={cn("size-4", dark ? "text-violet-300" : "text-violet-600")} fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="m3 8.5 3.2 3L13 4.5" />
+        </svg>
         <span className="sr-only">Included</span>
       </span>
     );
   if (v === false || v === "—")
     return (
-      <span className="text-slate-400">
+      <span className={dark ? "text-white/25" : "text-[#868c97]"}>
         <span aria-hidden="true">—</span>
         <span className="sr-only">Not included</span>
       </span>
     );
-  return <span className="text-sm font-medium text-ink-800">{v}</span>;
+  return <span className={cn("text-sm font-medium", dark ? "text-white" : "text-ink")}>{v}</span>;
 }
 
-/**
- * Plan comparison. Scrolls horizontally on narrow screens with the feature
- * column pinned, so every value stays readable.
- */
-export function ComparisonTable({ caption, columns, rows, highlight }: Props) {
+/** Specification-sheet comparison. Scrolls horizontally on narrow screens with the feature column pinned. */
+export function ComparisonTable({ caption, columns, rows, highlight, tone = "light" }: Props) {
+  const dark = tone === "dark";
+  const bg = dark ? "bg-night" : "bg-white";
   return (
-    <div className="card relative overflow-hidden !shadow-[var(--shadow-card)]" data-reveal="">
+    <div className={cn("relative border-t", dark ? "border-white" : "border-ink")} data-reveal="">
       <div className="relative overflow-x-auto overscroll-x-contain" tabIndex={0} role="region" aria-label={caption}>
         <table className="w-full min-w-[640px] border-collapse text-left">
           <caption className="sr-only">{caption}</caption>
           <thead>
-            <tr className="border-b border-line">
-              <th scope="col" className="sticky left-0 z-10 bg-white px-5 py-5 text-xs font-semibold tracking-[0.16em] text-slate uppercase sm:px-7">
-                Feature
+            <tr className={cn("border-b", dark ? "border-line-dark" : "border-line-strong")}>
+              <th scope="col" className={cn("sticky left-0 z-10 py-6 pr-6", bg)}>
+                <span className={cn("label", dark ? "text-white/50" : "text-grey")}>Specification</span>
               </th>
               {columns.map((c, i) => (
-                <th
-                  key={c.name}
-                  scope="col"
-                  className={cn("px-4 py-5 text-center align-bottom", i === highlight && "bg-violet-50/70")}
-                >
-                  <span className="block text-xs font-semibold tracking-[0.16em] text-ink uppercase">{c.name}</span>
-                  <span className="mt-1 block font-display text-lg font-semibold text-ink">{c.price}</span>
+                <th key={c.name} scope="col" className={cn("px-4 py-6 text-center align-bottom", i === highlight && (dark ? "bg-white/[0.05]" : "bg-violet-50/60"))}>
+                  <span className={cn("label block", dark ? "text-white" : "text-ink")}>{c.name}</span>
+                  <span className={cn("mt-2 block font-display text-xl font-semibold tracking-[-0.03em]", dark ? "text-white" : "text-ink")}>{c.price}</span>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.label} className="border-b border-line last:border-0">
-                <th
-                  scope="row"
-                  className="sticky left-0 z-10 bg-white px-5 py-4 text-[0.9375rem] font-medium text-ink-700 sm:px-7"
-                >
+              <tr key={row.label} className={cn("border-b", dark ? "border-line-dark" : "border-line")}>
+                <th scope="row" className={cn("sticky left-0 z-10 py-4 pr-6 text-[0.9375rem] font-normal", bg, dark ? "text-white/75" : "text-ink-700")}>
                   {row.label}
                 </th>
                 {row.values.map((v, i) => (
-                  <td key={i} className={cn("px-4 py-4 text-center", i === highlight && "bg-violet-50/70")}>
-                    <Value v={v} />
+                  <td key={i} className={cn("px-4 py-4 text-center", i === highlight && (dark ? "bg-white/[0.05]" : "bg-violet-50/60"))}>
+                    <Value v={v} dark={dark} />
                   </td>
                 ))}
               </tr>

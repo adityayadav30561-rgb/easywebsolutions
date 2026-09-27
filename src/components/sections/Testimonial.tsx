@@ -1,32 +1,46 @@
 import { testimonials } from "@/data/testimonials";
-import { Icon } from "@/components/ui/Icon";
+import { Label } from "@/components/ui/Type";
 
+/**
+ * Testimonial slot. Content comes from src/data/testimonials.ts; while it holds
+ * placeholders the section says so openly rather than inventing praise.
+ */
 export function Testimonial() {
   const t = testimonials[0];
   if (!t) return null;
   return (
-    <section className="border-y border-line bg-paper py-24 sm:py-32" aria-labelledby="testimonial-heading">
+    <section aria-labelledby="testimonial-heading" className="bg-white py-24 sm:py-36">
       <div className="container-site">
-        <h2 id="testimonial-heading" className="sr-only">
-          What clients say
-        </h2>
-        <figure className="relative mx-auto max-w-4xl text-center" data-reveal="">
-          <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-300 to-violet-600 text-white shadow-[0_12px_30px_-12px_rgb(124_58_237/0.7)]">
-            <Icon name="quote" size={24} />
-          </span>
-          <blockquote className="mt-10">
-            <p className="font-display text-[1.75rem] leading-[1.25] font-medium tracking-[-0.02em] text-ink sm:text-4xl lg:text-[2.75rem]">
-              “{t.quote}”
-            </p>
-          </blockquote>
-          <figcaption className="mt-10 flex items-center justify-center gap-4">
-            <span aria-hidden="true" className="h-px w-8 bg-violet-300" />
-            <span className="text-left">
-              <span className="block text-[0.9375rem] font-semibold text-ink">{t.name}</span>
-              <span className="block text-sm text-slate">{t.company}</span>
+        <div className="flex items-center justify-between border-b border-ink pb-5">
+          <h2 id="testimonial-heading">
+            <Label as="span" index="09">
+              Client words
+            </Label>
+          </h2>
+          {t.placeholder && (
+            <span className="label rounded-[4px] border border-dashed border-line-strong px-2 py-1 !text-[0.625rem] text-grey">
+              Editable placeholder
             </span>
-            <span aria-hidden="true" className="h-px w-8 bg-violet-300" />
-          </figcaption>
+          )}
+        </div>
+        <figure className="mt-16 grid gap-10 lg:grid-cols-12" data-reveal="">
+          <span aria-hidden="true" className="font-display text-[8rem] leading-[0.7] font-semibold text-violet lg:col-span-2">
+            “
+          </span>
+          <div className="lg:col-span-9">
+            <blockquote>
+              <p className="font-display text-[2.2rem] leading-[1.1] font-medium tracking-[-0.03em] text-ink sm:text-5xl lg:text-[4rem]">
+                {t.quote}
+              </p>
+            </blockquote>
+            <figcaption className="mt-10 flex items-center gap-4">
+              <span aria-hidden="true" className="signal h-[2px] w-10" />
+              <span>
+                <span className="block font-semibold text-ink">{t.name}</span>
+                <span className="block text-sm text-grey">{t.company}</span>
+              </span>
+            </figcaption>
+          </div>
         </figure>
       </div>
     </section>

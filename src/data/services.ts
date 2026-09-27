@@ -1,203 +1,150 @@
-import type { IconName } from "@/components/ui/Icon";
+import type { PhotoKey } from "./images";
 
 export const services = [
   {
     number: "01",
-    title: "Business Websites",
-    description: "Professional websites designed around your brand, audience and business goals.",
-    items: [
-      "Custom UI",
-      "Responsive design",
-      "Service pages",
-      "Contact forms",
-      "SEO foundations",
-      "Analytics",
-      "Performance optimization",
-    ],
+    title: "Website Design & Development",
+    short: "Design & Development",
+    description:
+      "Custom websites designed around your brand, your audience and the action you want visitors to take — then built to be fast, responsive and easy to manage.",
+    items: ["Custom UI", "Responsive design", "Service pages", "Contact forms", "SEO foundations", "Analytics", "Performance"],
+    photo: "serviceGridFacade" as PhotoKey,
     cta: { label: "Explore Websites", href: "/websites" },
   },
   {
     number: "02",
     title: "Website Care",
-    description: "Your website stays secure, updated, monitored and performing after launch.",
+    short: "Care",
+    description:
+      "Monitoring, backups, updates, security and content changes after launch, so your website stays healthy without becoming your job.",
     items: ["Monitoring", "Backups", "Updates", "Security", "Performance", "Content changes"],
+    photo: "serviceLaptopNight" as PhotoKey,
     cta: { label: "Explore Care Plans", href: "/care-plans" },
   },
   {
     number: "03",
-    title: "Website Growth",
-    description: "Continuous improvements that help your website perform better over time.",
-    items: [
-      "Conversion optimization",
-      "Content improvements",
-      "Analytics",
-      "UX improvements",
-      "Performance optimization",
-    ],
+    title: "Website Optimization",
+    short: "Optimization",
+    description:
+      "Continuous improvements to speed, content and user journeys that help an existing website perform better over time.",
+    items: ["Conversion optimization", "Content improvements", "Analytics", "UX improvements", "Performance optimization"],
+    photo: "serviceGalaxySoho" as PhotoKey,
     cta: { label: "Talk to Us", href: "/contact?need=optimization" },
   },
 ] as const;
 
-export const valueStrip: { label: string; icon: IconName }[] = [
-  { label: "Modern Design", icon: "sparkle" },
-  { label: "Built for Conversion", icon: "target" },
-  { label: "Fast & Responsive", icon: "zap" },
-  { label: "Ongoing Support", icon: "lifebuoy" },
-];
 
-export const problemSolution = [
-  {
-    problem: "Looks outdated",
-    problemNote: "Visitors judge credibility in seconds, and a dated design quietly sends them elsewhere.",
-    solution: "Modern visual identity",
-    solutionNote: "A clean, current design that reflects the quality of your business.",
-  },
-  {
-    problem: "Confuses visitors",
-    problemNote: "Unclear navigation and vague messaging leave people unsure what you offer.",
-    solution: "Clear user journeys",
-    solutionNote: "Structure and copy that explain what you do and guide people to the right page.",
-  },
-  {
-    problem: "Gets traffic but no enquiries",
-    problemNote: "People arrive, look around and leave without taking the next step.",
-    solution: "Conversion-focused experiences",
-    solutionNote: "Clear calls to action, simple forms and easy ways to call or message you.",
-  },
-];
 
-export const processSteps = [
+export const processSteps: { number: string; title: string; description: string; detail: string; photo: PhotoKey }[] = [
   {
     number: "01",
     title: "Discover",
     description: "We understand your business, audience, goals and what the website needs to achieve.",
+    detail: "Goals · Audience · Content · Competitors",
+    photo: "processDiscoverConcrete",
   },
   {
     number: "02",
     title: "Design",
     description: "We create a visual direction and user experience tailored to your brand.",
+    detail: "Structure · Typography · Visual direction · Prototypes",
+    photo: "processDesignLetterpress",
   },
   {
     number: "03",
     title: "Build",
     description: "We turn the approved design into a fast, responsive and functional website.",
+    detail: "Development · Responsive layouts · Forms · Performance",
+    photo: "processBuildBrutalist",
   },
   {
     number: "04",
-    title: "Launch & Care",
-    description: "We launch your website and can continue maintaining and improving it.",
+    title: "Launch",
+    description: "We test across devices, connect analytics and search tools, and take the website live carefully.",
+    detail: "Testing · SSL · Analytics · Search Console",
+    photo: "processLaunchCity",
+  },
+  {
+    number: "05",
+    title: "Care",
+    description: "We can continue maintaining, protecting and improving your website after launch.",
+    detail: "Monitoring · Backups · Updates · Improvements",
+    photo: "processCareUnderground",
   },
 ];
 
-export const benefits = [
-  {
-    number: "01",
-    title: "Custom, Not Cookie-Cutter",
-    description:
-      "Every layout is designed around your business, your services and the people you want to reach — not squeezed into a generic theme.",
-  },
-  {
-    number: "02",
-    title: "Designed for People",
-    description:
-      "Clear structure, readable typography and obvious next steps, so visitors understand what you do and how to get in touch.",
-  },
-  {
-    number: "03",
-    title: "Built for Performance",
-    description:
-      "Lean code, optimised images and responsive layouts that load quickly and work properly on phones, tablets and desktops.",
-  },
-  {
-    number: "04",
-    title: "Support After Launch",
-    description:
-      "We don't hand over and disappear. Care plans keep your website secure, updated and improving over time.",
-  },
-];
 
-export const buildSteps: { title: string; description: string; icon: IconName }[] = [
+export const buildSteps: { title: string; description: string; photo: PhotoKey }[] = [
   {
     title: "Strategy",
-    description: "We clarify your goals, audience and the actions you want visitors to take, then plan pages around them.",
-    icon: "compass",
+    description: "We clarify your goals, your audience and the actions you want visitors to take, then plan every page around them.",
+    photo: "processDiscoverConcrete",
   },
   {
     title: "UX",
-    description: "We map the structure and user journeys so every page has a clear purpose and an obvious next step.",
-    icon: "users",
+    description: "We map structure and user journeys so each page has a purpose and every visitor has an obvious next step.",
+    photo: "serviceGridFacade",
   },
   {
     title: "Design",
-    description: "We create a visual direction that reflects your brand, with typography, spacing and detail that feel considered.",
-    icon: "pen",
+    description: "A visual direction built from your brand: typography, spacing, imagery and detail that feel considered.",
+    photo: "processDesignLetterpress",
   },
   {
     title: "Development",
-    description: "We build the approved design as a fast, responsive website with clean, maintainable code.",
-    icon: "code",
+    description: "The approved design becomes a fast, responsive website with clean, maintainable code and working forms.",
+    photo: "processBuildBrutalist",
   },
   {
-    title: "Testing",
-    description: "We check layouts, forms, links and performance across devices and browsers before anything goes live.",
-    icon: "check-circle",
+    title: "Performance",
+    description: "Optimised images, lean code and careful loading so pages feel quick on real phones and real connections.",
+    photo: "serviceGalaxySoho",
   },
   {
     title: "Launch",
-    description: "We handle the launch carefully — SSL, analytics and search setup included where your package covers it.",
-    icon: "rocket",
-  },
-  {
-    title: "Support",
-    description: "Post-launch support is included with Professional and Premium, and care plans are available for ongoing help.",
-    icon: "lifebuoy",
+    description: "Testing across devices, SSL, analytics and search setup where your package includes it — then a careful go-live.",
+    photo: "processLaunchCity",
   },
 ];
 
-export const includedFeatures: { title: string; description: string; icon: IconName }[] = [
-  { title: "Responsive Design", description: "Layouts designed for phones, tablets and desktops.", icon: "devices" },
-  { title: "Contact Forms", description: "Simple forms that make it easy to send an enquiry.", icon: "mail" },
-  { title: "WhatsApp", description: "Let customers message you directly in one tap.", icon: "whatsapp" },
-  { title: "Click-to-Call", description: "Phone numbers that call straight from a mobile.", icon: "phone" },
-  { title: "Google Maps", description: "Help local customers find and visit you.", icon: "map-pin" },
-  { title: "SEO Foundations", description: "Clean structure, titles and descriptions search engines understand.", icon: "search" },
-  { title: "Analytics", description: "See how people find and use your website.", icon: "chart" },
-  { title: "Search Console", description: "Monitor how your site appears in Google Search.", icon: "radar" },
-  { title: "Performance Optimization", description: "Optimised images and code for fast loading.", icon: "gauge" },
-  { title: "SSL", description: "A secure HTTPS connection for every visitor.", icon: "lock" },
-  { title: "Social Integration", description: "Links to the platforms where your customers follow you.", icon: "share" },
-  { title: "Conversion CTAs", description: "Clear calls to action placed where decisions are made.", icon: "cursor" },
+export const includedFeatures: { title: string; description: string }[] = [
+  { title: "Responsive Design", description: "Layouts designed for phones, tablets and desktops." },
+  { title: "Contact Forms", description: "Simple forms that make it easy to send an enquiry." },
+  { title: "WhatsApp", description: "Let customers message you directly in one tap." },
+  { title: "Click-to-Call", description: "Phone numbers that call straight from a mobile." },
+  { title: "Google Maps", description: "Help local customers find and visit you." },
+  { title: "SEO Foundations", description: "Clean structure, titles and descriptions search engines understand." },
+  { title: "Analytics", description: "See how people find and use your website." },
+  { title: "Search Console", description: "Monitor how your site appears in Google Search." },
+  { title: "Performance Optimization", description: "Optimised images and code for fast loading." },
+  { title: "SSL", description: "A secure HTTPS connection for every visitor." },
+  { title: "Social Integration", description: "Links to the platforms where your customers follow you." },
+  { title: "Conversion CTAs", description: "Clear calls to action placed where decisions are made." },
 ];
 
-export const careReasons: { title: string; description: string; icon: IconName }[] = [
+export const careReasons: { title: string; description: string }[] = [
   {
     title: "Security",
     description: "Websites are routinely probed for weaknesses. Monitoring and timely updates reduce the risk of a compromise.",
-    icon: "shield",
   },
   {
     title: "Backups",
     description: "If something goes wrong, a recent backup means your website can be restored rather than rebuilt.",
-    icon: "database",
   },
   {
     title: "Updates",
     description: "Software and plugins need regular updates to stay compatible, stable and secure.",
-    icon: "refresh",
   },
   {
     title: "Performance",
     description: "Sites slow down as content and features grow. Keeping an eye on performance keeps pages quick.",
-    icon: "gauge",
   },
   {
     title: "Monitoring",
     description: "Uptime and SSL monitoring mean problems are noticed early — often before your customers notice them.",
-    icon: "activity",
   },
   {
     title: "Content changes",
     description: "New services, prices, photos or opening hours. Send the change and we'll take care of it.",
-    icon: "pen",
   },
 ];

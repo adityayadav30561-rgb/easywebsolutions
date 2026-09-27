@@ -1,56 +1,71 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 type Props = {
-  eyebrow: string;
-  title: ReactNode;
+  label: string;
+  lines: ReactNode[];
   description?: ReactNode;
   children?: ReactNode;
-  /** Optional right-hand content on desktop */
+  /** Visual below the headline (full-bleed band) */
+  media?: ReactNode;
+  /** Visual to the right of the headline on desktop */
   aside?: ReactNode;
   className?: string;
+  size?: "xl" | "lg" | "md";
 };
 
-/** Consistent hero for inner pages: soft brand glow, fine grid, large headline. */
-export function PageHero({ eyebrow, title, description, children, aside, className }: Props) {
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
+/** Inner-page hero: paper ground, oversized display lines, load choreography. */
+export function PageHero({ label, lines, description, children, media, aside, className, size = "xl" }: Props) {
   return (
-    <section className={cn("relative isolate overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-20 lg:pt-44", className)}>
-      <div aria-hidden="true" className="noise absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_85%_0%,rgb(139_92_246/0.13),transparent_60%),linear-gradient(180deg,#fff,#faf9fe)]" />
-        <div className="fine-grid absolute inset-0 [mask-image:radial-gradient(ellipse_60%_70%_at_80%_10%,#000_10%,transparent_70%)]" />
-      </div>
-      <div className={cn("container-site", Boolean(aside) && "grid gap-12 lg:grid-cols-12 lg:items-end")}>
-        <div className={cn(aside ? "lg:col-span-7" : "max-w-4xl")}>
-          <p className="hero-in eyebrow flex items-center gap-3">
-            <span aria-hidden="true" className="h-px w-6 bg-violet-600/50" />
-            {eyebrow}
-          </p>
+    <section className={cn("relative overflow-hidden bg-paper", className)}>
+      <div className={cn("container-site pt-36 pb-16 sm:pt-44 lg:pt-48", Boolean(aside) && "grid gap-14 lg:grid-cols-12 lg:items-end")}>
+        <div className={aside ? "lg:col-span-7" : undefined}>
+          <div className="enter flex items-center gap-4" style={d(150)}>
+            <span aria-hidden="true" className="h-px w-10 bg-ink" />
+            <p className="label text-ink">{label}</p>
+          </div>
           <h1
-            className="hero-in mt-6 text-[2.5rem] leading-[1.05] font-semibold tracking-[-0.035em] sm:text-[3.5rem] lg:text-[4.25rem]"
-            style={{ ["--hero-delay" as string]: "80ms" }}
+            className={cn(
+              "display mt-10 text-ink",
+              size === "xl" && "text-[3.1rem] sm:text-[6rem] xl:text-[8.75rem]",
+              size === "lg" && "text-[2.8rem] sm:text-[5rem] xl:text-[6.75rem]",
+              size === "md" && "text-[2.6rem] sm:text-[4.5rem] lg:text-[4.25rem] xl:text-[5.5rem]",
+            )}
           >
-            {title}
+            {lines.map((line, i) => (
+              <span key={i} className="ln enter-line" style={{ "--i": i, "--d": "200ms" } as CSSProperties}>
+                <span>{line}</span>
+              </span>
+            ))}
           </h1>
-          {description && (
-            <p
-              className="hero-in mt-7 max-w-2xl text-[1.0625rem] leading-relaxed text-slate sm:text-lg"
-              style={{ ["--hero-delay" as string]: "160ms" }}
-            >
-              {description}
-            </p>
-          )}
-          {children && (
-            <div className="hero-in mt-10" style={{ ["--hero-delay" as string]: "240ms" }}>
-              {children}
+          {(description || children) && (
+            <div className="mt-12 grid gap-10 md:grid-cols-[minmax(0,30rem)_auto] md:items-end md:justify-between">
+              {description && (
+                <p className="enter max-w-xl text-lg leading-relaxed text-ink-700" style={d(600)}>
+                  {description}
+                </p>
+              )}
+              {children && (
+                <div className="enter" style={d(720)}>
+                  {children}
+                </div>
+              )}
             </div>
           )}
         </div>
         {aside && (
-          <div className="hero-in lg:col-span-5" style={{ ["--hero-delay" as string]: "240ms" }}>
+          <div className="settle lg:col-span-5" style={d(500)}>
             {aside}
           </div>
         )}
       </div>
+      {media && (
+        <div className="settle" style={d(650)}>
+          {media}
+        </div>
+      )}
     </section>
   );
 }

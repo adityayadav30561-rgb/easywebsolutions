@@ -1,101 +1,109 @@
+import type { CSSProperties } from "react";
 import type { Plan } from "@/data/pricing";
 import { ButtonLink } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 
-type Props = {
-  plan: Plan;
-  compact?: boolean;
-  index?: number;
-  /** Label for the featured badge */
-  featuredLabel?: string;
-  headingLevel?: "h2" | "h3";
-};
-
 /**
- * Pricing card. Standard = clean white, featured = elevated with a violet
- * hairline and glow, premium = gradient hairline on a soft tinted surface.
+ * Website package as a proposal sheet: document header, scope list with
+ * hairlines, investment line. Professional gets a quiet signal, not a banner.
  */
-export function PricingCard({ plan, compact, index = 0, featuredLabel = "Most Popular", headingLevel: H = "h3" }: Props) {
+export function PackageSheet({ plan, index, headingLevel: H = "h3" }: { plan: Plan; index: number; headingLevel?: "h2" | "h3" }) {
   const featured = plan.tier === "featured";
   const premium = plan.tier === "premium";
-
   return (
     <article
-      aria-label={`${plan.name} — ${plan.price}${plan.unit === "/month" ? " per month" : ""}`}
+      aria-label={`${plan.name} package, ${plan.price}`}
       className={cn(
-        "relative flex flex-col rounded-[22px] transition-[transform,box-shadow] duration-500 ease-[var(--ease-premium)]",
-        compact ? "p-7" : "p-7 sm:p-9",
-        featured &&
-          "z-10 border border-violet/40 bg-white shadow-[var(--shadow-glow)] hover:-translate-y-1 lg:-my-4 lg:py-11",
-        premium && "gradient-border bg-white shadow-[var(--shadow-card)] hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]",
-        !featured && !premium && "card card-hover",
+        "relative flex min-w-0 flex-col border bg-white transition-shadow duration-700",
+        featured ? "border-ink shadow-[0_40px_80px_-50px_rgb(9_12_18/0.5)]" : "border-line-strong",
+        premium && "bg-paper",
       )}
       data-reveal=""
-      style={{ ["--reveal-delay" as string]: `${index * 90}ms` }}
+      style={{ "--d": `${index * 100}ms` } as CSSProperties}
     >
-      {premium && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-[22px] bg-[radial-gradient(ellipse_90%_50%_at_100%_0%,rgb(139_92_246/0.08),transparent_70%)]"
-        />
-      )}
-      {featured && (
-        <p className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-ink px-3.5 py-1.5 text-[0.6875rem] font-semibold tracking-[0.16em] whitespace-nowrap text-white uppercase shadow-lg">
-          <span aria-hidden="true" className="mr-1.5 text-violet-300">
-            ★
-          </span>
-          {featuredLabel}
-        </p>
-      )}
-
-      <div className="relative">
-        <div className="flex items-center justify-between gap-3">
-          <H className="font-sans text-xs font-semibold tracking-[0.18em] text-ink uppercase">{plan.name}</H>
-          {premium && (
-            <span className="rounded-full bg-violet-50 px-2.5 py-1 text-[0.6875rem] font-semibold tracking-wide text-violet-700">
-              Premium
-            </span>
-          )}
-        </div>
-        <p className="mt-1 text-sm font-medium text-slate">{plan.subtitle}</p>
-
-        <p className="mt-6 flex items-baseline gap-1.5">
-          <span className={cn("font-display font-semibold tracking-[-0.03em] text-ink", compact ? "text-4xl" : "text-[2.75rem]")}>
-            {plan.price}
-          </span>
-          <span className="text-sm font-medium text-slate">{plan.unit}</span>
-        </p>
-        {!compact && <p className="mt-4 text-[0.9375rem] leading-relaxed text-slate">{plan.summary}</p>}
+      {featured && <span aria-hidden="true" className="signal absolute inset-x-0 -top-px h-[3px]" />}
+      <div className="flex items-center justify-between border-b border-line px-6 py-4 sm:px-8">
+        <span className="label text-grey">Proposal {String(index + 1).padStart(2, "0")}</span>
+        {featured ? (
+          <span className="label rounded-[4px] bg-violet-50 px-2 py-1 !text-[0.625rem] text-violet-700">Most Popular</span>
+        ) : (
+          <span className="label text-grey">{plan.unit}</span>
+        )}
       </div>
 
-      <div className="relative my-7 h-px bg-line" />
+      <div className="px-6 pt-8 sm:px-8 sm:pt-10">
+        <H className="display text-[2.1rem] text-ink min-[400px]:text-[2.6rem]">{plan.name}</H>
+        <p className="mt-4 min-h-[3.2em] text-[0.9375rem] leading-relaxed text-grey">{plan.summary}</p>
+        <div className="mt-8 flex items-end justify-between border-y border-ink py-5">
+          <span className="label text-grey">Investment</span>
+          <span className="font-display text-[2.75rem] leading-none font-semibold tracking-[-0.04em] text-ink">{plan.price}</span>
+        </div>
+      </div>
 
-      <div className="relative flex-1">
-        {plan.inherits && <p className="mb-4 text-sm font-semibold text-ink">{plan.inherits}</p>}
-        <ul className="space-y-3">
-          {plan.features.map((f) => (
-            <li key={f} className="flex gap-3 text-[0.9375rem] leading-snug text-ink-700">
-              <span
-                className={cn(
-                  "mt-px flex size-5 shrink-0 items-center justify-center rounded-full",
-                  featured ? "bg-violet-600 text-white" : "bg-violet-50 text-violet-600",
-                )}
-              >
-                <Icon name="check" size={12} strokeWidth={2.4} />
-              </span>
+      <div className="flex-1 px-6 pt-6 sm:px-8">
+        <p className="label text-grey">Scope</p>
+        <ol className="mt-3">
+          {plan.features.map((f, i) => (
+            <li key={f} className="flex items-baseline gap-4 border-b border-line py-2.5 text-[0.9375rem] text-ink-700 last:border-0">
+              <span className="w-5 shrink-0 font-display text-[0.6875rem] text-grey-400 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
               {f}
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
 
+      <div className="px-6 pt-6 pb-6 sm:px-8 sm:pb-8">
+        <ButtonLink
+          href={plan.cta.href}
+          variant={featured ? "solid" : "outline"}
+          className="w-full"
+          aria-label={`${plan.cta.label} with the ${plan.name} package`}
+        >
+          {plan.cta.label}
+        </ButtonLink>
+      </div>
+    </article>
+  );
+}
+
+/** Care plan on a dark surface: fine borders, no floating card chrome. */
+export function CarePlanCard({ plan, index, headingLevel: H = "h3" }: { plan: Plan; index: number; headingLevel?: "h2" | "h3" }) {
+  const featured = plan.tier === "featured";
+  return (
+    <article
+      aria-label={`${plan.name} care plan, ${plan.price} per month`}
+      className={cn(
+        "relative flex flex-col border p-6 backdrop-blur-sm sm:p-8",
+        featured ? "border-violet-300/50 bg-white/[0.07]" : "border-line-dark bg-white/[0.03]",
+      )}
+      data-reveal=""
+      style={{ "--d": `${index * 100}ms` } as CSSProperties}
+    >
+      {featured && <span aria-hidden="true" className="signal absolute inset-x-0 -top-px h-[2px]" />}
+      <div className="flex items-center justify-between">
+        <H className="label text-white">{plan.name}</H>
+        {featured && <span className="label rounded-[4px] bg-violet/20 px-2 py-1 !text-[0.625rem] text-violet-300">Most Popular</span>}
+      </div>
+      <p className="mt-2 text-sm text-white/50">{plan.subtitle}</p>
+      <p className="mt-8 flex items-baseline gap-2">
+        <span className="font-display text-[3.25rem] leading-none font-semibold tracking-[-0.04em] text-white">{plan.price}</span>
+        <span className="text-sm text-white/50">{plan.unit}</span>
+      </p>
+      <div className="my-7 h-px bg-line-dark" />
+      {plan.inherits && <p className="label mb-4 text-violet-300">{plan.inherits}</p>}
+      <ul className="flex-1 space-y-2.5">
+        {plan.features.map((f) => (
+          <li key={f} className="flex gap-3 text-[0.9375rem] leading-snug text-white/80">
+            <span aria-hidden="true" className="mt-[0.55em] h-px w-3 shrink-0 bg-violet-300" />
+            {f}
+          </li>
+        ))}
+      </ul>
       <ButtonLink
         href={plan.cta.href}
-        variant={featured ? "primary" : "secondary"}
-        arrow
-        className="relative mt-9 w-full"
-        aria-label={`${plan.cta.label} with the ${plan.name} ${plan.unit === "/month" ? "care plan" : "package"}`}
+        variant={featured ? "light" : "outline-light"}
+        className="mt-9 w-full"
+        aria-label={`${plan.cta.label} care plan`}
       >
         {plan.cta.label}
       </ButtonLink>

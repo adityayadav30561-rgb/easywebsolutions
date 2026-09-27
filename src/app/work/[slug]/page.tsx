@@ -1,11 +1,13 @@
+import type { CSSProperties, ReactNode } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { getProject, projects } from "@/data/projects";
-import { Icon } from "@/components/ui/Icon";
+import { ProjectCover } from "@/components/visuals/ProjectCover";
+import { MockupWindow } from "@/components/visuals/ProjectMockup";
 import { CTASection } from "@/components/sections/CTASection";
-import { ProjectImage } from "@/components/sections/PortfolioCard";
+import { Label } from "@/components/ui/Type";
 
 export const dynamicParams = false;
 
@@ -24,30 +26,30 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   });
 }
 
-function Block({ index, title, children }: { index: string; title: string; children: React.ReactNode }) {
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
+function Chapter({ no, title, children }: { no: string; title: string; children: ReactNode }) {
   return (
-    <section className="grid gap-4 border-t border-line py-12 md:grid-cols-12 md:gap-8 md:py-16" data-reveal="">
-      <div className="md:col-span-4">
-        <p className="font-display text-sm font-semibold text-violet-600">{index}</p>
-        <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">{title}</h2>
+    <section className="grid gap-6 border-t border-ink py-14 lg:grid-cols-12 lg:gap-10 lg:py-20" data-reveal="">
+      <div className="lg:col-span-4">
+        <p className="label text-violet-600">Chapter {no}</p>
+        <h2 className="display mt-4 text-[2.6rem] text-ink sm:text-[3.4rem]">{title}</h2>
       </div>
-      <div className="text-base leading-relaxed text-slate sm:text-lg md:col-span-7 md:col-start-6">{children}</div>
+      <div className="text-lg leading-relaxed text-ink-700 lg:col-span-7 lg:col-start-6">{children}</div>
     </section>
   );
 }
 
-function List({ items }: { items: string[] }) {
+function Points({ items }: { items: string[] }) {
   return (
-    <ul className="space-y-4">
-      {items.map((item) => (
-        <li key={item} className="flex gap-4">
-          <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-violet-50 text-violet-600">
-            <Icon name="check" size={13} strokeWidth={2.4} />
-          </span>
-          <span className="text-ink-700">{item}</span>
+    <ol className="border-t border-line-strong">
+      {items.map((item, i) => (
+        <li key={item} className="grid grid-cols-[2.5rem_1fr] border-b border-line-strong py-4 text-[1.0625rem]">
+          <span className="font-display text-sm text-grey-400 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+          <span className="text-ink">{item}</span>
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }
 
@@ -59,124 +61,135 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
   const cs = project.caseStudy;
+  const t = project.mockup.theme;
 
   return (
     <>
       <article>
-        <header className="relative isolate overflow-hidden pt-32 pb-12 sm:pt-40">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_60%_at_85%_0%,rgb(139_92_246/0.1),transparent_60%)]"
-          />
+        <header className="bg-paper pt-32 sm:pt-40">
           <div className="container-site">
-            <Link
-              href="/work"
-              className="hero-in group inline-flex min-h-11 items-center gap-2 text-sm font-medium text-slate transition-colors hover:text-ink"
-            >
-              <Icon name="arrow-left" size={16} className="transition-transform group-hover:-translate-x-1" />
+            <Link href="/work" className="enter label group inline-flex min-h-11 items-center gap-3 text-grey hover:text-ink" style={d(100)}>
+              <svg aria-hidden="true" viewBox="0 0 20 16" className="h-3 w-4 rotate-180 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path d="M0 8h18M12 2l6 6-6 6" />
+              </svg>
               All work
             </Link>
-            <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="mt-8 grid gap-10 pb-14 lg:grid-cols-12 lg:items-end">
               <div className="lg:col-span-8">
-                <p className="hero-in eyebrow" style={{ ["--hero-delay" as string]: "60ms" }}>
-                  {project.industry}
-                  {project.status === "concept" && " · Concept project"}
+                <p className="enter label text-grey" style={d(150)}>
+                  <span className="text-violet-600">Project {String(index + 1).padStart(2, "0")}</span> — {project.industry}
+                  {project.status === "concept" && " · Concept"}
                 </p>
-                <h1
-                  className="hero-in mt-5 text-[2.5rem] leading-[1.05] font-semibold tracking-[-0.035em] sm:text-[3.5rem] lg:text-[4rem]"
-                  style={{ ["--hero-delay" as string]: "120ms" }}
-                >
-                  {project.name}
+                <h1 className="display mt-6 text-[3rem] text-ink sm:text-[5.5rem] xl:text-[7rem]">
+                  {project.name.split(" ").reduce<string[][]>((acc, w, i) => {
+                    if (i % 2 === 0) acc.push([w]);
+                    else acc[acc.length - 1].push(w);
+                    return acc;
+                  }, []).map((words, i) => (
+                    <span key={i} className="ln enter-line" style={{ "--i": i, "--d": "200ms" } as CSSProperties}>
+                      <span>{words.join(" ")}</span>
+                    </span>
+                  ))}
                 </h1>
-                <p
-                  className="hero-in mt-6 max-w-2xl text-lg leading-relaxed text-slate"
-                  style={{ ["--hero-delay" as string]: "180ms" }}
-                >
-                  {project.description}
-                </p>
               </div>
-              <dl
-                className="hero-in grid grid-cols-2 gap-6 border-t border-line pt-6 lg:col-span-4 lg:grid-cols-1 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
-                style={{ ["--hero-delay" as string]: "240ms" }}
-              >
+              <dl className="enter grid grid-cols-2 gap-6 border-t border-ink pt-6 lg:col-span-4" style={d(500)}>
                 <div>
-                  <dt className="text-xs font-semibold tracking-[0.16em] text-slate uppercase">Industry</dt>
-                  <dd className="mt-1.5 font-medium text-ink">{project.industry}</dd>
+                  <dt className="label text-grey">Industry</dt>
+                  <dd className="mt-2 text-ink">{project.industry}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-semibold tracking-[0.16em] text-slate uppercase">Services</dt>
-                  <dd className="mt-1.5 font-medium text-ink">{project.services.join(", ")}</dd>
+                  <dt className="label text-grey">Type</dt>
+                  <dd className="mt-2 text-ink">{project.status === "concept" ? "Design concept" : "Client project"}</dd>
+                </div>
+                <div className="col-span-2">
+                  <dt className="label text-grey">Services</dt>
+                  <dd className="mt-2 text-ink">{project.services.join(" · ")}</dd>
                 </div>
               </dl>
             </div>
           </div>
+          <div className="settle group relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9]" style={d(400)}>
+            <ProjectCover project={project} sizes="100vw" frame="wide-right" priority reveal={false} />
+          </div>
         </header>
 
-        <div className="container-site">
-          <div
-            className="hero-in group relative aspect-[4/3] overflow-hidden rounded-[24px] border border-line shadow-[var(--shadow-card)] sm:aspect-[16/9]"
-            style={{ ["--hero-delay" as string]: "300ms" }}
-          >
-            <ProjectImage project={project} sizes="(min-width: 1280px) 1200px, 100vw" priority wide />
-          </div>
-
+        <div className="container-site bg-white py-20 sm:py-28">
+          <p className="max-w-4xl font-display text-[1.75rem] leading-[1.25] font-medium tracking-[-0.02em] text-ink sm:text-[2.4rem]" data-reveal="">
+            {project.kicker} {project.description}
+          </p>
           {project.status === "concept" && (
-            <p className="mt-6 flex items-start gap-3 rounded-2xl border border-violet/15 bg-violet-50/60 px-5 py-4 text-sm leading-relaxed text-ink-700">
-              <Icon name="sparkle" size={18} className="mt-0.5 shrink-0 text-violet-600" />
-              This is a design concept that demonstrates our approach. It does not represent a specific client.
+            <p className="mt-8 inline-flex items-center gap-3 border border-dashed border-line-strong px-4 py-3 text-sm text-grey">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-violet" />
+              A design concept that demonstrates our approach. It does not represent a specific client.
             </p>
           )}
 
-          <div className="mt-16 mb-24 sm:mb-32">
-            <Block index="01" title="Overview">
+          <div className="mt-20">
+            <Chapter no="01" title="Overview">
               <p>{cs.overview}</p>
-            </Block>
-            <Block index="02" title="Challenge">
+            </Chapter>
+            <Chapter no="02" title="Challenge">
               <p>{cs.challenge}</p>
-            </Block>
-            <Block index="03" title="Approach">
-              <List items={cs.approach} />
-            </Block>
-            <Block index="04" title="Design Direction">
-              <p>{cs.designDirection}</p>
-              <ul className="mt-8 flex flex-wrap gap-3" aria-label="Colour palette">
-                {[project.mockup.theme.text, project.mockup.theme.accent, project.mockup.theme.accentSoft, project.mockup.theme.surface].map(
-                  (c) => (
-                    <li key={c} className="flex items-center gap-2.5 rounded-full border border-line bg-white py-1.5 pr-3.5 pl-1.5">
-                      <span className="size-7 rounded-full border border-black/5" style={{ background: c }} />
-                      <span className="font-mono text-xs text-slate uppercase">{c}</span>
-                    </li>
-                  ),
-                )}
-              </ul>
-            </Block>
-            <Block index="05" title="Solution">
-              <List items={cs.solution} />
-            </Block>
-            <Block index="06" title="Results">
-              <p>{cs.results ?? "Results will be added after launch."}</p>
-            </Block>
+            </Chapter>
+            <Chapter no="03" title="Approach">
+              <Points items={cs.approach} />
+            </Chapter>
           </div>
-
-          {next && next.slug !== project.slug && (
-            <Link
-              href={`/work/${next.slug}`}
-              className="group mb-24 flex flex-col justify-between gap-6 rounded-[24px] border border-line bg-paper p-8 transition-colors duration-500 hover:border-violet/30 hover:bg-violet-50/50 sm:mb-32 sm:flex-row sm:items-center sm:p-10"
-            >
-              <span>
-                <span className="text-xs font-semibold tracking-[0.16em] text-slate uppercase">Next project</span>
-                <span className="mt-2 block font-display text-2xl font-semibold tracking-tight sm:text-3xl">{next.name}</span>
-              </span>
-              <span className="flex size-14 items-center justify-center rounded-full bg-ink text-white transition-transform duration-500 ease-[var(--ease-premium)] group-hover:translate-x-1 group-hover:-rotate-45">
-                <Icon name="arrow-right" size={22} />
-              </span>
-            </Link>
-          )}
         </div>
+
+        {/* Design direction — full-bleed, on the project's own palette */}
+        <section data-theme="dark" className="grain relative bg-night py-20 text-white sm:py-28">
+          <div className="container-site relative z-[2] grid gap-14 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-5" data-reveal="">
+              <Label index="04" tone="dark">
+                Design direction
+              </Label>
+              <p className="mt-8 text-xl leading-relaxed text-white/80">{cs.designDirection}</p>
+              <ul className="mt-10 grid grid-cols-4 border-t border-line-dark" aria-label="Colour palette">
+                {[t.text, t.accent, t.accentSoft, t.surface].map((c, i) => (
+                  <li key={i} className="pt-4 pr-2">
+                    <span className="block aspect-square w-full border border-white/10" style={{ background: c }} />
+                    <span className="mt-2 block font-mono text-[0.6875rem] text-white/50 uppercase">{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="@container lg:col-span-7" data-reveal="" style={d(150)}>
+              <MockupWindow project={project} />
+            </div>
+          </div>
+        </section>
+
+        <div className="container-site bg-white py-20 sm:py-28">
+          <Chapter no="05" title="Solution">
+            <Points items={cs.solution} />
+          </Chapter>
+          <Chapter no="06" title="Results">
+            <p>{cs.results ?? "Results will be added after launch."}</p>
+          </Chapter>
+        </div>
+
+        {next && next.slug !== project.slug && (
+          <Link href={`/work/${next.slug}`} className="group relative block overflow-hidden bg-night">
+            <div className="relative aspect-[4/3] sm:aspect-[21/8]">
+              <ProjectCover project={next} sizes="100vw" frame="wide-right" reveal={false} />
+              <div aria-hidden="true" className="absolute inset-0 bg-night/55 transition-colors duration-700 group-hover:bg-night/35" />
+            </div>
+            <div className="container-site absolute inset-0 flex flex-col justify-end pb-10 sm:pb-14">
+              <p className="label text-white/60">Next project</p>
+              <p className="display mt-4 flex items-center gap-6 text-[2.6rem] text-white sm:text-[5rem]">
+                {next.name}
+                <svg aria-hidden="true" viewBox="0 0 20 16" className="hidden h-8 w-10 shrink-0 text-violet-300 transition-transform duration-500 group-hover:translate-x-3 sm:block" fill="none" stroke="currentColor" strokeWidth="1.6">
+                  <path d="M0 8h18M12 2l6 6-6 6" />
+                </svg>
+              </p>
+            </div>
+          </Link>
+        )}
       </article>
 
       <CTASection
-        title="Let's build something like this for you."
+        lines={["Let's build", <span key="y" className="text-violet-300">yours next.</span>]}
         description="Tell us about your business and what you want your website to achieve."
         primary={{ label: "Start a Project", href: "/contact" }}
         secondary={{ label: "View All Work", href: "/work" }}

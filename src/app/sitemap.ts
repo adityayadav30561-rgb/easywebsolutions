@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/contact", priority: 0.8 },
     { path: "/privacy", priority: 0.2 },
     { path: "/terms", priority: 0.2 },
+    { path: "/credits", priority: 0.1 },
   ];
   return [
     ...pages.map((p) => ({ url: `${site.url}${p.path}`, changeFrequency: "monthly" as const, priority: p.priority })),

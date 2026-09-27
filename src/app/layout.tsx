@@ -4,7 +4,7 @@ import { ViewTransition } from "react";
 import { site } from "@/config/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { RevealObserver } from "@/components/ui/RevealObserver";
+import { ScrollEffects } from "@/components/ui/ScrollEffects";
 import "./globals.css";
 
 const sora = Sora({
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#f7f7f5",
   colorScheme: "light",
 };
 
@@ -56,7 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </main>
         </ViewTransition>
         <Footer />
-        <RevealObserver />
+        <ScrollEffects />
       </body>
     </html>
   );
