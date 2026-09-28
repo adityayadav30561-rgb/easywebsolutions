@@ -113,22 +113,18 @@ Other scripts: `npm test`, `npm run lint`, `npm run typecheck`, `npm run db:migr
 
 ## Deploy on Vercel (as a second project)
 
-1. Create a PostgreSQL database, for example on **Neon** or **Supabase** (both have free tiers), and copy its
-   connection string.
-2. In Vercel, go to **Add New → Project** and import the same GitHub repo. Set **Root Directory** to `hq`.
-3. Add these environment variables:
-   - `DATABASE_URL`
-   - `APP_URL=https://hq.easywebsolns.com`
-   - `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD`
-4. Create the tables and the first admin once, from your computer, with `DATABASE_URL` pointing at the production
-   database:
-   ```bash
-   npm run db:deploy && npm run db:seed
-   ```
-5. In the Vercel project, add the domain `hq.easywebsolns.com`. Then, in Hostinger DNS, add a **CNAME** record
-   with host `hq`, pointing to `cname.vercel-dns.com`.
+The `vercel-build` script applies migrations and runs the (idempotent) base seed on every deploy, so no commands are
+needed on your computer.
 
-When the schema changes later, run `npm run db:deploy` against production before or alongside the deploy.
+1. Vercel → **Add New → Project** → import this repo → **Root Directory: `hq`** (framework: Next.js).
+2. Environment variables: `SEED_ADMIN_EMAIL` (your login email) and `SEED_ADMIN_PASSWORD` (your first password).
+   Optional: `APP_URL=https://hq.easywebsolns.com` (otherwise links use the address the app is opened on).
+3. Add a database: project → **Storage → Create Database → Neon (Postgres)** → connect it to the project. This sets
+   `DATABASE_URL` (and `DATABASE_URL_UNPOOLED`, used for migrations) automatically. Any other PostgreSQL works if you
+   set `DATABASE_URL` yourself.
+4. **Deployments → Redeploy.** Sign in at the `.vercel.app` address and change your password under Account.
+5. Domain: **Settings → Domains → add `hq.easywebsolns.com`**, then in Hostinger DNS add a **CNAME** record, name
+   `hq`, pointing to the value Vercel shows.
 
 ## Hardening roadmap
 

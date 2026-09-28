@@ -14,7 +14,8 @@
     "db:seed": "prisma db seed",
     "db:seed:demo": "SEED_DEMO=1 prisma db seed",
     "db:studio": "prisma studio",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "vercel-build": "prisma generate && prisma migrate deploy && prisma db seed && next build"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",

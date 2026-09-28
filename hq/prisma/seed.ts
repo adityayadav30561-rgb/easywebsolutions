@@ -48,6 +48,10 @@ async function main() {
 
   const adminEmail = (process.env.SEED_ADMIN_EMAIL ?? "admin@easywebsolns.com").toLowerCase();
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "ChangeMe!2026";
+  // Never create a production admin with the published default password.
+  if (process.env.VERCEL && !process.env.SEED_ADMIN_PASSWORD && !(await db.user.findUnique({ where: { email: adminEmail } }))) {
+    throw new Error("Set the SEED_ADMIN_PASSWORD environment variable in Vercel, then redeploy.");
+  }
   const admin = await user(adminEmail, "EasyWebSolns Admin", adminPassword, true);
 
   // ─── EasyWebSolns ───
