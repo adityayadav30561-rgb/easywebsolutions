@@ -20,7 +20,7 @@ export function CTASection({ lines, description, primary, secondary, eyebrow = "
       <div className="absolute inset-0 -z-10">
         <Photo name={photo} alt="" sizes="100vw" treatment="violet" parallax={0.1} />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-night via-night/75 to-night/20" />
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_85%_30%,rgb(139_92_246/0.35),transparent_70%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_85%_30%,rgb(138_109_188/0.35),transparent_70%)]" />
       </div>
       <div className="container-site relative z-[2] flex min-h-[88svh] flex-col justify-between py-24 sm:py-32">
         <Label tone="dark">{eyebrow}</Label>

@@ -64,7 +64,7 @@ function Corporate({ t, headline }: { t: Theme; headline: string }) {
         </div>
         <div
           className="relative aspect-square overflow-hidden rounded-[1.9cqw]"
-          style={{ background: `linear-gradient(150deg, ${t.text} 0%, ${t.accent} 70%, #c4b5fd 100%)` }}
+          style={{ background: `linear-gradient(150deg, ${t.text} 0%, ${t.accent} 70%, #b797cd 100%)` }}
         >
           <div className="absolute -right-[15%] -bottom-[15%] size-[75%] rounded-full border-[1.9cqw] border-white/15" />
           <div className="absolute top-[12%] left-[10%] w-[55%] rounded-[1.19cqw] bg-white/95 p-[1.67cqw] shadow-lg">

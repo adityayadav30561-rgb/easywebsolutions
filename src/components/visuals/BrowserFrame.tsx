@@ -23,8 +23,8 @@ export function BrowserFrame({
       className={cn(
         "overflow-hidden rounded-[1.1cqw] border",
         dark
-          ? "border-white/10 bg-[#141a2b] shadow-[var(--shadow-window-dark)]"
-          : "border-[rgb(15_23_42/0.08)] bg-white shadow-[var(--shadow-window)]",
+          ? "border-white/10 bg-[#171b27] shadow-[var(--shadow-window-dark)]"
+          : "border-[rgb(18_22_33/0.08)] bg-white shadow-[var(--shadow-window)]",
         className,
       )}
       style={style}
@@ -32,7 +32,7 @@ export function BrowserFrame({
       <div
         className={cn(
           "flex items-center gap-[0.7cqw] border-b px-[1.6cqw] py-[1.2cqw]",
-          dark ? "border-white/[0.06] bg-white/[0.02]" : "border-[rgb(15_23_42/0.06)] bg-[#fbfbfd]",
+          dark ? "border-white/[0.06] bg-white/[0.02]" : "border-[rgb(18_22_33/0.06)] bg-[#fbfbfd]",
         )}
       >
         <span className="size-[0.95cqw] rounded-full bg-[#ff5f57]/80" />
@@ -42,7 +42,7 @@ export function BrowserFrame({
           <span
             className={cn(
               "mx-auto truncate rounded-[0.6cqw] px-[2.4cqw] py-[0.35cqw] text-[1.1cqw] font-medium",
-              dark ? "bg-white/[0.05] text-white/70" : "bg-[rgb(15_23_42/0.04)] text-[#556072]",
+              dark ? "bg-white/[0.05] text-white/70" : "bg-[rgb(18_22_33/0.04)] text-[#556072]",
             )}
           >
             {url}

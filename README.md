@@ -35,9 +35,8 @@ CTAs pre-fill the contact form: `/contact?package=professional`, `/contact?plan=
 
 All placeholders are centralised and marked `PLACEHOLDER` in code.
 
-1. **Logo** — `public/brand/logo.svg` is a placeholder. Replace it with the official logo file (SVG or PNG) and update
-   `logo.src`, `logo.width` and `logo.height` in `src/config/site.ts` to the file's intrinsic size. The logo is rendered
-   unmodified in the navbar, footer and social share image. Replace `src/app/icon.svg` (favicon) too.
+1. **Logo** — done: the official logo is `public/brand/easywebsolns-logo.png` (background removed, whitespace trimmed);
+   the favicon (`src/app/icon.png`, `apple-icon.png`) is the logo's "e" mark.
 2. **Contact details** — email, phone and WhatsApp number in `src/config/site.ts`.
 3. **Social links** — Instagram / LinkedIn / Facebook URLs in `src/config/site.ts`.
 4. **Testimonials** — `src/data/testimonials.ts` (only publish real, approved quotes).
@@ -80,8 +79,8 @@ Content lives in `src/data` and `src/config` — pages and components never hard
 
 ## Design system — "Structure & Light"
 
-- **Palette:** near-black `#090C12`, navy `#0D1320`, white, off-white `#F7F7F5`, grey `#6B7280`. Purple
-  (`#8B5CF6` / `#A78BFA`) is the *signal* — a thin line of light, an underline, an index number — never a background.
+- **Palette (sampled from the logo):** navy `#121621`, near-black `#0B0D14`, white, off-white `#F7F7F5`, grey
+  `#575B62`. Logo purple `#8A6DBC` (deep `#67578D`, text `#6F55A3`, lavender `#B797CD`) is the *signal* — a thin line of light, an underline, an index number — never a background.
 - **Type:** Sora for uppercase display statements (tight 0.9 line-height, negative tracking) and Inter for body/UI.
   Small tracked labels (`(01) SERVICES`) carry the editorial structure.
 - **Shape:** mostly hard edges and hairlines; radius is reserved for buttons (8px) and small chips (4–6px).

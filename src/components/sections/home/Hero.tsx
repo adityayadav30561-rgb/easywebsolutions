@@ -14,7 +14,7 @@ function HeroSite() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-[1cqw]">
           <span className="size-[2.4cqw] rounded-full bg-ink" />
-          <Line w="8cqw" c="#0d1320" h={1} />
+          <Line w="8cqw" c="#121621" h={1} />
         </div>
         <div className="flex items-center gap-[2.4cqw] text-[1.35cqw] font-medium text-[#556072]">
           <span>Services</span>
@@ -26,7 +26,7 @@ function HeroSite() {
       <div className="mt-[4.5cqw] grid grid-cols-[1.05fr_1fr] gap-[3.2cqw]">
         <div className="flex flex-col justify-between">
           <div>
-            <p className="text-[1.15cqw] font-semibold tracking-[0.2em] text-[#7c3aed] uppercase">Architecture studio</p>
+            <p className="text-[1.15cqw] font-semibold tracking-[0.2em] text-[#6f55a3] uppercase">Architecture studio</p>
             <p className="mt-[1.6cqw] font-display text-[5.4cqw] leading-[0.95] font-semibold tracking-[-0.04em] text-ink uppercase">
               Space,
               <br />
@@ -43,7 +43,7 @@ function HeroSite() {
               <span className="rounded-[0.6cqw] bg-ink px-[2cqw] py-[1.1cqw] text-[1.2cqw] font-semibold tracking-[0.1em] text-white uppercase">
                 View projects →
               </span>
-              <span className="text-[1.2cqw] font-semibold tracking-[0.1em] text-ink uppercase underline decoration-[#a78bfa] underline-offset-[0.6cqw]">
+              <span className="text-[1.2cqw] font-semibold tracking-[0.1em] text-ink uppercase underline decoration-[#b797cd] underline-offset-[0.6cqw]">
                 Book a call
               </span>
             </div>
@@ -75,8 +75,8 @@ function HeroSite() {
 /** Second, darker window — cropped behind the first. */
 function HeroSiteDark() {
   return (
-    <div className="bg-[#0f1422] p-[3.2cqw]">
-      <p className="text-[1.15cqw] font-semibold tracking-[0.2em] text-[#a78bfa] uppercase">Selected services</p>
+    <div className="bg-[#141824] p-[3.2cqw]">
+      <p className="text-[1.15cqw] font-semibold tracking-[0.2em] text-[#b797cd] uppercase">Selected services</p>
       {["Consulting", "Strategy", "Delivery", "Support"].map((s, i) => (
         <div key={s} className="flex items-baseline justify-between border-b border-white/10 py-[1.6cqw]">
           <span className="font-display text-[3.2cqw] font-semibold tracking-[-0.03em] text-white uppercase">{s}</span>
@@ -128,7 +128,7 @@ export function Hero() {
             parallax={0.06}
             position="50% 35%"
           />
-          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_100%,rgb(139_92_246/0.3),transparent_70%)]" />
+          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_100%,rgb(138_109_188/0.3),transparent_70%)]" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-transparent" />
         </div>
         {/* Signal line on the photo's edge */}

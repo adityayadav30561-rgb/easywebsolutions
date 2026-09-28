@@ -76,13 +76,13 @@ export const projects: Project[] = [
       variant: "corporate",
       headline: "Technology that feels simple.",
       theme: {
-        stage: "linear-gradient(145deg,#101522 0%,#221a44 60%,#3b2a7a 100%)",
+        stage: "linear-gradient(145deg,#121621 0%,#2b2542 60%,#4f4278 100%)",
         bg: "#ffffff",
         surface: "#f4f3fb",
-        text: "#101522",
+        text: "#121621",
         muted: "#94a3b8",
-        accent: "#7c3aed",
-        accentSoft: "#ede7fe",
+        accent: "#6f55a3",
+        accentSoft: "#efe9f7",
       },
     },
     caseStudy: {
@@ -205,7 +205,7 @@ export const projects: Project[] = [
       variant: "store",
       headline: "Everyday pieces, thoughtfully made.",
       theme: {
-        stage: "linear-gradient(145deg,#f5f1ff 0%,#e9e1fd 100%)",
+        stage: "linear-gradient(145deg,#f3eff9 0%,#e9e1fd 100%)",
         bg: "#ffffff",
         surface: "#f6f3ee",
         text: "#1c1917",

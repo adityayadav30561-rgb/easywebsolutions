@@ -15,7 +15,7 @@ export default async function OpengraphImage() {
   ]);
   const mime = extname(site.logo.src) === ".svg" ? "image/svg+xml" : `image/${extname(site.logo.src).slice(1)}`;
   const logoSrc = `data:${mime};base64,${logo.toString("base64")}`;
-  const logoHeight = 52;
+  const logoHeight = 84;
   const logoWidth = Math.round((site.logo.width / site.logo.height) * logoHeight);
 
   return new ImageResponse(
@@ -28,7 +28,7 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          background: "linear-gradient(160deg, #ffffff 0%, #f8f7fc 55%, #efe9fe 100%)",
+          background: "linear-gradient(160deg, #ffffff 0%, #f7f7f5 55%, #efe9f7 100%)",
           fontFamily: "Sora",
           position: "relative",
         }}
@@ -41,18 +41,18 @@ export default async function OpengraphImage() {
             width: 620,
             height: 620,
             borderRadius: 9999,
-            background: "radial-gradient(circle, rgba(139,92,246,0.28), rgba(139,92,246,0) 65%)",
+            background: "radial-gradient(circle, rgba(138,109,188,0.28), rgba(138,109,188,0) 65%)",
           }}
         />
         <img src={logoSrc} width={logoWidth} height={logoHeight} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 76, lineHeight: 1.05, letterSpacing: -3, color: "#101522", display: "flex", flexWrap: "wrap" }}>
+          <div style={{ fontSize: 76, lineHeight: 1.05, letterSpacing: -3, color: "#121621", display: "flex", flexWrap: "wrap" }}>
             Websites that work
           </div>
-          <div style={{ fontSize: 76, lineHeight: 1.05, letterSpacing: -3, color: "#7c3aed", display: "flex" }}>
+          <div style={{ fontSize: 76, lineHeight: 1.05, letterSpacing: -3, color: "#6f55a3", display: "flex" }}>
             for your business.
           </div>
-          <div style={{ marginTop: 28, fontSize: 26, color: "#64748b", letterSpacing: -0.5, display: "flex" }}>
+          <div style={{ marginTop: 28, fontSize: 26, color: "#575b62", letterSpacing: -0.5, display: "flex" }}>
             Web design · Development · Optimization · Ongoing care
           </div>
         </div>

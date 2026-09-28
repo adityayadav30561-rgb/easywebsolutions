@@ -14,15 +14,15 @@ export const site = {
     "EasyWebSolns designs, builds and cares for fast, modern websites that build trust, generate enquiries and help businesses grow online.",
 
   /**
-   * Official logo. Replace `/public/brand/logo.svg` with the supplied logo file
-   * (SVG or PNG) and set `width`/`height` to its intrinsic size so the original
-   * proportions are preserved everywhere.
+   * Official logo (mark, wordmark and tagline), background made transparent and
+   * surrounding whitespace trimmed. Width/height are the file's intrinsic size so
+   * the original proportions are preserved everywhere.
    */
   logo: {
-    src: "/brand/logo.svg", // PLACEHOLDER asset — swap for the official logo file
-    width: 308,
-    height: 40,
-    alt: "EasyWebSolns",
+    src: "/brand/easywebsolns-logo.png",
+    width: 1611,
+    height: 279,
+    alt: "EasyWebSolns — Websites that work for you",
   },
 
   contact: {

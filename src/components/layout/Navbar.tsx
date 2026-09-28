@@ -69,11 +69,11 @@ export function Navbar() {
           className={cn(
             "flex items-center justify-between gap-6 border transition-[background-color,border-color,box-shadow,height,border-radius,padding] duration-700 ease-[var(--ease-premium)]",
             floating
-              ? "h-16 rounded-[12px] border-line bg-white/95 pr-2 pl-4 shadow-[0_18px_40px_-24px_rgb(9_12_18/0.45)] backdrop-blur-xl backdrop-saturate-150 sm:pl-5"
+              ? "h-16 rounded-[12px] border-line bg-white/95 pr-2 pl-4 shadow-[0_18px_40px_-24px_rgb(11_13_20/0.45)] backdrop-blur-xl backdrop-saturate-150 sm:pl-5"
               : "h-20 rounded-none border-transparent bg-transparent px-5 sm:px-8 lg:h-24 lg:px-12",
           )}
         >
-          <Logo priority height={floating ? 26 : 30} />
+          <Logo priority height={floating ? 38 : 46} className="-my-1" />
 
           <nav aria-label="Main" className="hidden lg:block">
             <ul className="flex items-center">

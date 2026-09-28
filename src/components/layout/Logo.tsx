@@ -23,6 +23,7 @@ export function Logo({ className, height = 30, priority }: { className?: string;
         height={height}
         priority={priority}
         unoptimized={src.endsWith(".svg")}
+        quality={90}
         style={{ width, height: "auto" }}
       />
     </Link>

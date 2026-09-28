@@ -9,7 +9,7 @@ function PhoneScreen({ project }: { project: Project }) {
   const t = project.mockup.theme;
   return (
     <div className="@container">
-    <div className="overflow-hidden rounded-[12cqw] border-[3cqw] border-[#0b0f18] bg-[#0b0f18] shadow-[var(--shadow-window-dark)]">
+    <div className="overflow-hidden rounded-[12cqw] border-[3cqw] border-[#0b0d14] bg-[#0b0d14] shadow-[var(--shadow-window-dark)]">
       <div className="overflow-hidden rounded-[9.0cqw]" style={{ background: t.bg }}>
         <div className="mx-auto mt-[4.0cqw] h-[5.0cqw] w-[30.0cqw] rounded-full bg-black" />
         <div className="p-[8.0cqw]">

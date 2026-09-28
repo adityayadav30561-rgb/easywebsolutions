@@ -35,7 +35,7 @@ Files live in `src/assets/images/` and are imported through `src/data/images.ts`
 
 ## Not photography
 
-- **Logo** (`public/brand/logo.svg`, `src/app/icon.svg`): PLACEHOLDER created for this project — replace with the official EasyWebSolns logo.
+- **Logo** (`public/brand/easywebsolns-logo.png`) and favicon (`src/app/icon.png`, `src/app/apple-icon.png`): the official EasyWebSolns logo supplied by the business (background made transparent, whitespace trimmed; the favicon uses the logo mark).
 - **Browser/website mockups**: drawn in code (`src/components/visuals`), no third-party assets.
 - **Fonts**: Sora and Inter (SIL Open Font License), served via `next/font`.
 

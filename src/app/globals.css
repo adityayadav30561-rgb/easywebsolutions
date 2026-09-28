@@ -7,24 +7,25 @@
    forward-moving arrow). Photography is architectural and monochrome.
    ================================================================== */
 @theme {
-  --color-ink: #0d1320;
-  --color-night: #090c12;
-  --color-ink-800: #1b2231;
-  --color-ink-700: #2b3344;
-  --color-grey: #6b7280;
-  --color-grey-400: #9ca3af;
+  --color-ink: #121621;
+  --color-night: #0b0d14;
+  --color-ink-800: #1c2130;
+  --color-ink-700: #2e3342;
+  --color-grey: #575b62;
+  --color-grey-400: #9a9da3;
   --color-grey-300: #c9ccd2;
 
-  --color-violet: #8b5cf6;
-  --color-violet-300: #a78bfa;
-  --color-violet-600: #7c3aed;
-  --color-violet-700: #6d28d9;
-  --color-violet-50: #f2eeff;
+  --color-violet: #8a6dbc;
+  --color-violet-300: #b797cd;
+  --color-violet-600: #6f55a3;
+  --color-violet-700: #5a4589;
+  --color-violet-50: #f3eff9;
+  --color-violet-800: #67578d;
 
   --color-paper: #f7f7f5;
   --color-paper-200: #eeeeea;
-  --color-line: rgb(13 19 32 / 0.1);
-  --color-line-strong: rgb(13 19 32 / 0.18);
+  --color-line: rgb(18 22 33 / 0.1);
+  --color-line-strong: rgb(18 22 33 / 0.18);
   --color-line-dark: rgb(255 255 255 / 0.1);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -33,7 +34,7 @@
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-cinema: cubic-bezier(0.76, 0, 0.24, 1);
 
-  --shadow-window: 0 1px 1px rgb(9 12 18 / 0.04), 0 40px 80px -30px rgb(9 12 18 / 0.45);
+  --shadow-window: 0 1px 1px rgb(11 13 20 / 0.04), 0 40px 80px -30px rgb(11 13 20 / 0.45);
   --shadow-window-dark: 0 40px 90px -30px rgb(0 0 0 / 0.8);
 
   --animate-drift-slow: drift 18s ease-in-out infinite alternate;
@@ -132,7 +133,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, rgb(139 92 246 / 0.55), rgb(13 19 32 / 0.35) 55%, rgb(9 12 18 / 0.6));
+    background: linear-gradient(160deg, rgb(138 109 188 / 0.6), rgb(18 22 33 / 0.35) 55%, rgb(11 13 20 / 0.6));
     mix-blend-mode: multiply;
     pointer-events: none;
   }
@@ -148,8 +149,9 @@
   }
 
   /* The signal line — purple light used sparingly */
+  /* The logo's gradient: deep violet → brand purple → lavender */
   .signal {
-    background: linear-gradient(90deg, var(--color-violet-600), var(--color-violet-300));
+    background: linear-gradient(90deg, var(--color-violet-800), var(--color-violet) 55%, var(--color-violet-300));
   }
 }
 

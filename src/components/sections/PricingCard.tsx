@@ -15,7 +15,7 @@ export function PackageSheet({ plan, index, headingLevel: H = "h3" }: { plan: Pl
       aria-label={`${plan.name} package, ${plan.price}`}
       className={cn(
         "relative flex min-w-0 flex-col border bg-white transition-shadow duration-700",
-        featured ? "border-ink shadow-[0_40px_80px_-50px_rgb(9_12_18/0.5)]" : "border-line-strong",
+        featured ? "border-ink shadow-[0_40px_80px_-50px_rgb(11_13_20/0.5)]" : "border-line-strong",
         premium && "bg-paper",
       )}
       data-reveal=""

@@ -29,9 +29,8 @@ export function Footer() {
 
         <div className="mt-24 grid gap-14 border-t border-line pt-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo height={32} />
-            <p className="label mt-6 text-ink">Websites that work for you.</p>
-            <p className="mt-4 max-w-xs text-[0.9375rem] leading-relaxed text-grey">
+            <Logo height={58} />
+            <p className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-grey">
               Design, development, optimization and ongoing care for businesses that take their website seriously.
             </p>
           </div>
