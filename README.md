@@ -5,6 +5,9 @@ Marketing website for **easywebsolns.com**, a website design, development, optim
 Built with **Next.js 16 (App Router) · TypeScript · Tailwind CSS v4**. Every page is statically prerendered; the only
 server code is the contact-form endpoint.
 
+> **HQ (the agency CRM)** lives in [`hq/`](hq/README.md). It is a separate Next.js app with its own database and
+> is deployed as a second Vercel project (root directory `hq`).
+
 ## Getting started
 
 ```bash

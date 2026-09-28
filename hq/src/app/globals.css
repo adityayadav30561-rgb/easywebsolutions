@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
+
+  --color-ink: #121621;
+  --color-night: #0b0d14;
+  --color-grey: #575b62;
+  --color-line: #e4e4e7;
+  --color-paper: #f7f7f5;
+  --color-violet-50: #f3eff9;
+  --color-violet-100: #e7def3;
+  --color-violet-300: #b797cd;
+  --color-violet-500: #8a6dbc;
+  --color-violet-600: #6f55a3;
+  --color-violet-700: #5c4789;
+  --color-violet-800: #67578d;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-violet-600;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+}
+
+@utility btn {
+  @apply inline-flex min-h-9 items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium whitespace-nowrap transition disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+@layer components {
+  .input {
+    @apply block w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink shadow-xs transition placeholder:text-zinc-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-100 focus:outline-none disabled:bg-zinc-50 disabled:text-zinc-500;
+  }
+  select.input {
+    @apply pr-8;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium text-grey;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-white hover:bg-violet-700;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-white text-ink hover:border-violet-300 hover:bg-violet-50;
+  }
+  .btn-ghost {
+    @apply btn text-grey hover:bg-zinc-100 hover:text-ink;
+  }
+  .btn-danger {
+    @apply btn border border-red-200 bg-white text-red-700 hover:bg-red-50;
+  }
+  .btn-sm {
+    @apply min-h-8 px-2.5 py-1 text-xs;
+  }
+  .card {
+    @apply rounded-xl border border-line bg-white;
+  }
+  .table {
+    @apply w-full text-left text-sm;
+  }
+  .table th {
+    @apply border-b border-line px-4 py-2.5 text-xs font-medium tracking-wide text-grey uppercase;
+  }
+  .table td {
+    @apply border-b border-zinc-100 px-4 py-3 align-middle;
+  }
+  .table tr:last-child td {
+    @apply border-b-0;
+  }
+  .table tbody tr {
+    @apply transition-colors hover:bg-zinc-50/70;
+  }
+  .link {
+    @apply font-medium text-ink underline-offset-2 hover:text-violet-700 hover:underline;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  @page {
+    margin: 14mm;
+  }
+}
