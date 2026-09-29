@@ -46,8 +46,8 @@ export default function AboutPage() {
         description="EasyWebSolns helps businesses create modern digital experiences that look professional, communicate clearly and make it easier for customers to take action."
         aside={
           <div className="relative aspect-[4/5] overflow-hidden">
-            <Photo name="aboutWoodCarving" alt="" sizes="(min-width: 1024px) 38vw, 100vw" treatment="mono" priority position="30% 50%" />
-            <p className="label absolute bottom-4 left-4 rounded-[4px] bg-night/60 px-2 py-1 text-white">Fig. — Craft, up close</p>
+            <Photo name="aboutWorkspace" alt="" sizes="(min-width: 1024px) 38vw, 100vw" priority position="30% 50%" />
+            <p className="label absolute bottom-4 left-4 rounded-[4px] bg-night/60 px-2 py-1 text-white">Fig. — Code, up close</p>
           </div>
         }
       >
@@ -83,8 +83,8 @@ export default function AboutPage() {
 
       {/* Full-bleed photograph */}
       <div className="relative aspect-[4/3] sm:aspect-[21/9]">
-        <Photo name="processDesignLetterpress" alt="" sizes="100vw" treatment="mono" reveal parallax={0.1} />
-        <p className="label absolute right-5 bottom-5 rounded-[4px] bg-night/60 px-2 py-1 text-white sm:right-8 sm:bottom-8">Typography — where design begins</p>
+        <Photo name="processDesign" alt="" sizes="100vw" reveal parallax={0.1} />
+        <p className="label absolute right-5 bottom-5 rounded-[4px] bg-night/60 px-2 py-1 text-white sm:right-8 sm:bottom-8">Wireframes — where design begins</p>
       </div>
 
       {/* Approach */}
@@ -128,7 +128,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="relative min-h-[26rem]">
-            <Photo name="aboutStoneArtisan" alt="" sizes="(min-width: 1024px) 50vw, 100vw" treatment="violet" reveal />
+            <Photo name="aboutCollaboration" alt="" sizes="(min-width: 1024px) 50vw, 100vw" treatment="violet" reveal />
           </div>
         </div>
       </section>
@@ -172,7 +172,7 @@ export default function AboutPage() {
         description="Tell us about your business and what you'd like your website to do."
         primary={{ label: "Start a Project", href: "/contact" }}
         secondary={{ label: "View Our Work", href: "/work" }}
-        photo="whyConcreteBlocks"
+        photo="whyTeam"
       />
     </>
   );

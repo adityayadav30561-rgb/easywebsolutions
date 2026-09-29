@@ -8,7 +8,7 @@ export const services = [
     description:
       "Custom websites designed around your brand, your audience and the action you want visitors to take — then built to be fast, responsive and easy to manage.",
     items: ["Custom UI", "Responsive design", "Service pages", "Contact forms", "SEO foundations", "Analytics", "Performance"],
-    photo: "serviceGridFacade" as PhotoKey,
+    photo: "serviceDesignDev" as PhotoKey,
     cta: { label: "Explore Websites", href: "/websites" },
   },
   {
@@ -18,7 +18,7 @@ export const services = [
     description:
       "Monitoring, backups, updates, security and content changes after launch, so your website stays healthy without becoming your job.",
     items: ["Monitoring", "Backups", "Updates", "Security", "Performance", "Content changes"],
-    photo: "serviceLaptopNight" as PhotoKey,
+    photo: "serviceCare" as PhotoKey,
     cta: { label: "Explore Care Plans", href: "/care-plans" },
   },
   {
@@ -28,7 +28,7 @@ export const services = [
     description:
       "Continuous improvements to speed, content and user journeys that help an existing website perform better over time.",
     items: ["Conversion optimization", "Content improvements", "Analytics", "UX improvements", "Performance optimization"],
-    photo: "serviceGalaxySoho" as PhotoKey,
+    photo: "serviceOptimization" as PhotoKey,
     cta: { label: "Talk to Us", href: "/contact?need=optimization" },
   },
 ] as const;
@@ -41,35 +41,35 @@ export const processSteps: { number: string; title: string; description: string;
     title: "Discover",
     description: "We understand your business, audience, goals and what the website needs to achieve.",
     detail: "Goals · Audience · Content · Competitors",
-    photo: "processDiscoverConcrete",
+    photo: "processDiscover",
   },
   {
     number: "02",
     title: "Design",
     description: "We create a visual direction and user experience tailored to your brand.",
     detail: "Structure · Typography · Visual direction · Prototypes",
-    photo: "processDesignLetterpress",
+    photo: "processDesign",
   },
   {
     number: "03",
     title: "Build",
     description: "We turn the approved design into a fast, responsive and functional website.",
     detail: "Development · Responsive layouts · Forms · Performance",
-    photo: "processBuildBrutalist",
+    photo: "processBuild",
   },
   {
     number: "04",
     title: "Launch",
     description: "We test across devices, connect analytics and search tools, and take the website live carefully.",
     detail: "Testing · SSL · Analytics · Search Console",
-    photo: "processLaunchCity",
+    photo: "processLaunch",
   },
   {
     number: "05",
     title: "Care",
     description: "We can continue maintaining, protecting and improving your website after launch.",
     detail: "Monitoring · Backups · Updates · Improvements",
-    photo: "processCareUnderground",
+    photo: "processCare",
   },
 ];
 
@@ -78,32 +78,32 @@ export const buildSteps: { title: string; description: string; photo: PhotoKey }
   {
     title: "Strategy",
     description: "We clarify your goals, your audience and the actions you want visitors to take, then plan every page around them.",
-    photo: "processDiscoverConcrete",
+    photo: "processDiscover",
   },
   {
     title: "UX",
     description: "We map structure and user journeys so each page has a purpose and every visitor has an obvious next step.",
-    photo: "serviceGridFacade",
+    photo: "serviceDesignDev",
   },
   {
     title: "Design",
     description: "A visual direction built from your brand: typography, spacing, imagery and detail that feel considered.",
-    photo: "processDesignLetterpress",
+    photo: "processDesign",
   },
   {
     title: "Development",
     description: "The approved design becomes a fast, responsive website with clean, maintainable code and working forms.",
-    photo: "processBuildBrutalist",
+    photo: "processBuild",
   },
   {
     title: "Performance",
     description: "Optimised images, lean code and careful loading so pages feel quick on real phones and real connections.",
-    photo: "serviceGalaxySoho",
+    photo: "serviceOptimization",
   },
   {
     title: "Launch",
     description: "Testing across devices, SSL, analytics and search setup where your package includes it — then a careful go-live.",
-    photo: "processLaunchCity",
+    photo: "processLaunch",
   },
 ];
 

@@ -26,18 +26,18 @@ function HeroSite() {
       <div className="mt-[4.5cqw] grid grid-cols-[1.05fr_1fr] gap-[3.2cqw]">
         <div className="flex flex-col justify-between">
           <div>
-            <p className="text-[1.15cqw] font-semibold tracking-[0.2em] text-[#6f55a3] uppercase">Architecture studio</p>
+            <p className="text-[1.15cqw] font-semibold tracking-[0.2em] text-[#6f55a3] uppercase">Business consulting</p>
             <p className="mt-[1.6cqw] font-display text-[5.4cqw] leading-[0.95] font-semibold tracking-[-0.04em] text-ink uppercase">
-              Space,
+              Advice,
               <br />
               made
               <br />
-              to last.
+              simple.
             </p>
           </div>
           <div>
             <p className="max-w-[90%] text-[1.35cqw] leading-[1.55] text-[#556072]">
-              Residential and commercial projects designed around light, material and the people who use them.
+              Practical support for growing businesses, from first plan to steady growth.
             </p>
             <div className="mt-[2.4cqw] flex items-center gap-[1.6cqw]">
               <span className="rounded-[0.6cqw] bg-ink px-[2cqw] py-[1.1cqw] text-[1.2cqw] font-semibold tracking-[0.1em] text-white uppercase">
@@ -51,17 +51,17 @@ function HeroSite() {
         </div>
         <div className="relative aspect-[4/4.2] overflow-hidden">
           <Image
-            src={photos.processBuildBrutalist.src}
+            src={photos.careSupport.src}
             alt=""
             fill
             sizes="(min-width: 1024px) 22vw, 40vw"
-            className="object-cover grayscale"
+            className="object-cover"
             placeholder="blur"
           />
         </div>
       </div>
       <div className="mt-[3.2cqw] grid grid-cols-3 border-t border-[#e5e7eb] pt-[2.2cqw]">
-        {["Residential", "Workplace", "Restoration"].map((s, i) => (
+        {["Planning", "Bookings", "Support"].map((s, i) => (
           <div key={s} className={i ? "border-l border-[#e5e7eb] pl-[2cqw]" : ""}>
             <p className="text-[1.05cqw] text-[#6b7280]">0{i + 1}</p>
             <p className="mt-[0.4cqw] text-[1.45cqw] font-semibold text-ink">{s}</p>
@@ -120,10 +120,10 @@ export function Hero() {
       <div data-theme="dark" className="relative order-2 aspect-[4/5] w-full sm:aspect-[16/11] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-[46%]">
         <div className="settle absolute inset-0" style={d(0)}>
           <Photo
-            name="heroModernistFacade"
+            name="heroDesignStudio"
             alt=""
             sizes="(min-width: 1024px) 46vw, 100vw"
-            treatment="mono"
+           
             priority
             parallax={0.06}
             position="50% 35%"
@@ -134,7 +134,7 @@ export function Hero() {
         {/* Signal line on the photo's edge */}
         <span aria-hidden="true" className="signal draw absolute top-0 bottom-0 left-0 hidden w-[3px] lg:block" style={{ ...d(900), transformOrigin: "top" }} />
         <p className="label enter absolute top-5 right-5 rounded-[4px] bg-night/60 px-2 py-1 text-white sm:right-8 lg:top-auto lg:bottom-8" style={d(1200)}>
-          Fig. 01 — Structure
+          Fig. 01 — Design
         </p>
         {/* Mobile/tablet composition sits over the lower edge of the photograph */}
         <div className="pointer-events-none absolute -bottom-16 left-4 z-10 w-[88%] sm:left-8 sm:w-[70%] lg:hidden">

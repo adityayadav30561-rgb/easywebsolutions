@@ -87,7 +87,8 @@ Content lives in `src/data` and `src/config` — pages and components never hard
 - **Type:** Sora for uppercase display statements (tight 0.9 line-height, negative tracking) and Inter for body/UI.
   Small tracked labels (`(01) SERVICES`) carry the editorial structure.
 - **Shape:** mostly hard edges and hairlines; radius is reserved for buttons (8px) and small chips (4–6px).
-- **Imagery:** licensed architectural and craft photography, treated in CSS (monochrome, violet grade, dark overlay).
+- **Imagery:** licensed full-colour photography of web design and development work (screens, code, wireframes,
+  teams), with a soft violet/dark CSS overlay only where text sits on a photo.
   Every file is listed with source and licence in [`docs/IMAGE-SOURCES.md`](docs/IMAGE-SOURCES.md) and credited at
   `/credits`. Images are statically imported (`src/data/images.ts`) so Next.js serves AVIF/WebP with blur placeholders.
 - **Motion:** CSS load choreography in the hero, line-by-line display reveals, mask reveals for images, light

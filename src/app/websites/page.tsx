@@ -29,7 +29,7 @@ export default function WebsitesPage() {
         label="Website design & development"
         lines={["Websites", "built to", <span key="m">move <span className="text-violet-600">business.</span></span>]}
         description="We combine strategy, design, development and performance to create websites that help businesses attract, engage and convert visitors."
-        media={<DeviceShowcase photo="websitesCurvedMuseum" project={showcase} caption="Concept — Professional practice website" />}
+        media={<DeviceShowcase photo="websitesDesk" project={showcase} caption="Concept — Professional practice website" />}
       >
         <ButtonLink href="/contact?need=new-website">Get a Website Quote</ButtonLink>
       </PageHero>
@@ -52,7 +52,7 @@ export default function WebsitesPage() {
             {buildSteps.map((step, i) => (
               <li key={step.title} className={i % 3 === 1 ? "lg:mt-24" : i % 3 === 2 ? "lg:mt-12" : undefined} data-reveal="" style={{ "--d": `${(i % 3) * 90}ms` } as CSSProperties}>
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Photo name={step.photo} alt="" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw" treatment="mono" />
+                  <Photo name={step.photo} alt="" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw" />
                   <span className="label absolute top-4 left-4 rounded-[4px] bg-white px-2 py-1 !text-[0.625rem] text-ink">
                     {String(i + 1).padStart(2, "0")} / 06
                   </span>
@@ -133,7 +133,7 @@ export default function WebsitesPage() {
         description="Share a few details about your business and goals. We'll recommend the right package and send a clear quote."
         primary={{ label: "Get a Quote", href: "/contact?need=new-website" }}
         secondary={{ label: "View Our Work", href: "/work" }}
-        photo="serviceGalaxySoho"
+        photo="serviceOptimization"
       />
     </>
   );

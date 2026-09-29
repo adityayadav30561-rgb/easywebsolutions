@@ -48,7 +48,7 @@ export function ServiceRow({ number, title, description, items, photo, cta, inde
         </div>
         <div className="relative aspect-[4/3] overflow-hidden lg:col-span-3">
           <div className="absolute inset-0 transition-transform duration-[1200ms] ease-[var(--ease-premium)] group-hover:scale-[1.07]">
-            <Photo name={photo} alt="" sizes="(min-width: 1024px) 24vw, 100vw" treatment="mono" />
+            <Photo name={photo} alt="" sizes="(min-width: 1024px) 24vw, 100vw" />
           </div>
           <div aria-hidden="true" className="absolute inset-0 bg-violet/0 mix-blend-multiply transition-colors duration-700 group-hover:bg-violet/30" />
         </div>

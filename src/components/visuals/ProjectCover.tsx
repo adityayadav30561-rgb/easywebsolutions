@@ -41,7 +41,7 @@ export function ProjectCover({
           name={project.cover}
           alt=""
           sizes={sizes}
-          treatment="mono"
+         
           reveal={reveal}
           priority={priority}
           position={project.coverPosition}

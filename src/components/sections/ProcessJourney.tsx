@@ -130,7 +130,7 @@ export function ProcessJourney() {
                       i === active ? "scale-100 opacity-100" : "scale-[1.06] opacity-0",
                     )}
                   >
-                    <Photo name={s.photo} alt="" sizes="50vw" treatment="mono" />
+                    <Photo name={s.photo} alt="" sizes="50vw" />
                   </div>
                 ))}
                 <p className="label absolute bottom-4 left-4 z-10 rounded-[4px] bg-night/60 px-2 py-1 text-white">
@@ -152,7 +152,7 @@ export function ProcessJourney() {
                 <p className="mt-4 max-w-md text-[1.0625rem] leading-relaxed text-ink-700">{s.description}</p>
                 <p className="label mt-4 text-grey">{s.detail}</p>
                 <div className="relative mt-8 aspect-[16/10] overflow-hidden">
-                  <Photo name={s.photo} alt="" sizes="(min-width: 640px) 80vw, 100vw" treatment="mono" reveal />
+                  <Photo name={s.photo} alt="" sizes="(min-width: 640px) 80vw, 100vw" reveal />
                 </div>
               </li>
             ))}

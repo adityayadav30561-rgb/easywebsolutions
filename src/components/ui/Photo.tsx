@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { photos, type PhotoKey } from "@/data/images";
 import { cn } from "@/lib/cn";
 
+/** Photos are always shown in full colour; "violet" and "dark" add an overlay for text legibility. "mono" is kept as an alias of "none". */
 type Treatment = "none" | "mono" | "violet" | "dark";
 
 type Props = {
@@ -24,7 +25,7 @@ type Props = {
 
 /**
  * Art-directed photograph. Fills its (positioned) parent; the parent decides
- * the crop via its own aspect ratio. Treatments are CSS-only, so the licensed
+ * the crop via its own aspect ratio. Overlays are CSS-only, so the licensed
  * source files remain untouched.
  */
 export function Photo({
@@ -60,11 +61,7 @@ export function Photo({
             priority={priority}
             placeholder="blur"
             quality={72}
-            className={cn(
-              "object-cover",
-              (treatment === "mono" || treatment === "violet" || treatment === "dark") && "photo-mono",
-              imgClassName,
-            )}
+            className={cn("object-cover", imgClassName)}
             style={{ objectPosition: position }}
           />
         </div>

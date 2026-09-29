@@ -27,7 +27,7 @@ export function Why() {
             ]}
           />
           <div className="relative aspect-[3/4] overflow-hidden lg:col-span-3 lg:col-start-10 lg:mt-24">
-            <Photo name="whyConcreteBlocks" alt="" sizes="(min-width: 1024px) 22vw, 100vw" treatment="mono" reveal parallax={0.1} />
+            <Photo name="whyTeam" alt="" sizes="(min-width: 1024px) 22vw, 100vw" reveal parallax={0.1} />
           </div>
         </div>
 

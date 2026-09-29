@@ -7,8 +7,8 @@ export function AboutSplit() {
     <section aria-labelledby="about-heading" className="bg-paper">
       <div className="grid lg:grid-cols-2">
         <div className="relative aspect-[4/5] lg:aspect-auto lg:min-h-[52rem]">
-          <Photo name="aboutStoneArtisan" alt="" sizes="(min-width: 1024px) 50vw, 100vw" treatment="mono" reveal parallax={0.08} />
-          <p className="label absolute bottom-6 left-6 rounded-[4px] bg-night/60 px-2 py-1 text-white">Fig. 03 — Craft</p>
+          <Photo name="aboutCollaboration" alt="" sizes="(min-width: 1024px) 50vw, 100vw" reveal parallax={0.08} />
+          <p className="label absolute bottom-6 left-6 rounded-[4px] bg-night/60 px-2 py-1 text-white">Fig. 03 — Collaboration</p>
         </div>
         <div className="flex flex-col justify-center px-5 py-24 sm:px-12 lg:px-16 xl:px-24">
           <Label index="08">About</Label>

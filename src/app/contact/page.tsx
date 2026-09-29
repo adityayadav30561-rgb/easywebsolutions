@@ -58,8 +58,8 @@ export default function ContactPage() {
           {/* Details */}
           <aside data-theme="dark" className="enter grain relative flex flex-col overflow-hidden bg-night text-white lg:col-span-5" style={d(750)} aria-labelledby="details-heading">
             <div className="relative aspect-[16/10] lg:aspect-[4/3]">
-              <Photo name="contactReflection" alt="" sizes="(min-width: 1024px) 40vw, 100vw" treatment="violet" />
-              <p className="label absolute bottom-4 left-5 z-[2] rounded-[4px] bg-night/60 px-2 py-1 text-white">Fig. — Reflection</p>
+              <Photo name="contactConversation" alt="" sizes="(min-width: 1024px) 40vw, 100vw" treatment="violet" />
+              <p className="label absolute bottom-4 left-5 z-[2] rounded-[4px] bg-night/60 px-2 py-1 text-white">Fig. — Planning together</p>
             </div>
             <div className="relative z-[2] flex flex-1 flex-col px-5 py-10 sm:px-10">
               <h2 id="details-heading" className="label text-white/50">

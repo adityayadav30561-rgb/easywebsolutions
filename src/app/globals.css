@@ -119,12 +119,7 @@
     text-transform: uppercase;
   }
 
-  /* Monochrome photo treatment */
-  .photo-mono {
-    filter: grayscale(1) contrast(1.08);
-  }
-
-  /* Purple colour grade: multiply a violet wash over a mono image */
+  /* Brand grade for photos that carry text: a soft violet-to-night wash over the full-colour image */
   .grade-violet {
     position: relative;
     isolation: isolate;
@@ -133,8 +128,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, rgb(138 109 188 / 0.6), rgb(18 22 33 / 0.35) 55%, rgb(11 13 20 / 0.6));
-    mix-blend-mode: multiply;
+    background: linear-gradient(160deg, rgb(111 85 163 / 0.28), rgb(11 13 20 / 0.12) 50%, rgb(11 13 20 / 0.55));
     pointer-events: none;
   }
 

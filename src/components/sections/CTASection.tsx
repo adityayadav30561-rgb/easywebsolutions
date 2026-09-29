@@ -13,8 +13,8 @@ type Props = {
   photo?: PhotoKey;
 };
 
-/** Immersive closing section: architectural photograph, violet light, huge type. */
-export function CTASection({ lines, description, primary, secondary, eyebrow = "Start a project", photo = "ctaBuildingsNight" }: Props) {
+/** Immersive closing section: full-colour workspace photograph, violet light, huge type. */
+export function CTASection({ lines, description, primary, secondary, eyebrow = "Start a project", photo = "ctaWorkspace" }: Props) {
   return (
     <section aria-labelledby="cta-heading" data-theme="dark" className="grain relative isolate overflow-hidden bg-night text-white">
       <div className="absolute inset-0 -z-10">

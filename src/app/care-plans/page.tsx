@@ -40,7 +40,7 @@ function StatusVisual() {
   const project = getProject("brand-business-website")!;
   return (
     <div data-theme="dark" className="@container relative aspect-[4/5] overflow-hidden bg-night sm:aspect-[16/10] lg:aspect-[16/7]">
-      <Photo name="careDeskDark" alt="" sizes="100vw" treatment="violet" parallax={0.08} priority />
+      <Photo name="careSupport" alt="" sizes="100vw" treatment="violet" parallax={0.08} priority />
       <div aria-hidden="true" className="absolute inset-0 bg-night/40" />
       <div aria-hidden="true" className="absolute top-1/2 left-1/2 w-[70%] -translate-x-1/2 -translate-y-1/2 sm:w-[52%] lg:w-[40%]">
         <MockupWindow project={project} />
@@ -88,7 +88,7 @@ export default function CarePlansPage() {
               <Label index="01">Why it matters</Label>
               <DisplayLines id="why-care-heading" className="mt-8 text-[3rem] text-ink sm:text-[4.5rem]" lines={["A website", "isn't finished", "at launch."]} />
               <div className="relative mt-10 hidden aspect-[4/3] overflow-hidden lg:block">
-                <Photo name="processCareUnderground" alt="" sizes="35vw" treatment="mono" reveal />
+                <Photo name="processCare" alt="" sizes="35vw" reveal />
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function CarePlansPage() {
         description="Tell us about your website and we'll recommend the right care plan."
         primary={{ label: "Protect My Website", href: "/contact?need=care" }}
         secondary={{ label: "Build a New Website", href: "/websites" }}
-        photo="careNightStreet"
+        photo="careMonitoring"
       />
     </>
   );

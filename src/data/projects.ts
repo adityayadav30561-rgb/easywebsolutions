@@ -63,7 +63,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "brand-business-website",
-    cover: "workTechTower",
+    cover: "workTech",
     coverPosition: "50% 30%",
     kicker: "Clarity for a company that sells complexity.",
     name: "Brand & Business Website",
@@ -106,7 +106,7 @@ export const projects: Project[] = [
   },
   {
     slug: "local-services-website",
-    cover: "workLocalCraft",
+    cover: "workLocalBusiness",
     coverPosition: "50% 50%",
     kicker: "Built for the customer holding a phone and a problem.",
     name: "Local Services Website",
@@ -149,7 +149,7 @@ export const projects: Project[] = [
   },
   {
     slug: "professional-practice-website",
-    cover: "workProfessionalWindows",
+    cover: "workProfessional",
     coverPosition: "50% 40%",
     kicker: "Calm, credible and easy to act on.",
     name: "Professional Practice Website",
@@ -192,7 +192,7 @@ export const projects: Project[] = [
   },
   {
     slug: "online-store-concept",
-    cover: "workStoreLamp",
+    cover: "workStore",
     coverPosition: "50% 60%",
     kicker: "A storefront that gets out of the product’s way.",
     name: "Online Store Concept",
@@ -235,7 +235,7 @@ export const projects: Project[] = [
   },
   {
     slug: "hospitality-venue-website",
-    cover: "workVenueTram",
+    cover: "workVenue",
     coverPosition: "50% 55%",
     kicker: "Atmosphere first. Bookings one tap away.",
     name: "Hospitality & Venue Website",
@@ -278,7 +278,7 @@ export const projects: Project[] = [
   },
   {
     slug: "community-organisation-website",
-    cover: "workCommunityStudio",
+    cover: "workCommunity",
     coverPosition: "50% 50%",
     kicker: "Accessible by default, easy to keep current.",
     name: "Community Organisation Website",

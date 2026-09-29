@@ -1,61 +1,62 @@
 /**
  * Licensed photography (see docs/IMAGE-SOURCES.md for source and licence of each file).
+ * All photos are colour images of web design and development work, from Unsplash (Unsplash License).
  * Static imports give Next.js intrinsic sizes and blur placeholders.
  */
 import type { StaticImageData } from "next/image";
 
-import heroModernistFacade from "@/assets/images/hero-modernist-facade.jpg";
-import firstSaleSoloBuilding from "@/assets/images/first-sale-solo-building.jpg";
-import serviceGridFacade from "@/assets/images/service-grid-facade.jpg";
-import serviceLaptopNight from "@/assets/images/service-laptop-night.jpg";
-import serviceGalaxySoho from "@/assets/images/service-galaxy-soho.jpg";
-import processDiscoverConcrete from "@/assets/images/process-discover-concrete.jpg";
-import processDesignLetterpress from "@/assets/images/process-design-letterpress.jpg";
-import processBuildBrutalist from "@/assets/images/process-build-brutalist.jpg";
-import processLaunchCity from "@/assets/images/process-launch-city.jpg";
-import processCareUnderground from "@/assets/images/process-care-underground.jpg";
-import whyConcreteBlocks from "@/assets/images/why-concrete-blocks.jpg";
-import aboutStoneArtisan from "@/assets/images/about-stone-artisan.jpg";
-import aboutWoodCarving from "@/assets/images/about-wood-carving.jpg";
-import ctaBuildingsNight from "@/assets/images/cta-buildings-night.jpg";
-import careNightStreet from "@/assets/images/care-night-street.jpg";
-import careDeskDark from "@/assets/images/care-desk-dark.jpg";
-import websitesCurvedMuseum from "@/assets/images/websites-curved-museum.jpg";
-import contactReflection from "@/assets/images/contact-reflection.jpg";
-import workTechTower from "@/assets/images/work-tech-tower.jpg";
-import workProfessionalWindows from "@/assets/images/work-professional-windows.jpg";
-import workStoreLamp from "@/assets/images/work-store-lamp.jpg";
-import workVenueTram from "@/assets/images/work-venue-tram.jpg";
-import workLocalCraft from "@/assets/images/work-local-craft.jpg";
-import workCommunityStudio from "@/assets/images/work-community-studio.jpg";
+import heroDesignStudio from "@/assets/images/hero-design-studio.jpg";
+import introLaptopDesk from "@/assets/images/intro-laptop-desk.jpg";
+import serviceDesignDev from "@/assets/images/service-design-dev.jpg";
+import serviceCare from "@/assets/images/service-care.jpg";
+import serviceOptimization from "@/assets/images/service-optimization.jpg";
+import processDiscover from "@/assets/images/process-discover.jpg";
+import processDesign from "@/assets/images/process-design.jpg";
+import processBuild from "@/assets/images/process-build.jpg";
+import processLaunch from "@/assets/images/process-launch.jpg";
+import processCare from "@/assets/images/process-care.jpg";
+import whyTeam from "@/assets/images/why-team.jpg";
+import aboutCollaboration from "@/assets/images/about-collaboration.jpg";
+import aboutWorkspace from "@/assets/images/about-workspace.jpg";
+import ctaWorkspace from "@/assets/images/cta-workspace.jpg";
+import careMonitoring from "@/assets/images/care-monitoring.jpg";
+import careSupport from "@/assets/images/care-support.jpg";
+import websitesDesk from "@/assets/images/websites-desk.jpg";
+import contactConversation from "@/assets/images/contact-conversation.jpg";
+import workTech from "@/assets/images/work-tech.jpg";
+import workProfessional from "@/assets/images/work-professional.jpg";
+import workStore from "@/assets/images/work-store.jpg";
+import workVenue from "@/assets/images/work-venue.jpg";
+import workLocalBusiness from "@/assets/images/work-local-business.jpg";
+import workCommunity from "@/assets/images/work-community.jpg";
 
 export type Photo = { src: StaticImageData; alt: string; credit: string; url: string };
 
 export const photos = {
-  heroModernistFacade: { src: heroModernistFacade, alt: "Black and white photo of a modernist building", credit: "Maxence Ambert", url: "https://unsplash.com/photos/xUCYN4GPePI" },
-  firstSaleSoloBuilding: { src: firstSaleSoloBuilding, alt: "Concrete tower against a pale sky (Solo-building series)", credit: "Pierre Châtel-Innocenti", url: "https://unsplash.com/photos/VO7HVshBK5Y" },
-  serviceGridFacade: { src: serviceGridFacade, alt: "Grid facade looking up, Washington D.C.", credit: "Christophe Laurenceau", url: "https://unsplash.com/photos/MPWbGMrZ6eo" },
-  serviceLaptopNight: { src: serviceLaptopNight, alt: "Laptop on a desk at night", credit: "Ankit Singh", url: "https://unsplash.com/photos/vw_y__9mKl8" },
-  serviceGalaxySoho: { src: serviceGalaxySoho, alt: "Curved facade of Galaxy SOHO, Beijing", credit: "Sam Balye", url: "https://unsplash.com/photos/t0nojyPGbok" },
-  processDiscoverConcrete: { src: processDiscoverConcrete, alt: "Heiligkreuzkirche concrete interior, Chur", credit: "Ricardo Gomez Angel", url: "https://unsplash.com/photos/9AjwOAIdsII" },
-  processDesignLetterpress: { src: processDesignLetterpress, alt: "Letterpress type being arranged, Taichung", credit: "Raymond Yeung", url: "https://unsplash.com/photos/98ZZnRQKISM" },
-  processBuildBrutalist: { src: processBuildBrutalist, alt: "Brutalist balconies, Mériadeck, Bordeaux", credit: "Alexander Psiuk", url: "https://unsplash.com/photos/4frZSdcZaE0" },
-  processLaunchCity: { src: processLaunchCity, alt: "New York City at night from above", credit: "dominik hofbauer", url: "https://unsplash.com/photos/AaceTp_LRAM" },
-  processCareUnderground: { src: processCareUnderground, alt: "Underground car park in dim light, Bergen", credit: "David Werbrouck", url: "https://unsplash.com/photos/VsejBFGkeyM" },
-  whyConcreteBlocks: { src: whyConcreteBlocks, alt: "Brutalist concrete blocks, Salamanca", credit: "uve sanchez", url: "https://unsplash.com/photos/9DRX_cW48RQ" },
-  aboutStoneArtisan: { src: aboutStoneArtisan, alt: "Artisan carving stone, Mount Qingcheng", credit: "Quan-You Zhang", url: "https://unsplash.com/photos/XChuTe9LR6s" },
-  aboutWoodCarving: { src: aboutWoodCarving, alt: "Chisel carving wood, close-up", credit: "Dominik Scythe", url: "https://unsplash.com/photos/3cIvvzjE6Lk" },
-  ctaBuildingsNight: { src: ctaBuildingsNight, alt: "Low angle view of two buildings at night", credit: "Viktor Talashuk", url: "https://unsplash.com/photos/53McvMr9sjo" },
-  careNightStreet: { src: careNightStreet, alt: "Empty Toronto street at night", credit: "Patrick Tomasso", url: "https://unsplash.com/photos/D6Bk1A3-gMA" },
-  careDeskDark: { src: careDeskDark, alt: "Dark minimal desk with monitor", credit: "Kevin Canlas", url: "https://unsplash.com/photos/EJPzqPYZgvI" },
-  websitesCurvedMuseum: { src: websitesCurvedMuseum, alt: "Curved architecture, Canadian Museum of History", credit: "Zachary McSween Manickchand", url: "https://unsplash.com/photos/I-tis7ZFIVI" },
-  contactReflection: { src: contactReflection, alt: "Brutalist building reflected in water", credit: "William Priess", url: "https://unsplash.com/photos/1jyHQxBAE7A" },
-  workTechTower: { src: workTechTower, alt: "Tall building against dark sky, Tokyo", credit: "mos design", url: "https://unsplash.com/photos/CvocCBtUdfE" },
-  workProfessionalWindows: { src: workProfessionalWindows, alt: "Repeating window pattern of a tall building", credit: "Michael Cochran", url: "https://unsplash.com/photos/jtkDOOIl2uE" },
-  workStoreLamp: { src: workStoreLamp, alt: "Yellow desk lamp on a glass trestle table", credit: "Brecht Corbeel", url: "https://unsplash.com/photos/BPmgWWtwcuQ" },
-  workVenueTram: { src: workVenueTram, alt: "Red tram at night, Queens Quay West, Toronto", credit: "Filip Mroz", url: "https://unsplash.com/photos/023T4jyCRqA" },
-  workLocalCraft: { src: workLocalCraft, alt: "Grayscale photo of a person cutting a slab", credit: "Benjamin Thomas", url: "https://unsplash.com/photos/idEEZ-wQkfA" },
-  workCommunityStudio: { src: workCommunityStudio, alt: "Hands working on a project at a table", credit: "gomi", url: "https://unsplash.com/photos/HPF5e282XCc" },
+  heroDesignStudio: { src: heroDesignStudio, alt: "Designer's desk with a monitor, tablet and phone showing website designs", credit: "Daniel Korpai", url: "https://unsplash.com/photos/pKRNxEguRgM" },
+  introLaptopDesk: { src: introLaptopDesk, alt: "Laptop and desktop screen showing a website on a bright desk", credit: "Domenico Loia", url: "https://unsplash.com/photos/hGV2TfOh0ns" },
+  serviceDesignDev: { src: serviceDesignDev, alt: "Monitor displaying a website design system", credit: "Balázs Kétyi", url: "https://unsplash.com/photos/_x335IZXxfc" },
+  serviceCare: { src: serviceCare, alt: "Laptop showing colourful code in an editor", credit: "Mohammad Rahmani", url: "https://unsplash.com/photos/8qEB0fTe9Vw" },
+  serviceOptimization: { src: serviceOptimization, alt: "Website performance analytics graphs on a screen", credit: "Luke Chesser", url: "https://unsplash.com/photos/JKUTrJ4vK00" },
+  processDiscover: { src: processDiscover, alt: "Wall of colourful sticky notes from a planning session", credit: "Hugo Rocha", url: "https://unsplash.com/photos/qFpnvZ_j9HU" },
+  processDesign: { src: processDesign, alt: "Watercolour wireframe sketches of website layouts", credit: "Hal Gatewood", url: "https://unsplash.com/photos/tZc3vjPCk-Q" },
+  processBuild: { src: processBuild, alt: "Laptop with website code on a developer's desk", credit: "Christopher Gower", url: "https://unsplash.com/photos/m_HRfLhgABo" },
+  processLaunch: { src: processLaunch, alt: "Hand holding a smartphone showing a live website", credit: "David Liceaga", url: "https://unsplash.com/photos/NqNDfVTohvM" },
+  processCare: { src: processCare, alt: "Dashboard of website metrics on a laptop", credit: "Stephen Dawson", url: "https://unsplash.com/photos/qwtCeJ5cLYs" },
+  whyTeam: { src: whyTeam, alt: "Three people laughing while working on laptops together", credit: "Brooke Cagle", url: "https://unsplash.com/photos/g1Kr4Ozfoac" },
+  aboutCollaboration: { src: aboutCollaboration, alt: "Team reviewing a design on a laptop around a table", credit: "Jud Mackrill", url: "https://unsplash.com/photos/Of_m3hMsoAA" },
+  aboutWorkspace: { src: aboutWorkspace, alt: "Developer typing code on a laptop beside a plant", credit: "Nubelson Fernandes", url: "https://unsplash.com/photos/UcYBL5V0xWQ" },
+  ctaWorkspace: { src: ctaWorkspace, alt: "Web designer working on a website across two screens", credit: "Campaign Creators", url: "https://unsplash.com/photos/iEiUITs149M" },
+  careMonitoring: { src: careMonitoring, alt: "Laptop showing website analytics and statistics", credit: "Lukas Blazek", url: "https://unsplash.com/photos/mcSDtbWXUZU" },
+  careSupport: { src: careSupport, alt: "Two people discussing a website on a laptop", credit: "KOBU Agency", url: "https://unsplash.com/photos/7okkFhxrxNw" },
+  websitesDesk: { src: websitesDesk, alt: "Laptop showing an online store website on a desk", credit: "Igor Miske", url: "https://unsplash.com/photos/Px3iBXV-4TU" },
+  contactConversation: { src: contactConversation, alt: "Two people pointing at a laptop while planning a website", credit: "Mimi Thian", url: "https://unsplash.com/photos/ZKBzlifgkgw" },
+  workTech: { src: workTech, alt: "Two developers working on code at monitors", credit: "Compagnons", url: "https://unsplash.com/photos/Im_cQ6hQo10" },
+  workProfessional: { src: workProfessional, alt: "Professional working on a business website at her desk", credit: "Campaign Creators", url: "https://unsplash.com/photos/ARW7Ic7MSAM" },
+  workStore: { src: workStore, alt: "Smartphone showing a shop's mobile website", credit: "Sarah Dorweiler", url: "https://unsplash.com/photos/eNE1rUBItAk" },
+  workVenue: { src: workVenue, alt: "Hand holding a phone showing a mobile site, laptop behind", credit: "Daniel Korpai", url: "https://unsplash.com/photos/mxPiMiz7KCo" },
+  workLocalBusiness: { src: workLocalBusiness, alt: "Designer using a drawing tablet with colour swatches and a laptop", credit: "Theme Photos", url: "https://unsplash.com/photos/CGpifH3FjOA" },
+  workCommunity: { src: workCommunity, alt: "Designer sketching website wireframes at a desk", credit: "UX Indonesia", url: "https://unsplash.com/photos/pqzRfBhd9r0" },
 } satisfies Record<string, Photo>;
 
 export type PhotoKey = keyof typeof photos;

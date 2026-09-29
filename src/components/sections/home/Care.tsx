@@ -12,7 +12,7 @@ export function Care() {
   return (
     <section aria-labelledby="care-heading" data-theme="dark" className="grain relative isolate overflow-hidden bg-night text-white">
       <div className="absolute inset-x-0 top-0 -z-10 h-[80vh]">
-        <Photo name="careNightStreet" alt="" sizes="100vw" treatment="violet" parallax={0.12} position="50% 60%" />
+        <Photo name="careMonitoring" alt="" sizes="100vw" treatment="violet" parallax={0.12} position="50% 60%" />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/70 to-night" />
       </div>
 

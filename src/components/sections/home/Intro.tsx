@@ -15,7 +15,7 @@ export function Intro() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           <figure className="lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden">
-              <Photo name="firstSaleSoloBuilding" alt="" sizes="(min-width: 1024px) 38vw, 100vw" treatment="mono" reveal parallax={0.08} />
+              <Photo name="introLaptopDesk" alt="" sizes="(min-width: 1024px) 38vw, 100vw" reveal parallax={0.08} />
             </div>
             <figcaption className="mt-4 flex justify-between border-t border-line pt-3">
               <span className="label text-grey">Fig. 02</span>

@@ -45,7 +45,7 @@ export default function WorkPage() {
         description="Tell us about your business and what you want your website to achieve."
         primary={{ label: "Start a Project", href: "/contact" }}
         secondary={{ label: "See Website Packages", href: "/websites" }}
-        photo="processLaunchCity"
+        photo="processLaunch"
       />
     </>
   );
