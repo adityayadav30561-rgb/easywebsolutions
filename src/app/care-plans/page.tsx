@@ -1,18 +1,18 @@
-import type { CSSProperties } from "react";
 import { pageMetadata } from "@/lib/seo";
-import { careComparison, carePlans } from "@/data/pricing";
 import { careReasons } from "@/data/services";
+import { careComparison, carePlans } from "@/data/pricing";
 import { careFaqs } from "@/data/faqs";
-import { getProject } from "@/data/projects";
-import { PageHero } from "@/components/sections/PageHero";
-import { CarePlanCard } from "@/components/sections/PricingCard";
-import { ComparisonTable } from "@/components/sections/ComparisonTable";
-import { FAQSection } from "@/components/sections/FAQSection";
-import { CTASection } from "@/components/sections/CTASection";
-import { MockupWindow } from "@/components/visuals/ProjectMockup";
-import { ButtonLink } from "@/components/ui/Button";
-import { Photo } from "@/components/ui/Photo";
-import { DisplayLines, Label } from "@/components/ui/Type";
+import { PageIntro } from "@/components/blocks/PageIntro";
+import { Em, SectionHead } from "@/components/blocks/SectionHead";
+import { CarePlanCard } from "@/components/blocks/PackageCard";
+import { CompareTable } from "@/components/blocks/CompareTable";
+import { FAQSection } from "@/components/blocks/FAQSection";
+import { CTA } from "@/components/blocks/CTA";
+import { GlassPhoto } from "@/components/blocks/GlassPhoto";
+import { Glass } from "@/components/glass/Glass";
+import { Reveal } from "@/components/motion/Reveal";
+import { Aurora } from "@/components/site/Aurora";
+import { ButtonLink } from "@/components/site/Button";
 
 export const metadata = pageMetadata({
   title: "Website Care Plans | EasyWebSolns",
@@ -22,43 +22,33 @@ export const metadata = pageMetadata({
 });
 
 const statuses = [
-  { label: "Secure", note: "Security monitoring", pos: "left-[3%] top-[16%]" },
-  { label: "Backed up", note: "Regular backups", pos: "right-[3%] top-[24%]" },
-  { label: "Monitored", note: "Uptime & SSL", pos: "left-[6%] bottom-[14%]" },
-  { label: "Updated", note: "Software & plugins", pos: "right-[6%] bottom-[20%]" },
+  { label: "Secure", note: "Security monitoring", pos: "left-[-3%] top-[12%]" },
+  { label: "Backed up", note: "Regular backups", pos: "right-[-4%] top-[30%]" },
+  { label: "Monitored", note: "Uptime & SSL", pos: "left-[4%] bottom-[10%]" },
+  { label: "Updated", note: "Software & plugins", pos: "right-[2%] bottom-[-4%]" },
 ];
 
 const incident = [
   { step: "Detect", text: "Monitoring alerts us when your website becomes unavailable or its SSL certificate has a problem." },
-  { step: "Assess", text: "We investigate the cause — an update, the hosting provider, a plugin, or something else." },
+  { step: "Assess", text: "We investigate the cause: an update, the hosting provider, a plugin, or something else." },
   { step: "Restore", text: "We work to bring the website back, using backups where needed, and keep you informed." },
   { step: "Report", text: "We explain what happened, what we did, and anything that would help prevent it again." },
 ];
 
-/** A website surrounded by quiet status indicators. Illustrative — not live data. */
 function StatusVisual() {
-  const project = getProject("brand-business-website")!;
   return (
-    <div data-theme="dark" className="@container relative aspect-[4/5] overflow-hidden bg-night sm:aspect-[16/10] lg:aspect-[16/7]">
-      <Photo name="careSupport" alt="" sizes="100vw" treatment="violet" parallax={0.08} priority />
-      <div aria-hidden="true" className="absolute inset-0 bg-night/40" />
-      <div aria-hidden="true" className="absolute top-1/2 left-1/2 w-[70%] -translate-x-1/2 -translate-y-1/2 sm:w-[52%] lg:w-[40%]">
-        <MockupWindow project={project} />
-      </div>
-      <ul aria-label="What a care plan looks after" className="absolute inset-0">
+    <div className="relative aspect-[4/5]">
+      <GlassPhoto name="careSupport" sizes="(min-width: 1024px) 34rem, 90vw" priority className="absolute inset-0" />
+      <ul aria-label="What a care plan looks after">
         {statuses.map((s, i) => (
-          <li
-            key={s.label}
-            className={`enter absolute ${s.pos} flex items-center gap-3 rounded-[8px] border border-white/15 bg-night/60 px-3 py-2.5 backdrop-blur-md sm:px-4 sm:py-3`}
-            style={{ "--d": `${900 + i * 150}ms` } as CSSProperties}
-          >
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full rounded-full bg-violet-300 opacity-60 motion-safe:animate-ping" />
-              <span className="relative inline-flex size-2 rounded-full bg-violet-300" />
+          <li key={s.label} className={`glass glass-thin float-y absolute ${s.pos} flex items-center gap-3 px-4 py-3 [--radius:1.2rem]`} style={{ animationDelay: `${i * 0.8}s` }}>
+            <span className="relative grid size-2.5 place-items-center">
+              <span className="absolute size-2.5 animate-ping rounded-full bg-emerald-400/60" />
+              <span className="size-2 rounded-full bg-emerald-500" />
             </span>
             <span>
-              <span className="label block text-white">{s.label}</span>
-              <span className="hidden text-xs text-white/55 sm:block">{s.note}</span>
+              <span className="block text-sm font-semibold text-ink">{s.label}</span>
+              <span className="block text-xs text-mute">{s.note}</span>
             </span>
           </li>
         ))}
@@ -70,111 +60,81 @@ function StatusVisual() {
 export default function CarePlansPage() {
   return (
     <>
-      <PageHero
-        label="Website care plans"
-        size="lg"
-        lines={["Your website", "shouldn't need", "your attention", <span key="e" className="text-violet-600">every day.</span>]}
-        description="Stay secure, updated, monitored and supported without having to manage the technical details yourself."
-        media={<StatusVisual />}
+      <PageIntro
+        lines={["Your website,", <Em key="l">looked after.</Em>]}
+        lead="Stay secure, updated, monitored and supported without having to manage the technical details yourself."
+        aside={<StatusVisual />}
       >
-        <ButtonLink href="/contact?need=care">Protect My Website</ButtonLink>
-      </PageHero>
+        <ButtonLink href="/contact?need=care">Protect my website</ButtonLink>
+        <ButtonLink href="#plans" variant="glass">
+          See plans
+        </ButtonLink>
+      </PageIntro>
 
-      {/* Why care matters — a spec index */}
-      <section aria-labelledby="why-care-heading" className="bg-white py-24 sm:py-36">
-        <div className="container-site grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-32">
-              <Label index="01">Why it matters</Label>
-              <DisplayLines id="why-care-heading" className="mt-8 text-[3rem] text-ink sm:text-[4.5rem]" lines={["A website", "isn't finished", "at launch."]} />
-              <div className="relative mt-10 hidden aspect-[4/3] overflow-hidden lg:block">
-                <Photo name="processCare" alt="" sizes="35vw" reveal />
-              </div>
-            </div>
-          </div>
-          <ol className="border-t border-ink lg:col-span-6 lg:col-start-7">
+      <section aria-labelledby="why-care-heading" className="py-24 sm:py-32">
+        <div className="wrap">
+          <SectionHead id="why-care-heading" lines={["A website isn't", <Em key="f">finished at launch.</Em>]} lead="Software ages, threats change and businesses move on. Care keeps everything working in the background." />
+          <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {careReasons.map((r, i) => (
-              <li key={r.title} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line-strong py-8" data-reveal="" style={{ "--d": `${i * 50}ms` } as CSSProperties}>
-                <span className="font-display text-sm text-violet-600 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 className="display text-[2rem] text-ink sm:text-[2.4rem]">{r.title}</h3>
-                  <p className="mt-3 max-w-md text-[1rem] leading-relaxed text-ink-700">{r.description}</p>
-                </div>
-              </li>
+              <Reveal as="li" key={r.title} delay={(i % 3) * 0.08}>
+                <Glass interactive className="h-full p-7 sm:p-8 [--radius:2rem]">
+                  <h3 className="t-title text-[1.9rem] text-ink">{r.title}</h3>
+                  <p className="mt-3 text-ink-2">{r.description}</p>
+                </Glass>
+              </Reveal>
             ))}
-          </ol>
+          </ul>
         </div>
       </section>
 
-      {/* Plans + comparison on dark */}
-      <section id="plans" aria-labelledby="plans-heading" data-theme="dark" className="grain relative bg-night py-24 text-white sm:py-36">
-        <div className="container-site relative z-[2]">
-          <Label index="02" tone="dark">
-            Plans
-          </Label>
-          <DisplayLines id="plans-heading" className="mt-8 text-[3rem] text-white sm:text-[5rem] xl:text-[6.5rem]" lines={["Simple", "monthly care."]} />
-          <p className="mt-6 max-w-md text-lg text-white/60" data-reveal="">
-            Billed monthly. Choose the level of care your website needs.
-          </p>
-          <div className="mt-16 grid gap-5 lg:grid-cols-3">
-            {carePlans.map((plan, i) => (
-              <CarePlanCard key={plan.id} plan={plan} index={i} />
-            ))}
-          </div>
-
-          <div className="mt-28">
-            <h3 className="display text-[2.4rem] sm:text-[3rem]" data-reveal="">
-              Compare plans
-            </h3>
-            <div className="mt-8">
-              <ComparisonTable
-                tone="dark"
+      <section id="plans" aria-labelledby="plans-heading" className="scroll-mt-24 px-3 py-10 sm:px-5">
+        <div className="noise relative isolate overflow-hidden rounded-[2.75rem] bg-night py-24 sm:py-32">
+          <Aurora className="opacity-70 mix-blend-screen" />
+          <div className="wrap relative">
+            <SectionHead id="plans-heading" dark lines={["Simple", <Em key="m">monthly care.</Em>]} lead="Billed monthly. Choose the level of care your website needs." />
+            <ul className="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
+              {carePlans.map((p, i) => (
+                <Reveal as="li" key={p.id} delay={i * 0.1} className="h-full">
+                  <CarePlanCard plan={p} />
+                </Reveal>
+              ))}
+            </ul>
+            <Reveal className="mt-16">
+              <h3 className="t-title mb-6 text-[2rem] text-white">Compare plans</h3>
+              <CompareTable
+                dark
                 caption="Care plan comparison"
                 columns={carePlans.map((p) => ({ name: p.name, price: `${p.price}${p.unit}` }))}
-                rows={careComparison}
-                highlight={1}
+                rows={careComparison.map((r) => ({ label: r.label, values: r.values }))}
               />
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* When something goes wrong */}
-      <section aria-labelledby="incident-heading" className="bg-paper py-24 sm:py-36">
-        <div className="container-site">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <Label index="03">If something breaks</Label>
-              <DisplayLines id="incident-heading" className="mt-8 text-[3rem] text-ink sm:text-[5rem]" lines={["When something", "goes wrong."]} />
-            </div>
-            <p className="max-w-md text-[1.0625rem] leading-relaxed text-grey lg:col-span-5 lg:justify-self-end" data-reveal="">
-              Websites occasionally have bad days. What matters is noticing quickly and handling it calmly. Here&apos;s
-              what happens when you&apos;re on a care plan.
-            </p>
-          </div>
-          <ol className="relative mt-16 grid gap-10 md:grid-cols-4 md:gap-0">
-            <span aria-hidden="true" className="signal absolute top-0 left-0 hidden h-[2px] w-full md:block" data-reveal="rule" />
+      <section aria-labelledby="incident-heading" className="py-24 sm:py-32">
+        <div className="wrap">
+          <SectionHead id="incident-heading" lines={["If something", <Em key="g">goes wrong.</Em>]} lead="A calm, clear routine, so problems are handled quickly and you always know what happened." />
+          <ol className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {incident.map((s, i) => (
-              <li key={s.step} className="relative border-l border-line-strong pl-6 md:border-l-0 md:pt-10 md:pr-8 md:pl-0" data-reveal="" style={{ "--d": `${200 + i * 150}ms` } as CSSProperties}>
-                <span aria-hidden="true" className="absolute -top-[5px] left-0 hidden size-3 rounded-full bg-violet md:block" />
-                <p className="label text-grey">Step {String(i + 1).padStart(2, "0")}</p>
-                <h3 className="display mt-3 text-[2.2rem] text-ink">{s.step}</h3>
-                <p className="mt-3 text-[1rem] leading-relaxed text-ink-700">{s.text}</p>
-              </li>
+              <Reveal as="li" key={s.step} delay={i * 0.08}>
+                <Glass interactive className="h-full p-7 [--radius:2rem]">
+                  <span className="grid size-10 place-items-center rounded-full bg-ink text-sm font-semibold text-white">{i + 1}</span>
+                  <h3 className="t-title mt-6 text-[1.8rem] text-ink">{s.step}</h3>
+                  <p className="mt-3 text-ink-2">{s.text}</p>
+                </Glass>
+              </Reveal>
             ))}
           </ol>
         </div>
       </section>
 
-      <FAQSection index="04" items={careFaqs} />
+      <FAQSection faqs={careFaqs} id="care-faq" />
 
-      <CTASection
-        eyebrow="Website care"
-        lines={["Launch with", "confidence.", <span key="m" className="text-violet-300">Maintain with ease.</span>]}
-        description="Tell us about your website and we'll recommend the right care plan."
-        primary={{ label: "Protect My Website", href: "/contact?need=care" }}
-        secondary={{ label: "Build a New Website", href: "/websites" }}
-        photo="careMonitoring"
+      <CTA
+        lines={["Keep your website", <Em key="h">healthy.</Em>]}
+        lead="Tell us about your website and we'll recommend the plan that fits."
+        primary={{ label: "Choose a care plan", href: "/contact?need=care" }}
       />
     </>
   );

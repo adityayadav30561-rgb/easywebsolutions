@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ButtonLink } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/site/Button";
+import { Em } from "@/components/blocks/SectionHead";
 
 export const metadata: Metadata = {
   title: { absolute: "Page not found | EasyWebSolns" },
@@ -8,20 +9,19 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="bg-paper pt-40 pb-28">
-      <div className="container-site">
-        <p className="label text-grey">Error 404</p>
-        <h1 className="display mt-8 text-[4rem] text-ink sm:text-[8rem] xl:text-[11rem]">
-          Lost the
-          <br />
-          <span className="text-[#868c97]">thread.</span>
-        </h1>
-        <p className="mt-10 max-w-md text-lg text-ink-700">The page you&apos;re looking for doesn&apos;t exist or has moved.</p>
-        <div className="mt-10 flex flex-col gap-4 min-[480px]:flex-row min-[480px]:items-center min-[480px]:gap-8">
-          <ButtonLink href="/">Back to Home</ButtonLink>
-          <ButtonLink href="/contact" variant="link">
-            Contact Us
-          </ButtonLink>
+    <section className="pt-44 pb-28">
+      <div className="wrap flex flex-col items-center text-center">
+        <div className="glass px-8 py-16 sm:px-20 sm:py-24 [--radius:2.75rem]">
+          <h1 className="t-display text-[clamp(3.4rem,10vw,8rem)]">
+            Lost the <Em>thread.</Em>
+          </h1>
+          <p className="t-lead mx-auto mt-6 max-w-md">The page you&apos;re looking for doesn&apos;t exist or has moved.</p>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <ButtonLink href="/">Back to home</ButtonLink>
+            <ButtonLink href="/contact" variant="glass">
+              Contact us
+            </ButtonLink>
+          </div>
         </div>
       </div>
     </section>

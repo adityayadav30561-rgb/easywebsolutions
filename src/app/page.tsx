@@ -1,16 +1,16 @@
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
-import { Hero } from "@/components/sections/home/Hero";
-import { Intro } from "@/components/sections/home/Intro";
-import { Services } from "@/components/sections/home/Services";
-import { SelectedWork } from "@/components/sections/home/SelectedWork";
-import { ProcessJourney } from "@/components/sections/ProcessJourney";
-import { Packages } from "@/components/sections/home/Packages";
-import { Care } from "@/components/sections/home/Care";
-import { Why } from "@/components/sections/home/Why";
-import { AboutSplit } from "@/components/sections/home/AboutSplit";
-import { Testimonial } from "@/components/sections/Testimonial";
-import { CTASection } from "@/components/sections/CTASection";
+import { Hero } from "@/components/home/Hero";
+import { Marquee } from "@/components/home/Marquee";
+import { Statement } from "@/components/home/Statement";
+import { ServiceStack } from "@/components/home/ServiceStack";
+import { WorkReel } from "@/components/home/WorkReel";
+import { Process } from "@/components/home/Process";
+import { Pricing } from "@/components/home/Pricing";
+import { CareBand } from "@/components/home/CareBand";
+import { Why } from "@/components/home/Why";
+import { CTA } from "@/components/blocks/CTA";
+import { Em } from "@/components/blocks/SectionHead";
 
 export const metadata = pageMetadata({
   title: "EasyWebSolns — Websites That Work For You",
@@ -37,20 +37,18 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Hero />
-      <Intro />
-      <Services />
-      <SelectedWork />
-      <ProcessJourney />
-      <Packages />
-      <Care />
+      <Marquee />
+      <Statement />
+      <ServiceStack />
+      <WorkReel />
+      <Process />
+      <Pricing />
+      <CareBand />
       <Why />
-      <AboutSplit />
-      <Testimonial />
-      <CTASection
-        lines={["Let's build", "something", <span key="w" className="text-violet-300">that works.</span>]}
-        description="Tell us what you're building, what isn't working, or what you'd like to improve."
-        primary={{ label: "Start a Project", href: "/contact" }}
-        secondary={{ label: "View Our Work", href: "/work" }}
+      <CTA
+        lines={["Let's build something", <Em key="w">that works.</Em>]}
+        lead="Tell us what you're building, what isn't working, or what you'd like to improve."
+        secondary={{ label: "See our work", href: "/work" }}
       />
     </>
   );

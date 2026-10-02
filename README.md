@@ -66,31 +66,31 @@ src/
   app/                 routes, metadata, sitemap, robots, OG image, API route
   assets/images/       licensed photography (see docs/IMAGE-SOURCES.md)
   components/
-    layout/            Navbar, MobileMenu, Footer, Logo
-    sections/          PageHero, ServiceRow, ProjectShowcase, ProcessJourney, PricingCard (PackageSheet,
-                       CarePlanCard), ComparisonTable, WorkGrid, FAQ, Testimonial, CTASection
-    sections/home/     homepage-only sections
-    visuals/           ProjectMockup, ProjectCover, DeviceShowcase, BrowserFrame
+    site/              Nav (floating glass bar), Footer, Button, Aurora (animated colour field)
+    glass/             Glass — the liquid-glass surface with pointer-tracked highlight
+    motion/            SmoothScroll (Lenis), Reveal / RevealLines, ScrollWords, Parallax
+    home/              Hero, Marquee, Statement, ServiceStack, WorkReel, Process, Pricing, CareBand, Why
+    blocks/            SectionHead, PageIntro, PackageCard, ProjectCard, WorkGrid, CompareTable, FAQ, CTA, GlassPhoto
+    visuals/           code-drawn concept websites (ProjectMockup, BrowserFrame)
     contact/           ContactForm
-    ui/                Button, Photo, Type (Label, DisplayLines), Icon, ScrollEffects
   config/site.ts       brand, contact details, navigation
-  data/                pricing, care plans, services, projects, FAQs, testimonials, images
+  data/                pricing, care plans, services, projects, FAQs, images
   lib/                 SEO helper, contact validation, utils
 ```
 
 Content lives in `src/data` and `src/config` — pages and components never hardcode repeated content.
 
-## Design system — "Structure & Light"
+## Design system — "Liquid Glass"
 
-- **Palette (sampled from the logo):** navy `#121621`, near-black `#0B0D14`, white, off-white `#F7F7F5`, grey
-  `#575B62`. Logo purple `#8A6DBC` (deep `#67578D`, text `#6F55A3`, lavender `#B797CD`) is the *signal* — a thin line of light, an underline, an index number — never a background.
-- **Type:** Sora for uppercase display statements (tight 0.9 line-height, negative tracking) and Inter for body/UI.
-  Small tracked labels (`(01) SERVICES`) carry the editorial structure.
-- **Shape:** mostly hard edges and hairlines; radius is reserved for buttons (8px) and small chips (4–6px).
-- **Imagery:** licensed full-colour photography of web design and development work (screens, code, wireframes,
-  teams), with a soft violet/dark CSS overlay only where text sits on a photo.
-  Every file is listed with source and licence in [`docs/IMAGE-SOURCES.md`](docs/IMAGE-SOURCES.md) and credited at
-  `/credits`. Images are statically imported (`src/data/images.ts`) so Next.js serves AVIF/WebP with blur placeholders.
-- **Motion:** CSS load choreography in the hero, line-by-line display reveals, mask reveals for images, light
-  parallax and a pinned horizontal process journey on desktop — all driven by one small scroll engine
-  (`ScrollEffects`) and disabled under `prefers-reduced-motion`.
+- **Material:** content sits on layered glass (`.glass` in `globals.css`): frosted `backdrop-filter` blur with boosted
+  saturation, a luminous gradient rim, inner thickness shadows and a specular highlight that follows the pointer.
+  A slowly drifting aurora of brand colour (violet, iris, sky, blush) sits behind everything so the glass has
+  something to refract. Dark "night" panels use the same glass in a dark tint.
+- **Type:** Inter with its optical-size axis (tight display letterforms, open text sizes) paired with Instrument
+  Serif italic for single emphasised words. No eyebrow labels above headings.
+- **Motion:** Lenis inertial smooth scrolling; Motion for scroll-linked scenes — the hero headline dissolves while a
+  glass-framed website rises and flattens, statements light up word by word, service cards stack, the work rail
+  slides sideways while pinned, the process panel stays pinned and changes per step, and a glass highlight slides
+  between nav items. Everything is transform/opacity based and fully disabled under `prefers-reduced-motion`.
+- **Imagery:** licensed full-colour photography of web design and development work, listed with source and licence
+  in [`docs/IMAGE-SOURCES.md`](docs/IMAGE-SOURCES.md) and credited at `/credits`.

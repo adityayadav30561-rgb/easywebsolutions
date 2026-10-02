@@ -1,13 +1,18 @@
-import type { CSSProperties, ReactNode } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { pageMetadata } from "@/lib/seo";
+import type { ReactNode } from "react";
 import { getProject, projects } from "@/data/projects";
-import { ProjectCover } from "@/components/visuals/ProjectCover";
+import { pageMetadata } from "@/lib/seo";
+import { Em } from "@/components/blocks/SectionHead";
+import { GlassPhoto } from "@/components/blocks/GlassPhoto";
+import { ProjectCard } from "@/components/blocks/ProjectCard";
+import { CTA } from "@/components/blocks/CTA";
+import { Check } from "@/components/blocks/Check";
+import { Glass } from "@/components/glass/Glass";
+import { Reveal, RevealLines } from "@/components/motion/Reveal";
+import { Parallax } from "@/components/motion/Parallax";
 import { MockupWindow } from "@/components/visuals/ProjectMockup";
-import { CTASection } from "@/components/sections/CTASection";
-import { Label } from "@/components/ui/Type";
 
 export const dynamicParams = false;
 
@@ -26,30 +31,27 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   });
 }
 
-const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
-
-function Chapter({ no, title, children }: { no: string; title: string; children: ReactNode }) {
+function Chapter({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="grid gap-6 border-t border-ink py-14 lg:grid-cols-12 lg:gap-10 lg:py-20" data-reveal="">
-      <div className="lg:col-span-4">
-        <p className="label text-violet-600">Chapter {no}</p>
-        <h2 className="display mt-4 text-[2.6rem] text-ink sm:text-[3.4rem]">{title}</h2>
-      </div>
-      <div className="text-lg leading-relaxed text-ink-700 lg:col-span-7 lg:col-start-6">{children}</div>
-    </section>
+    <Reveal>
+      <Glass className="grid gap-6 p-7 sm:p-10 lg:grid-cols-12 lg:gap-10 [--radius:2.25rem]">
+        <h2 className="t-title text-[2.2rem] text-ink sm:text-[2.8rem] lg:col-span-4">{title}</h2>
+        <div className="text-[1.08rem] leading-relaxed text-ink-2 lg:col-span-8">{children}</div>
+      </Glass>
+    </Reveal>
   );
 }
 
 function Points({ items }: { items: string[] }) {
   return (
-    <ol className="border-t border-line-strong">
-      {items.map((item, i) => (
-        <li key={item} className="grid grid-cols-[2.5rem_1fr] border-b border-line-strong py-4 text-[1.0625rem]">
-          <span className="font-display text-sm text-grey-400 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-          <span className="text-ink">{item}</span>
+    <ul className="space-y-3">
+      {items.map((item) => (
+        <li key={item} className="flex gap-3">
+          <Check className="mt-1.5 text-violet-600" />
+          <span>{item}</span>
         </li>
       ))}
-    </ol>
+    </ul>
   );
 }
 
@@ -61,139 +63,105 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
   const cs = project.caseStudy;
-  const t = project.mockup.theme;
 
   return (
     <>
       <article>
-        <header className="bg-paper pt-32 sm:pt-40">
-          <div className="container-site">
-            <Link href="/work" className="enter label group inline-flex min-h-11 items-center gap-3 text-grey hover:text-ink" style={d(100)}>
-              <svg aria-hidden="true" viewBox="0 0 20 16" className="h-3 w-4 rotate-180 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M0 8h18M12 2l6 6-6 6" />
+        <header className="pt-32 sm:pt-40">
+          <div className="wrap">
+            <Link href="/work" className="glass glass-thin group inline-flex min-h-10 items-center gap-2 px-4 text-sm font-medium text-ink-2 hover:text-ink [--radius:999px]">
+              <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4 transition-transform duration-500 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M13 8H3.5M7.5 4l-4 4 4 4" />
               </svg>
               All work
             </Link>
-            <div className="mt-8 grid gap-10 pb-14 lg:grid-cols-12 lg:items-end">
+            <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
               <div className="lg:col-span-8">
-                <p className="enter label text-grey" style={d(150)}>
-                  <span className="text-violet-600">Project {String(index + 1).padStart(2, "0")}</span> — {project.industry}
-                  {project.status === "concept" && " · Concept"}
-                </p>
-                <h1 className="display mt-6 text-[3rem] text-ink sm:text-[5.5rem] xl:text-[7rem]">
-                  {project.name.split(" ").reduce<string[][]>((acc, w, i) => {
-                    if (i % 2 === 0) acc.push([w]);
-                    else acc[acc.length - 1].push(w);
-                    return acc;
-                  }, []).map((words, i) => (
-                    <span key={i} className="ln enter-line" style={{ "--i": i, "--d": "200ms" } as CSSProperties}>
-                      <span>{words.join(" ")}</span>
-                    </span>
-                  ))}
-                </h1>
+                <RevealLines as="h1" onMount lines={[project.name]} className="t-display text-[clamp(3rem,7.6vw,6.6rem)]" />
+                <Reveal delay={0.3}>
+                  <p className="t-lead mt-6 max-w-2xl">{project.kicker}</p>
+                </Reveal>
               </div>
-              <dl className="enter grid grid-cols-2 gap-6 border-t border-ink pt-6 lg:col-span-4" style={d(500)}>
-                <div>
-                  <dt className="label text-grey">Industry</dt>
-                  <dd className="mt-2 text-ink">{project.industry}</dd>
-                </div>
-                <div>
-                  <dt className="label text-grey">Type</dt>
-                  <dd className="mt-2 text-ink">{project.status === "concept" ? "Design concept" : "Client project"}</dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="label text-grey">Services</dt>
-                  <dd className="mt-2 text-ink">{project.services.join(" · ")}</dd>
-                </div>
-              </dl>
+              <Reveal delay={0.4} className="lg:col-span-4">
+                <dl className="glass glass-thin grid grid-cols-2 gap-5 p-6 [--radius:1.75rem]">
+                  <div>
+                    <dt className="text-sm text-mute">Industry</dt>
+                    <dd className="mt-1 font-medium text-ink">{project.industry}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-mute">Type</dt>
+                    <dd className="mt-1 font-medium text-ink">{project.status === "concept" ? "Design concept" : "Client project"}</dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="text-sm text-mute">Services</dt>
+                    <dd className="mt-1 font-medium text-ink">{project.services.join(" · ")}</dd>
+                  </div>
+                </dl>
+              </Reveal>
             </div>
           </div>
-          <div className="settle group relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9]" style={d(400)}>
-            <ProjectCover project={project} sizes="100vw" frame="wide-right" priority reveal={false} />
+
+          <div className="wrap mt-14">
+            <Reveal>
+              <div className="relative aspect-[4/5] sm:aspect-[16/9]">
+                <GlassPhoto name={project.cover} sizes="(min-width: 1280px) 78rem, 100vw" position={project.coverPosition} priority className="absolute inset-0" />
+                <div className="absolute inset-x-[5%] bottom-[-10%] sm:inset-x-[12%]">
+                  <Parallax amount={60}>
+                    <div className="glass p-[1.1%] [--radius:1.6rem]">
+                      <MockupWindow project={project} className="overflow-hidden rounded-[1.2rem]" />
+                    </div>
+                  </Parallax>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </header>
 
-        <div className="container-site bg-white py-20 sm:py-28">
-          <p className="max-w-4xl font-display text-[1.75rem] leading-[1.25] font-medium tracking-[-0.02em] text-ink sm:text-[2.4rem]" data-reveal="">
-            {project.kicker} {project.description}
-          </p>
-          {project.status === "concept" && (
-            <p className="mt-8 inline-flex items-center gap-3 border border-dashed border-line-strong px-4 py-3 text-sm text-grey">
-              <span aria-hidden="true" className="size-1.5 rounded-full bg-violet" />
-              A design concept that demonstrates our approach. It does not represent a specific client.
-            </p>
-          )}
-
-          <div className="mt-20">
-            <Chapter no="01" title="Overview">
+        <div className="wrap mt-32 space-y-5 pb-24 sm:mt-40">
+          <Reveal>
+            <p className="t-title max-w-4xl text-[clamp(1.8rem,3.6vw,2.8rem)] text-ink">{project.description}</p>
+            {project.status === "concept" && (
+              <p className="glass glass-thin mt-8 inline-flex items-center gap-3 px-4 py-3 text-sm text-ink-2 [--radius:1rem]">
+                <span aria-hidden="true" className="size-2 rounded-full bg-violet" />
+                A design concept that demonstrates our approach. It does not represent a specific client.
+              </p>
+            )}
+          </Reveal>
+          <div className="space-y-5 pt-8">
+            <Chapter title="Overview">
               <p>{cs.overview}</p>
             </Chapter>
-            <Chapter no="02" title="Challenge">
+            <Chapter title="The challenge">
               <p>{cs.challenge}</p>
             </Chapter>
-            <Chapter no="03" title="Approach">
+            <Chapter title="Approach">
               <Points items={cs.approach} />
             </Chapter>
+            <Chapter title="Design direction">
+              <p>{cs.designDirection}</p>
+            </Chapter>
+            <Chapter title="Solution">
+              <Points items={cs.solution} />
+            </Chapter>
+            {cs.results && (
+              <Chapter title="Results">
+                <p>{cs.results}</p>
+              </Chapter>
+            )}
           </div>
         </div>
-
-        {/* Design direction — full-bleed, on the project's own palette */}
-        <section data-theme="dark" className="grain relative bg-night py-20 text-white sm:py-28">
-          <div className="container-site relative z-[2] grid gap-14 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-5" data-reveal="">
-              <Label index="04" tone="dark">
-                Design direction
-              </Label>
-              <p className="mt-8 text-xl leading-relaxed text-white/80">{cs.designDirection}</p>
-              <ul className="mt-10 grid grid-cols-4 border-t border-line-dark" aria-label="Colour palette">
-                {[t.text, t.accent, t.accentSoft, t.surface].map((c, i) => (
-                  <li key={i} className="pt-4 pr-2">
-                    <span className="block aspect-square w-full border border-white/10" style={{ background: c }} />
-                    <span className="mt-2 block font-mono text-[0.6875rem] text-white/50 uppercase">{c}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="@container lg:col-span-7" data-reveal="" style={d(150)}>
-              <MockupWindow project={project} />
-            </div>
-          </div>
-        </section>
-
-        <div className="container-site bg-white py-20 sm:py-28">
-          <Chapter no="05" title="Solution">
-            <Points items={cs.solution} />
-          </Chapter>
-          <Chapter no="06" title="Results">
-            <p>{cs.results ?? "Results will be added after launch."}</p>
-          </Chapter>
-        </div>
-
-        {next && next.slug !== project.slug && (
-          <Link href={`/work/${next.slug}`} className="group relative block overflow-hidden bg-night">
-            <div className="relative aspect-[4/3] sm:aspect-[21/8]">
-              <ProjectCover project={next} sizes="100vw" frame="wide-right" reveal={false} />
-              <div aria-hidden="true" className="absolute inset-0 bg-night/55 transition-colors duration-700 group-hover:bg-night/35" />
-            </div>
-            <div className="container-site absolute inset-0 flex flex-col justify-end pb-10 sm:pb-14">
-              <p className="label text-white/60">Next project</p>
-              <p className="display mt-4 flex items-center gap-6 text-[2.6rem] text-white sm:text-[5rem]">
-                {next.name}
-                <svg aria-hidden="true" viewBox="0 0 20 16" className="hidden h-8 w-10 shrink-0 text-violet-300 transition-transform duration-500 group-hover:translate-x-3 sm:block" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <path d="M0 8h18M12 2l6 6-6 6" />
-                </svg>
-              </p>
-            </div>
-          </Link>
-        )}
       </article>
 
-      <CTASection
-        lines={["Let's build", <span key="y" className="text-violet-300">yours next.</span>]}
-        description="Tell us about your business and what you want your website to achieve."
-        primary={{ label: "Start a Project", href: "/contact" }}
-        secondary={{ label: "View All Work", href: "/work" }}
-      />
+      <section aria-labelledby="next-heading" className="pb-16">
+        <div className="wrap">
+          <h2 id="next-heading" className="t-display mb-8 text-[clamp(2.4rem,5vw,4rem)]">
+            Next <Em>project.</Em>
+          </h2>
+          <ProjectCard project={next} className="aspect-[4/5] sm:aspect-[21/9]" sizes="(min-width: 1280px) 78rem, 100vw" />
+        </div>
+      </section>
+
+      <CTA lines={["Want something", <Em key="l">like this?</Em>]} lead="Tell us about your business and what you want your website to achieve." />
     </>
   );
 }

@@ -1,23 +1,28 @@
-import type { CSSProperties } from "react";
+import Image from "next/image";
 import { pageMetadata } from "@/lib/seo";
-import { packageComparison, websitePackages } from "@/data/pricing";
 import { buildSteps, includedFeatures } from "@/data/services";
+import { packageComparison, websitePackages } from "@/data/pricing";
 import { websiteFaqs } from "@/data/faqs";
+import { photos } from "@/data/images";
 import { getProject } from "@/data/projects";
-import { PageHero } from "@/components/sections/PageHero";
-import { PackageSheet } from "@/components/sections/PricingCard";
-import { ComparisonTable } from "@/components/sections/ComparisonTable";
-import { FAQSection } from "@/components/sections/FAQSection";
-import { CTASection } from "@/components/sections/CTASection";
-import { DeviceShowcase } from "@/components/visuals/DeviceShowcase";
-import { ButtonLink } from "@/components/ui/Button";
-import { Photo } from "@/components/ui/Photo";
-import { DisplayLines, Label } from "@/components/ui/Type";
+import { PageIntro } from "@/components/blocks/PageIntro";
+import { Em, SectionHead } from "@/components/blocks/SectionHead";
+import { PackageCard } from "@/components/blocks/PackageCard";
+import { CompareTable } from "@/components/blocks/CompareTable";
+import { FAQSection } from "@/components/blocks/FAQSection";
+import { CTA } from "@/components/blocks/CTA";
+import { GlassPhoto } from "@/components/blocks/GlassPhoto";
+import { Check } from "@/components/blocks/Check";
+import { Glass } from "@/components/glass/Glass";
+import { Reveal } from "@/components/motion/Reveal";
+import { Parallax } from "@/components/motion/Parallax";
+import { ButtonLink } from "@/components/site/Button";
+import { MockupWindow } from "@/components/visuals/ProjectMockup";
 
 export const metadata = pageMetadata({
   title: "Website Design & Development | EasyWebSolns",
   description:
-    "Custom website design and development from $499. Strategy, UX, design, development and performance — websites built to help businesses attract, engage and convert.",
+    "Custom website design and development for businesses. Starter $499, Professional $799, Premium $1,199+. Fast, responsive websites built to turn visitors into enquiries.",
   path: "/websites",
 });
 
@@ -25,115 +30,108 @@ export default function WebsitesPage() {
   const showcase = getProject("professional-practice-website")!;
   return (
     <>
-      <PageHero
-        label="Website design & development"
-        lines={["Websites", "built to", <span key="m">move <span className="text-violet-600">business.</span></span>]}
-        description="We combine strategy, design, development and performance to create websites that help businesses attract, engage and convert visitors."
-        media={<DeviceShowcase photo="websitesDesk" project={showcase} caption="Concept — Professional practice website" />}
+      <PageIntro
+        lines={["Websites built", <Em key="m">to move business.</Em>]}
+        lead="We combine strategy, design, development and performance to create websites that help businesses attract, engage and convert visitors."
       >
-        <ButtonLink href="/contact?need=new-website">Get a Website Quote</ButtonLink>
-      </PageHero>
+        <ButtonLink href="/contact?need=new-website">Get a website quote</ButtonLink>
+        <ButtonLink href="#packages" variant="glass">
+          See packages
+        </ButtonLink>
+      </PageIntro>
 
-      {/* How we build — a numbered editorial sequence with imagery */}
-      <section aria-labelledby="build-heading" className="bg-white py-24 sm:py-36">
-        <div className="container-site">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <Label index="01">How we build</Label>
-              <DisplayLines id="build-heading" className="mt-8 text-[3rem] text-ink sm:text-[5rem] xl:text-[6.5rem]" lines={["Six disciplines.", "One website."]} />
+      {/* Showcase: photo in a glass bezel with a concept site floating over it */}
+      <section aria-label="Example concept website" className="pb-24 sm:pb-36">
+        <div className="wrap relative">
+          <Reveal>
+            <div className="relative aspect-[4/5] sm:aspect-[16/9]">
+              <GlassPhoto name="websitesDesk" sizes="(min-width: 1280px) 78rem, 100vw" className="absolute inset-0" priority />
+              <div className="absolute inset-x-[6%] bottom-[-8%] sm:inset-x-auto sm:right-[5%] sm:bottom-[-10%] sm:w-[58%]">
+                <Parallax amount={50}>
+                  <div className="glass p-[1.2%] [--radius:1.6rem]">
+                    <MockupWindow project={showcase} className="overflow-hidden rounded-[1.2rem]" />
+                  </div>
+                  <p className="mt-3 text-right text-sm text-mute">Design concept: professional practice website</p>
+                </Parallax>
+              </div>
             </div>
-            <p className="max-w-md text-[1.0625rem] leading-relaxed text-grey lg:col-span-5 lg:justify-self-end" data-reveal="">
-              Good websites aren&apos;t decorated after the fact. Each stage shapes the next, from the first question about
-              your customers to the last check before launch.
-            </p>
-          </div>
+          </Reveal>
+        </div>
+      </section>
 
-          <ol className="mt-20 grid gap-x-10 gap-y-20 md:grid-cols-2 lg:grid-cols-3">
+      <section aria-labelledby="build-heading" className="py-24 sm:py-32">
+        <div className="wrap">
+          <SectionHead
+            id="build-heading"
+            lines={["Six disciplines.", <Em key="o">One website.</Em>]}
+            lead="Good websites aren't decorated after the fact. Each stage shapes the next, from the first question about your customers to the last check before launch."
+          />
+          <ul className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {buildSteps.map((step, i) => (
-              <li key={step.title} className={i % 3 === 1 ? "lg:mt-24" : i % 3 === 2 ? "lg:mt-12" : undefined} data-reveal="" style={{ "--d": `${(i % 3) * 90}ms` } as CSSProperties}>
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Photo name={step.photo} alt="" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw" />
-                  <span className="label absolute top-4 left-4 rounded-[4px] bg-white px-2 py-1 !text-[0.625rem] text-ink">
-                    {String(i + 1).padStart(2, "0")} / 06
-                  </span>
-                </div>
-                <h3 className="display mt-7 text-[2.4rem] text-ink">{step.title}</h3>
-                <p className="mt-3 max-w-sm text-[1rem] leading-relaxed text-ink-700">{step.description}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Packages */}
-      <section id="packages" aria-labelledby="packages-heading" className="bg-paper py-24 sm:py-36">
-        <div className="container-site">
-          <Label index="02">Packages</Label>
-          <DisplayLines id="packages-heading" className="mt-8 text-[3rem] text-ink sm:text-[5rem] xl:text-[6.5rem]" lines={["Choose your", "starting point."]} />
-          <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-0 lg:[&>*+*]:-ml-px">
-            {websitePackages.map((plan, i) => (
-              <PackageSheet key={plan.id} plan={plan} index={i} />
-            ))}
-          </div>
-
-          <div className="mt-28">
-            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-              <h3 className="display text-[2.4rem] text-ink sm:text-[3rem]" data-reveal="">
-                At a glance
-              </h3>
-              <p className="max-w-sm text-sm text-grey" data-reveal="">
-                Only what each package lists. Not sure which fits? We&apos;ll recommend one — or quote for something custom.
-              </p>
-            </div>
-            <div className="mt-8">
-              <ComparisonTable
-                caption="Website package comparison"
-                columns={websitePackages.map((p) => ({ name: p.name, price: p.price }))}
-                rows={packageComparison}
-                highlight={1}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What's included — typographic index, not icon cards */}
-      <section aria-labelledby="included-heading" data-theme="dark" className="grain relative bg-night py-24 text-white sm:py-36">
-        <div className="container-site relative z-[2]">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <Label index="03" tone="dark">
-                What&apos;s included
-              </Label>
-              <DisplayLines id="included-heading" className="mt-8 text-[3rem] text-white sm:text-[5rem] xl:text-[6.5rem]" lines={["The details that", "make it work."]} />
-            </div>
-            <p className="max-w-md text-[1.0625rem] leading-relaxed text-white/60 lg:col-span-5 lg:justify-self-end" data-reveal="">
-              The building blocks we use across our packages. Each package lists exactly which are included.
-            </p>
-          </div>
-          <ul className="mt-16 grid border-t border-white sm:grid-cols-2 lg:grid-cols-4">
-            {includedFeatures.map((f, i) => (
-              <li key={f.title} className="group border-b border-line-dark py-7 sm:pr-8" data-reveal="" style={{ "--d": `${(i % 4) * 60}ms` } as CSSProperties}>
-                <p className="flex items-baseline gap-3">
-                  <span className="font-display text-xs text-violet-300 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="font-display text-xl font-semibold tracking-[-0.02em] transition-colors group-hover:text-violet-300">{f.title}</span>
-                </p>
-                <p className="mt-2 pl-7 text-sm leading-relaxed text-white/55">{f.description}</p>
-              </li>
+              <Reveal as="li" key={step.title} delay={(i % 3) * 0.08}>
+                <Glass interactive className="flex h-full flex-col p-2.5 [--radius:2.25rem]">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-[1.8rem]">
+                    <Image src={photos[step.photo].src} alt="" fill sizes="(min-width: 1024px) 26rem, (min-width: 640px) 45vw, 90vw" placeholder="blur" quality={70} className="object-cover" />
+                  </div>
+                  <div className="p-5 sm:p-6">
+                    <h3 className="t-title text-[1.9rem] text-ink">{step.title}</h3>
+                    <p className="mt-3 text-ink-2">{step.description}</p>
+                  </div>
+                </Glass>
+              </Reveal>
             ))}
           </ul>
         </div>
       </section>
 
-      <FAQSection index="04" items={websiteFaqs} />
+      <section id="packages" aria-labelledby="packages-heading" className="py-24 sm:py-32">
+        <div className="wrap">
+          <SectionHead id="packages-heading" lines={["Choose your", <Em key="s">starting point.</Em>]} lead="Prices are one-time. Scope is confirmed in writing before any work begins." />
+          <ul className="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
+            {websitePackages.map((p, i) => (
+              <Reveal as="li" key={p.id} delay={i * 0.1} className="h-full">
+                <PackageCard plan={p} />
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal className="mt-16" >
+            <div id="compare" className="scroll-mt-28">
+              <h3 className="t-title mb-6 text-[2rem] text-ink">Compare at a glance</h3>
+              <CompareTable
+                caption="Website package comparison"
+                columns={websitePackages.map((p) => ({ name: p.name, price: p.price }))}
+                rows={packageComparison.map((r) => ({ label: r.label, values: r.values }))}
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-      <CTASection
-        eyebrow="Get a website quote"
-        lines={["Tell us", <span key="n" className="text-violet-300">what you need.</span>]}
-        description="Share a few details about your business and goals. We'll recommend the right package and send a clear quote."
-        primary={{ label: "Get a Quote", href: "/contact?need=new-website" }}
-        secondary={{ label: "View Our Work", href: "/work" }}
-        photo="serviceOptimization"
+      <section aria-labelledby="included-heading" className="py-24 sm:py-32">
+        <div className="wrap">
+          <SectionHead id="included-heading" lines={["The details that", <Em key="m">make it work.</Em>]} lead="The building blocks we use across our packages. Each package lists exactly which are included." />
+          <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {includedFeatures.map((f, i) => (
+              <Reveal as="li" key={f.title} delay={(i % 4) * 0.06}>
+                <Glass interactive className="h-full p-6 [--radius:1.75rem]">
+                  <span className="grid size-10 place-items-center rounded-full bg-white/70 text-violet-600 shadow-[inset_0_1px_0_#fff]">
+                    <Check />
+                  </span>
+                  <h3 className="mt-5 text-[1.12rem] font-semibold tracking-[-0.02em] text-ink">{f.title}</h3>
+                  <p className="mt-2 text-[0.95rem] text-ink-2">{f.description}</p>
+                </Glass>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <FAQSection faqs={websiteFaqs} />
+
+      <CTA
+        lines={["Tell us", <Em key="n">what you need.</Em>]}
+        lead="Share a few details about your business and goals. We'll recommend the right package and send a clear quote."
+        primary={{ label: "Get a website quote", href: "/contact?need=new-website" }}
       />
     </>
   );
