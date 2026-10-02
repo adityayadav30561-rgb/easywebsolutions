@@ -33,6 +33,18 @@ Files live in `src/assets/images/` and are imported through `src/data/images.ts`
 | `work-local-business.jpg` — Designer using a drawing tablet with colour swatches and a laptop | Unsplash | https://unsplash.com/photos/CGpifH3FjOA | Theme Photos | Unsplash License | Project cover: Local Services Website |
 | `work-community.jpg` — Designer sketching website wireframes at a desk | Unsplash | https://unsplash.com/photos/pqzRfBhd9r0 | UX Indonesia | Unsplash License | Project cover: Community Organisation Website |
 
+## Client work (not stock photography)
+
+Files in `src/assets/work/<client>/`:
+
+- `home-desktop.webp`, `home-mobile.webp`: screenshots of the client's live homepage, captured by EasyWebSolns in
+  October 2026 for portfolio use (on 7seasmatrix.com a hosting-provider notice bar was hidden before capture).
+- `proof-*.webp`: unedited screenshots of the client's Google Analytics 4 and Google Search Console reports,
+  supplied by EasyWebSolns in `Seo_Portfolio.docx`. The figures on each SEO case study are copied from these.
+
+These are shown with the clients' knowledge as portfolio work. Remove a client's folder and its entry in
+`src/data/seo-projects.ts` if they ask not to be featured.
+
 ## Not photography
 
 - **Logo** (`public/brand/easywebsolns-logo.png`) and favicon (`src/app/icon.png`, `src/app/apple-icon.png`): the official EasyWebSolns logo supplied by the business (background made transparent, whitespace trimmed; the favicon uses the logo mark).

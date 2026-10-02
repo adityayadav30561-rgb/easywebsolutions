@@ -54,7 +54,7 @@ export const mainNav = [
 export const footerServices = [
   { label: "Business Websites", href: "/websites" },
   { label: "Website Care", href: "/care-plans" },
-  { label: "Website Optimization", href: "/contact?need=optimization" },
+  { label: "SEO & Optimization", href: "/work#seo" },
 ] as const;
 
 export const legalNav = [

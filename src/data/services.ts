@@ -23,13 +23,13 @@ export const services = [
   },
   {
     number: "03",
-    title: "Website Optimization",
-    short: "Optimization",
+    title: "SEO & Optimization",
+    short: "SEO",
     description:
-      "Continuous improvements to speed, content and user journeys that help an existing website perform better over time.",
-    items: ["Conversion optimization", "Content improvements", "Analytics", "UX improvements", "Performance optimization"],
+      "Search engine optimisation and continuous improvements to speed, content and user journeys, so more of the right people find you and more of them get in touch.",
+    items: ["SEO", "Search Console", "Analytics", "Content improvements", "Conversion optimization", "Performance optimization"],
     photo: "serviceOptimization" as PhotoKey,
-    cta: { label: "Talk to Us", href: "/contact?need=optimization" },
+    cta: { label: "See SEO results", href: "/work#seo" },
   },
 ] as const;
 

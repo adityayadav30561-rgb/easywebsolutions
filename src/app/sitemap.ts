@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
-import { projects } from "@/data/projects";
+import { work } from "@/data/work";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
@@ -16,6 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   return [
     ...pages.map((p) => ({ url: `${site.url}${p.path}`, changeFrequency: "monthly" as const, priority: p.priority })),
-    ...projects.map((p) => ({ url: `${site.url}/work/${p.slug}`, changeFrequency: "yearly" as const, priority: 0.6 })),
+    ...work.map((w) => ({ url: `${site.url}/work/${w.slug}`, changeFrequency: "monthly" as const, priority: w.kind === "seo" ? 0.7 : 0.5 })),
   ];
 }

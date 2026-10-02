@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useLayoutEffect, useRef, useState } from "react";
-import { projects } from "@/data/projects";
-import { ProjectCard } from "@/components/blocks/ProjectCard";
+import { featuredWork } from "@/data/work";
+import { WorkCard } from "@/components/blocks/WorkCard";
 import { ButtonLink } from "@/components/site/Button";
 import { Em } from "@/components/blocks/SectionHead";
 
@@ -46,8 +46,8 @@ export function WorkReel() {
             Selected <Em>work.</Em>
           </h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {projects.map((p) => (
-              <ProjectCard key={p.slug} project={p} className="aspect-[4/5] md:aspect-[5/4]" />
+            {featuredWork.map((w) => (
+              <WorkCard key={w.slug} item={w} className="aspect-[4/5] md:aspect-[5/4]" />
             ))}
           </div>
         </div>
@@ -63,13 +63,13 @@ export function WorkReel() {
             <h2 id="work-heading" className="t-display text-[clamp(3rem,7vw,6rem)]">
               Selected <Em>work.</Em>
             </h2>
-            <p className="t-lead mt-6 max-w-sm">Design concepts that show how we think about structure, clarity and conversion. Client case studies are added with permission.</p>
+            <p className="t-lead mt-6 max-w-sm">Real results for real clients, verified in their own Google Analytics and Search Console.</p>
             <ButtonLink href="/work" variant="glass" className="mt-8 self-start">
-              All projects
+              All work
             </ButtonLink>
           </div>
-          {projects.map((p, i) => (
-            <ProjectCard key={p.slug} project={p} priority={i < 2} sizes="(min-width: 640px) 44rem, 86vw" className="h-[64svh] max-h-[40rem] w-[86vw] shrink-0 sm:w-[44rem]" />
+          {featuredWork.map((w, i) => (
+            <WorkCard key={w.slug} item={w} priority={i < 2} sizes="(min-width: 640px) 44rem, 86vw" className="h-[64svh] max-h-[40rem] w-[86vw] shrink-0 sm:w-[44rem]" />
           ))}
         </motion.div>
         <div className="wrap mt-10">

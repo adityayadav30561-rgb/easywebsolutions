@@ -4,6 +4,7 @@ export const needOptions = [
   { value: "new-website", label: "New Website" },
   { value: "redesign", label: "Website Redesign" },
   { value: "care", label: "Website Care" },
+  { value: "seo", label: "SEO" },
   { value: "optimization", label: "Website Optimization" },
   { value: "other", label: "Other" },
 ] as const;
