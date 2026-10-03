@@ -45,6 +45,14 @@ Files in `src/assets/work/<client>/`:
 These are shown with the clients' knowledge as portfolio work. Remove a client's folder and its entry in
 `src/data/seo-projects.ts` if they ask not to be featured.
 
+### Apps
+
+Files in `src/assets/work/apps/<app>/`: screenshots of EasyWebSolns' own apps (Event Intelligence India,
+Maharishi Ayurveda, Toys Cartel), captured on 2–3 Oct 2026 with each app's sample/demo data and supplied in
+`portfolio-screenshots.zip`. Phone screens are kept at their native 1179×2556 and `hero*` collages at 2400px
+wide, converted from PNG to WebP (quality 86–88). next/image serves visitors resized AVIF/WebP versions, so
+a full case study downloads about 1 MB of images.
+
 ## Not photography
 
 - **Logo** (`public/brand/easywebsolns-logo.png`) and favicon (`src/app/icon.png`, `src/app/apple-icon.png`): the official EasyWebSolns logo supplied by the business (background made transparent, whitespace trimmed; the favicon uses the logo mark).

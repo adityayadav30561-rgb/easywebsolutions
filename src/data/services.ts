@@ -31,6 +31,16 @@ export const services = [
     photo: "serviceOptimization" as PhotoKey,
     cta: { label: "See SEO results", href: "/work#seo" },
   },
+  {
+    number: "04",
+    title: "App Development",
+    short: "Apps",
+    description:
+      "Mobile apps for iOS, Android and the web from one codebase, designed to feel native and built around the few things your customers do most.",
+    items: ["iOS & Android", "Web app & PWA", "App UI design", "Shopping & bookings", "Sign-in & accounts", "APIs & databases"],
+    photo: "processLaunch" as PhotoKey,
+    cta: { label: "See our apps", href: "/work#apps" },
+  },
 ] as const;
 
 

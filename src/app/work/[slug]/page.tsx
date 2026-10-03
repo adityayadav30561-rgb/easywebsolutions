@@ -7,6 +7,7 @@ import { WorkCard } from "@/components/blocks/WorkCard";
 import { CTA } from "@/components/blocks/CTA";
 import { SeoCaseStudy } from "@/components/work/SeoCaseStudy";
 import { ConceptCaseStudy } from "@/components/work/ConceptCaseStudy";
+import { AppCaseStudy } from "@/components/work/AppCaseStudy";
 
 export const dynamicParams = false;
 
@@ -23,6 +24,14 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
     return pageMetadata({
       title: `${p.name} SEO Case Study: ${p.headline.value} ${p.headline.label} | EasyWebSolns`,
       description: `${p.kicker} SEO results for ${p.name} (${p.industry}, ${p.location}), verified in Google Analytics and Search Console.`,
+      path: `/work/${p.slug}`,
+    });
+  }
+  if (item.kind === "app") {
+    const p = item.project;
+    return pageMetadata({
+      title: `${p.name} App: Design & Development Case Study | EasyWebSolns`,
+      description: `${p.kicker} Every screen of the ${p.name} app, plus a live demo.`,
       path: `/work/${p.slug}`,
     });
   }
@@ -44,7 +53,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
   return (
     <>
-      {item.kind === "seo" ? <SeoCaseStudy project={item.project} /> : <ConceptCaseStudy project={item.project} />}
+      {item.kind === "seo" ? <SeoCaseStudy project={item.project} /> : item.kind === "app" ? <AppCaseStudy project={item.project} /> : <ConceptCaseStudy project={item.project} />}
 
       <section aria-labelledby="next-heading" className="pb-16">
         <div className="wrap">
@@ -57,6 +66,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
       {item.kind === "seo" ? (
         <CTA lines={["Want results", <Em key="l">like these?</Em>]} lead="Tell us about your business and where you'd like to be found. We'll look at your search visibility and tell you honestly what's possible." primary={{ label: "Talk to us about SEO", href: "/contact?need=seo" }} />
+      ) : item.kind === "app" ? (
+        <CTA lines={["Have an app", <Em key="l">in mind?</Em>]} lead="Tell us what it should do and who it's for. We'll help you shape it into something people enjoy using." primary={{ label: "Talk to us about your app", href: "/contact?need=app" }} />
       ) : (
         <CTA lines={["Want something", <Em key="l">like this?</Em>]} lead="Tell us about your business and what you want your website to achieve." />
       )}

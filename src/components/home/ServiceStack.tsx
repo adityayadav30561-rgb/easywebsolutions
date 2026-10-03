@@ -47,7 +47,7 @@ function Card({ i, total, progress, s }: { i: number; total: number; progress: M
   );
 }
 
-/** The three services as glass cards that stack and settle as you scroll. */
+/** The services as glass cards that stack and settle as you scroll. */
 export function ServiceStack() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
@@ -56,8 +56,8 @@ export function ServiceStack() {
       <div className="wrap">
         <SectionHead
           id="services-heading"
-          lines={["Everything your website needs.", <Em key="n">Nothing it doesn&apos;t.</Em>]}
-          lead="Three ways we help: build the website, look after it, and keep making it better."
+          lines={["Everything your business needs online.", <Em key="n">Nothing it doesn&apos;t.</Em>]}
+          lead="Four ways we help: build your website or app, look after it, and keep making it better."
         />
         <div ref={ref} className="mt-16">
           {services.map((s, i) => (

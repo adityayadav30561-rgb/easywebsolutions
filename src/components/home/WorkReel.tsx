@@ -63,7 +63,7 @@ export function WorkReel() {
             <h2 id="work-heading" className="t-display text-[clamp(3rem,7vw,6rem)]">
               Selected <Em>work.</Em>
             </h2>
-            <p className="t-lead mt-6 max-w-sm">Real results for real clients, verified in their own Google Analytics and Search Console.</p>
+            <p className="t-lead mt-6 max-w-sm">Apps you can try today, and SEO results verified in our clients&apos; own Google Analytics.</p>
             <ButtonLink href="/work" variant="glass" className="mt-8 self-start">
               All work
             </ButtonLink>

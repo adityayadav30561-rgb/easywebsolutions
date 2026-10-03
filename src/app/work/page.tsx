@@ -3,11 +3,12 @@ import { PageIntro } from "@/components/blocks/PageIntro";
 import { Em } from "@/components/blocks/SectionHead";
 import { WorkGrid } from "@/components/blocks/WorkGrid";
 import { SeoResults } from "@/components/blocks/SeoResults";
+import { AppsShowcase } from "@/components/blocks/AppsShowcase";
 import { CTA } from "@/components/blocks/CTA";
 
 export const metadata = pageMetadata({
-  title: "Website Design Portfolio | EasyWebSolns",
-  description: "SEO results verified in Google Analytics and Search Console for e-commerce, healthcare, logistics and local businesses, plus website design concepts.",
+  title: "Portfolio: Apps, SEO Results & Websites | EasyWebSolns",
+  description: "Mobile apps with live demos, SEO results verified in Google Analytics and Search Console, and website design concepts.",
   path: "/work",
 });
 
@@ -16,8 +17,9 @@ export default function WorkPage() {
     <>
       <PageIntro
         lines={["Selected", <Em key="w">work.</Em>]}
-        lead="Real results for real clients, verified in their own analytics, alongside design concepts that show how we think about structure, clarity and conversion."
+        lead="Apps you can try for yourself and SEO results verified in our clients' own analytics, alongside design concepts that show how we think about structure, clarity and conversion."
       />
+      <AppsShowcase />
       <SeoResults />
       <section aria-labelledby="all-work-heading" className="pt-8 pb-24 sm:pb-32">
         <div className="wrap">
