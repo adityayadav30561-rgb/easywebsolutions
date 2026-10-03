@@ -1,4 +1,4 @@
-const items = ["Custom design", "Responsive layouts", "SEO foundations", "Analytics", "Speed optimisation", "Contact forms", "WhatsApp & click-to-call", "Google Maps", "SSL", "Monthly care", "Backups", "Security monitoring"];
+const items = ["Custom design", "Responsive layouts", "iOS & Android apps", "Web apps & PWAs", "SEO", "SEO foundations", "Analytics", "Speed optimisation", "Contact forms", "WhatsApp & click-to-call", "Google Maps", "SSL", "Monthly care", "Backups", "Security monitoring"];
 
 /** An endless, softly faded ribbon of what's included. */
 export function Marquee() {

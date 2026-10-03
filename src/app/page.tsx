@@ -13,9 +13,9 @@ import { CTA } from "@/components/blocks/CTA";
 import { Em } from "@/components/blocks/SectionHead";
 
 export const metadata = pageMetadata({
-  title: "EasyWebSolns — Websites That Work For You",
+  title: "EasyWebSolns — Websites & Apps That Work For You",
   description:
-    "Website design, development, optimization and care for growing businesses. Modern websites that make you easier to trust, understand and choose.",
+    "Website design and development, mobile apps for iOS, Android and the web, SEO and ongoing care for growing businesses.",
   path: "/",
 });
 
@@ -29,7 +29,7 @@ const jsonLd = {
   description: site.description,
   email: site.contact.email,
   sameAs: site.social.map((s) => s.href),
-  serviceType: ["Website design", "Website development", "Website optimization", "Website maintenance"],
+  serviceType: ["Website design", "Website development", "Mobile app development", "Search engine optimization", "Website maintenance"],
 };
 
 export default function HomePage() {
