@@ -1,24 +1,22 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { featuredWork } from "@/data/work";
 import { WorkCard } from "@/components/blocks/WorkCard";
 import { ButtonLink } from "@/components/site/Button";
 import { Em } from "@/components/blocks/SectionHead";
-import { useScrollFx } from "@/components/motion/useScrollFx";
 
 /**
- * Selected work on a horizontal rail. With a mouse/trackpad the section pins
- * and vertical scroll slides the rail sideways (the distance is measured, so
- * it ends exactly on the last card). On touch screens it's a native swipe
- * carousel with snap points, which the browser scrolls on the compositor.
+ * Selected work on a horizontal rail. The section pins and vertical scroll
+ * slides the rail sideways — the distance is measured, so it always ends
+ * exactly on the last card.
  */
 export function WorkReel() {
   const section = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const [distance, setDistance] = useState(0);
-  const fx = useScrollFx();
+  const reduce = useReducedMotion();
 
   useLayoutEffect(() => {
     const measure = () => {
@@ -33,32 +31,25 @@ export function WorkReel() {
       ro.disconnect();
       window.removeEventListener("resize", measure);
     };
-  }, [fx]);
+  }, []);
 
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
-  const bar = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const smooth = useSpring(scrollYProgress, { stiffness: 160, damping: 34, mass: 0.3 });
+  const x = useTransform(smooth, [0, 1], [0, -distance]);
+  const bar = useTransform(smooth, [0, 1], ["0%", "100%"]);
 
-  if (!fx) {
+  if (reduce) {
     return (
-      <section aria-labelledby="work-heading" className="py-20">
+      <section aria-labelledby="work-heading" className="py-24">
         <div className="wrap">
           <h2 id="work-heading" className="t-display text-[clamp(2.6rem,6.4vw,5.6rem)]">
             Selected <Em>work.</Em>
           </h2>
-          <p className="t-lead mt-5 max-w-sm">Apps you can try today, and SEO results verified in our clients&apos; own Google Analytics.</p>
-        </div>
-        <ul className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-4 [scroll-padding-inline:1.25rem] sm:gap-5 sm:px-8 sm:[scroll-padding-inline:2rem]">
-          {featuredWork.map((w, i) => (
-            <li key={w.slug} className="w-[84vw] max-w-[36rem] shrink-0 snap-start">
-              <WorkCard item={w} priority={i < 1} sizes="(min-width: 640px) 36rem, 84vw" className="aspect-[4/5] sm:aspect-[5/4]" />
-            </li>
-          ))}
-        </ul>
-        <div className="wrap mt-6">
-          <ButtonLink href="/work" variant="glass">
-            All work
-          </ButtonLink>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {featuredWork.map((w) => (
+              <WorkCard key={w.slug} item={w} className="aspect-[4/5] md:aspect-[5/4]" />
+            ))}
+          </div>
         </div>
       </section>
     );
