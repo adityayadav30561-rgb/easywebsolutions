@@ -27,7 +27,7 @@ export function SeoCard({ project, className, sizes = "(min-width: 1024px) 40vw,
       <div aria-hidden="true" className="absolute inset-0" style={{ background: `linear-gradient(160deg, ${project.accent}cc 0%, rgb(10 10 16 / 0.82) 55%, rgb(10 10 16 / 0.92) 100%)` }} />
       <div aria-hidden="true" className="absolute -top-1/3 -right-1/4 size-[70%] rounded-full bg-[radial-gradient(closest-side,rgb(108_124_255/0.35),transparent)]" />
 
-      <span className="glass glass-dark glass-thin absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 text-xs font-medium [--radius:999px]">
+      <span className="glass glass-live glass-dark glass-thin absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 text-xs font-medium [--radius:999px]">
         <span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgb(52_211_153)]" />
         SEO · Verified results
       </span>
@@ -38,7 +38,7 @@ export function SeoCard({ project, className, sizes = "(min-width: 1024px) 40vw,
         <p className="mt-1 text-sm text-white/55">{project.headline.period}</p>
       </div>
 
-      <div className="glass glass-thin absolute inset-x-3 bottom-3 flex items-end justify-between gap-4 p-5 transition-transform duration-700 ease-[var(--ease-premium)] group-hover:-translate-y-1 [--radius:1.6rem] sm:p-6">
+      <div className="glass glass-live glass-thin absolute inset-x-3 bottom-3 flex items-end justify-between gap-4 p-5 transition-transform duration-700 ease-[var(--ease-premium)] group-hover:-translate-y-1 [--radius:1.6rem] sm:p-6">
         <div className="min-w-0">
           <h3 className="t-head text-[1.35rem] text-ink sm:text-[1.6rem]">{project.name}</h3>
           <p className="mt-1 line-clamp-2 text-[0.92rem] text-ink-2">{project.kicker}</p>

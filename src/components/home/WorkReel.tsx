@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { featuredWork } from "@/data/work";
 import { WorkCard } from "@/components/blocks/WorkCard";
@@ -34,9 +34,8 @@ export function WorkReel() {
   }, []);
 
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
-  const smooth = useSpring(scrollYProgress, { stiffness: 160, damping: 34, mass: 0.3 });
-  const x = useTransform(smooth, [0, 1], [0, -distance]);
-  const bar = useTransform(smooth, [0, 1], ["0%", "100%"]);
+  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
+  const bar = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   if (reduce) {
     return (

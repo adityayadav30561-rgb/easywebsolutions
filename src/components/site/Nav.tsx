@@ -33,7 +33,7 @@ export function Nav() {
       <nav
         aria-label="Main"
         className={cn(
-          "glass glass-thin mx-auto flex items-center justify-between gap-4 [--radius:999px]",
+          "glass glass-live glass-thin mx-auto flex items-center justify-between gap-4 [--radius:999px]",
           compact ? "h-14 max-w-[54rem] pr-1.5 pl-5" : "h-16 max-w-[70rem] pr-2 pl-6",
         )}
         style={{ transition: "max-width .7s var(--ease-premium), height .7s var(--ease-premium), padding .7s var(--ease-premium)" }}
@@ -88,11 +88,11 @@ export function Nav() {
         {open && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0, y: -12, scale: 0.97, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -8, scale: 0.98, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: -12, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="glass mx-auto mt-3 max-w-[70rem] origin-top p-3 [--radius:2rem] md:hidden"
+            className="glass glass-live mx-auto mt-3 max-w-[70rem] origin-top p-3 [--radius:2rem] md:hidden"
           >
             <ul>
               {mainNav.map((l, i) => (

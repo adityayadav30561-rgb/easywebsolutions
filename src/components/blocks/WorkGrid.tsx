@@ -36,9 +36,9 @@ export function WorkGrid() {
             <motion.li
               key={item.slug}
               layout
-              initial={{ opacity: 0, scale: 0.94, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.94, filter: "blur(10px)" }}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.94 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <WorkCard item={item} priority={i < 2} sizes="(min-width: 768px) 46vw, 92vw" className="aspect-[4/5] sm:aspect-[5/4]" />

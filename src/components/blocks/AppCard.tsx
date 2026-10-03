@@ -24,7 +24,7 @@ export function AppCard({ project, className, sizes = "(min-width: 1024px) 40vw,
       />
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-      <span className="glass glass-dark glass-thin absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 text-xs font-medium [--radius:999px]">
+      <span className="glass glass-live glass-dark glass-thin absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 text-xs font-medium [--radius:999px]">
         <svg viewBox="0 0 16 16" aria-hidden="true" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.5">
           <rect x="4" y="1.5" width="8" height="13" rx="2" />
           <path d="M7 12.2h2" strokeLinecap="round" />
@@ -32,7 +32,7 @@ export function AppCard({ project, className, sizes = "(min-width: 1024px) 40vw,
         App · Live demo
       </span>
 
-      <div className="glass glass-thin absolute inset-x-3 bottom-3 flex items-end justify-between gap-4 p-5 transition-transform duration-700 ease-[var(--ease-premium)] group-hover:-translate-y-1 [--radius:1.6rem] sm:p-6">
+      <div className="glass glass-live glass-thin absolute inset-x-3 bottom-3 flex items-end justify-between gap-4 p-5 transition-transform duration-700 ease-[var(--ease-premium)] group-hover:-translate-y-1 [--radius:1.6rem] sm:p-6">
         <div className="min-w-0">
           <h3 className="t-head text-[1.35rem] text-ink sm:text-[1.6rem]">{project.name}</h3>
           <p className="mt-1 line-clamp-2 text-[0.92rem] text-ink-2">{project.kicker}</p>

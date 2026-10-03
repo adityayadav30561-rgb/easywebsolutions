@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-/** Fades, lifts and de-blurs its children into view once. */
+/** Fades and lifts its children into view once (opacity and transform only, so it stays on the GPU). */
 export function Reveal({
   children,
   delay = 0,
@@ -25,8 +25,8 @@ export function Reveal({
   return (
     <M
       className={className}
-      initial={{ opacity: 0, y, filter: "blur(10px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -12% 0px" }}
       transition={{ duration: 1.1, ease, delay }}
     >
@@ -81,8 +81,8 @@ export function RevealLines({
           <motion.span
             className="block will-change-transform"
             variants={{
-              hidden: { y: "105%", opacity: 0, filter: "blur(8px)" },
-              show: { y: "0%", opacity: 1, filter: "blur(0px)", transition: { duration: 1.15, ease, delay: delay + i * 0.09 } },
+              hidden: { y: "105%", opacity: 0 },
+              show: { y: "0%", opacity: 1, transition: { duration: 1.15, ease, delay: delay + i * 0.09 } },
             }}
           >
             {line}

@@ -18,7 +18,7 @@ function Card({ i, total, progress, s }: { i: number; total: number; progress: M
     <div className="sticky top-[14svh] h-[78svh] min-h-[34rem]" style={{ paddingTop: `${i * 1.6}rem` }}>
       <motion.article
         style={reduce ? undefined : { scale }}
-        className="glass relative mx-auto grid h-full max-h-[44rem] origin-top overflow-hidden p-3 will-change-transform [--radius:2.6rem] md:grid-cols-2"
+        className="glass glass-solid relative mx-auto grid h-full max-h-[44rem] origin-top overflow-hidden p-3 will-change-transform [--radius:2.6rem] md:grid-cols-2"
       >
         <div className="flex flex-col justify-between gap-8 p-6 sm:p-10">
           <div>

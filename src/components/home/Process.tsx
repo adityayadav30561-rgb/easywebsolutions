@@ -29,8 +29,8 @@ export function Process() {
                 <AnimatePresence initial={false}>
                   <motion.div
                     key={step.photo}
-                    initial={{ opacity: 0, scale: 1.08, filter: "blur(12px)" }}
-                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                    initial={{ opacity: 0, scale: 1.08 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute inset-0"
@@ -38,7 +38,7 @@ export function Process() {
                     <Image src={photos[step.photo].src} alt="" fill sizes="45vw" placeholder="blur" quality={75} className="object-cover" />
                   </motion.div>
                 </AnimatePresence>
-                <div className="glass glass-thin absolute inset-x-4 bottom-4 flex items-center justify-between px-5 py-4 [--radius:1.4rem]">
+                <div className="glass glass-live glass-thin absolute inset-x-4 bottom-4 flex items-center justify-between px-5 py-4 [--radius:1.4rem]">
                   <span className="t-head text-xl text-ink">{step.title}</span>
                   <span className="text-sm font-medium text-ink-2 tabular-nums">
                     {active + 1} / {processSteps.length}

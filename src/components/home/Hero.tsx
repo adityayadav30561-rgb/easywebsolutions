@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, useMotionTemplate } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { getProject } from "@/data/projects";
 import { MockupWindow } from "@/components/visuals/ProjectMockup";
@@ -22,10 +22,10 @@ function Chip({ text, pos, depth, progress, delay }: { text: string; pos: string
   return (
     <motion.div style={{ y }} className={`absolute ${pos} z-20 hidden sm:block`}>
       <motion.div
-        initial={{ opacity: 0, scale: 0.85, filter: "blur(10px)" }}
-        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, ease, delay }}
-        className="glass glass-thin float-y flex items-center gap-2.5 px-4 py-2.5 text-[0.9rem] font-medium whitespace-nowrap text-ink [--radius:999px]"
+        className="glass glass-live glass-thin float-y flex items-center gap-2.5 px-4 py-2.5 text-[0.9rem] font-medium whitespace-nowrap text-ink [--radius:999px]"
         style={{ animationDelay: `${delay * 2}s` }}
       >
         <span className="size-2 rounded-full bg-gradient-to-br from-violet to-iris shadow-[0_0_10px_rgb(108_124_255/0.7)]" />
@@ -36,7 +36,7 @@ function Chip({ text, pos, depth, progress, delay }: { text: string; pos: string
 }
 
 /**
- * Opening scene. The headline drifts back and dissolves while a glass-framed
+ * Opening scene. The headline drifts back and fades while a glass-framed
  * website rises, flattens out of its tilt and comes forward — all scrubbed
  * by scroll on a sticky stage.
  */
@@ -44,13 +44,12 @@ export function Hero() {
   const stage = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: stage, offset: ["start start", "end start"] });
-  const p = useSpring(scrollYProgress, { stiffness: 140, damping: 32, mass: 0.35 });
+  // Lenis already smooths the scroll, so progress is used directly (a spring on top adds lag).
+  const p = scrollYProgress;
 
   const textOpacity = useTransform(p, [0, 0.38], [1, 0]);
   const textY = useTransform(p, [0, 0.4], [0, -90]);
   const textScale = useTransform(p, [0, 0.4], [1, 0.94]);
-  const textBlur = useTransform(p, [0, 0.38], [0, 12]);
-  const textFilter = useMotionTemplate`blur(${textBlur}px)`;
 
   const deviceY = useTransform(p, [0, 0.6], [0, -260]);
   const deviceRotate = useTransform(p, [0, 0.55], [22, 0]);
@@ -64,7 +63,7 @@ export function Hero() {
         <Aurora className="scale-110" />
 
         <motion.div
-          style={reduce ? undefined : { opacity: textOpacity, y: textY, scale: textScale, filter: textFilter }}
+          style={reduce ? undefined : { opacity: textOpacity, y: textY, scale: textScale }}
           className="wrap relative z-10 flex flex-col items-center pt-[max(7.5rem,15svh)] text-center will-change-transform"
         >
           <h1 id="hero-heading" className="t-display text-[clamp(3.2rem,min(10.5vw,15svh),9rem)]">
@@ -72,8 +71,8 @@ export function Hero() {
               <span key={line} className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
                 <motion.span
                   className="block"
-                  initial={reduce ? false : { y: "110%", filter: "blur(12px)", opacity: 0 }}
-                  animate={{ y: "0%", filter: "blur(0px)", opacity: 1 }}
+                  initial={reduce ? false : { y: "110%", opacity: 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
                   transition={{ duration: 1.3, ease, delay: 0.15 + i * 0.12 }}
                 >
                   {i === 1 ? (
@@ -88,8 +87,8 @@ export function Hero() {
             ))}
           </h1>
           <motion.p
-            initial={reduce ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={reduce ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease, delay: 0.55 }}
             className="t-lead mt-7 max-w-[34rem] !text-ink-2"
           >

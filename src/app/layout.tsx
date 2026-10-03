@@ -54,7 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         {/* Site-wide colour field the glass refracts */}
         <div aria-hidden="true" className="fixed inset-0 -z-10">
-          <Aurora intensity={0.55} />
+          <Aurora intensity={0.55} still />
         </div>
         <Nav />
         <main id="main" className="flex-1">
