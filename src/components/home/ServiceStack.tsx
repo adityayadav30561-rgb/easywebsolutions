@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
 import { services } from "@/data/services";
 import { photos } from "@/data/images";
 import { ButtonLink } from "@/components/site/Button";
 import { Em, SectionHead } from "@/components/blocks/SectionHead";
+import { useScrollFx } from "@/components/motion/useScrollFx";
 
 function Card({ i, total, progress, s }: { i: number; total: number; progress: MotionValue<number>; s: (typeof services)[number] }) {
-  const reduce = useReducedMotion();
+  const fx = useScrollFx();
   const target = 1 - (total - 1 - i) * 0.045;
   const scale = useTransform(progress, [i / total, 1], [1, target]);
   const dim = useTransform(progress, [i / total, (i + 1) / total], [0, i === total - 1 ? 0 : 0.12]);
@@ -17,7 +18,7 @@ function Card({ i, total, progress, s }: { i: number; total: number; progress: M
   return (
     <div className="sticky top-[14svh] h-[78svh] min-h-[34rem]" style={{ paddingTop: `${i * 1.6}rem` }}>
       <motion.article
-        style={reduce ? undefined : { scale }}
+        style={fx ? { scale } : undefined}
         className="glass glass-solid relative mx-auto grid h-full max-h-[44rem] origin-top overflow-hidden p-3 will-change-transform [--radius:2.6rem] md:grid-cols-2"
       >
         <div className="flex flex-col justify-between gap-8 p-6 sm:p-10">

@@ -13,6 +13,7 @@ import { Aurora } from "@/components/site/Aurora";
 import { Em } from "@/components/blocks/SectionHead";
 import { CountUp } from "@/components/motion/CountUp";
 import { cn } from "@/lib/cn";
+import { useScrollFx } from "@/components/motion/useScrollFx";
 
 import eiHome from "@/assets/work/apps/event-intelligence-india/light/01-home.webp";
 import maHome from "@/assets/work/apps/maharishi-ayurveda/07-home.webp";
@@ -197,6 +198,7 @@ export function Hero() {
   const section = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const fx = useScrollFx(); // scroll-linked parallax only where it can be smooth (mouse/trackpad)
   const [active, setActive] = useState(1);
   const [hover, setHover] = useState(false);
   const inView = useInView(section, { amount: 0.3 });
@@ -234,7 +236,7 @@ export function Hero() {
 
       <div className="wrap relative z-10 grid min-h-svh items-center gap-12 pt-28 pb-16 sm:pt-32 lg:grid-cols-12 lg:gap-8 lg:pb-20">
         {/* Copy */}
-        <motion.div style={reduce ? undefined : { y: textY, opacity: textOpacity }} className="lg:col-span-5">
+        <motion.div style={fx ? { y: textY, opacity: textOpacity } : undefined} className="lg:col-span-5">
           <h1 id="hero-heading" className="t-display text-[clamp(3rem,min(7.4vw,11svh),6rem)]">
             {lines.map((line, i) => (
               <span key={i} className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
@@ -292,14 +294,14 @@ export function Hero() {
 
         {/* Showcase */}
         <motion.div
-          style={reduce ? undefined : { y: stageY }}
+          style={fx ? { y: stageY } : undefined}
           initial={reduce ? false : { opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.3, ease, delay: 0.3 }}
           className="lg:col-span-7"
         >
           <div className="[perspective:1600px]" onPointerMove={onMove} onPointerEnter={() => setHover(true)} onPointerLeave={onLeave}>
-            <motion.div ref={stage} style={reduce ? undefined : { rotateX, rotateY }} className="relative aspect-[1/0.92] w-full [transform-style:preserve-3d] sm:aspect-[5/4]">
+            <motion.div ref={stage} style={fx ? { rotateX, rotateY } : undefined} className="relative aspect-[1/0.92] w-full [transform-style:preserve-3d] sm:aspect-[5/4]">
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div key={scene.key} className="absolute inset-0" exit={{ opacity: 0, transition: { duration: 0.4 } }}>
                   <scene.Scene priority={active === 1} />

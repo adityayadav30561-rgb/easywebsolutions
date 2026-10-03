@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Fragment, useLayoutEffect, useRef, useState } from "react";
 import type { AppProject, AppScreen } from "@/data/app-projects";
 import { screenCount } from "@/data/app-projects";
 import { Em } from "@/components/blocks/SectionHead";
 import { cn } from "@/lib/cn";
+import { useScrollFx } from "@/components/motion/useScrollFx";
 
 const spring = { type: "spring", stiffness: 420, damping: 36, mass: 0.7 } as const;
 
@@ -14,7 +15,7 @@ const spring = { type: "spring", stiffness: 420, damping: 36, mass: 0.7 } as con
 function Phone({ screen, name, dark, loadDark }: { screen: AppScreen; name: string; dark: boolean; loadDark: boolean }) {
   const full = dark && screen.dark ? screen.dark : screen.image;
   return (
-    <figure className="w-[min(58vw,15rem)] shrink-0 sm:w-[clamp(13rem,19vw,17rem)]">
+    <figure className="w-[min(58vw,15rem)] shrink-0 snap-start sm:w-[clamp(13rem,19vw,17rem)]">
       <a href={full.src} target="_blank" rel="noopener noreferrer" className={cn("glass block p-[3.5%] transition-transform duration-500 ease-[var(--ease-premium)] hover:-translate-y-1.5 [--radius:16%/7.4%]", dark && "glass-dark")}>
         <span className="relative block overflow-hidden rounded-[13%/6%] bg-white">
           <Image src={screen.image} alt={`${name}: ${screen.title}. ${screen.caption}`} placeholder="blur" quality={90} sizes="(min-width: 640px) 17rem, 58vw" className="block h-auto w-full" />
@@ -61,9 +62,10 @@ function ThemeSwitch({ dark, onChange }: { dark: boolean; onChange: (d: boolean)
 }
 
 /**
- * Every screen of the app on one horizontal rail, grouped by flow. The section
- * pins and vertical scroll slides the rail; the distance is measured so it
- * always ends on the last screen. Apps with a dark theme get a Light/Dark switch
+ * Every screen of the app on one horizontal rail, grouped by flow. With a
+ * mouse/trackpad the section pins and vertical scroll slides the rail (the
+ * distance is measured so it ends on the last screen); on touch screens it's a
+ * native swipe carousel with snap points, which never stutters. Apps with a dark theme get a Light/Dark switch
  * that cross-fades every screen (dark images load only once it's first used).
  */
 export function ScreenTour({ project }: { project: AppProject }) {
@@ -72,7 +74,7 @@ export function ScreenTour({ project }: { project: AppProject }) {
   const [distance, setDistance] = useState(0);
   const [dark, setDark] = useState(false);
   const [loadDark, setLoadDark] = useState(false);
-  const reduce = useReducedMotion();
+  const fx = useScrollFx();
 
   useLayoutEffect(() => {
     const measure = () => {
@@ -87,7 +89,7 @@ export function ScreenTour({ project }: { project: AppProject }) {
       ro.disconnect();
       window.removeEventListener("resize", measure);
     };
-  }, []);
+  }, [fx]);
 
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
@@ -99,7 +101,7 @@ export function ScreenTour({ project }: { project: AppProject }) {
   };
 
   const intro = (
-    <div className="flex w-[82vw] shrink-0 flex-col justify-center pr-4 sm:w-[26rem]">
+    <div className={cn("flex shrink-0 flex-col justify-center", fx ? "w-[26rem] pr-4" : "max-w-xl")}>
       <h2 id="screens-heading" className={cn("t-display text-[clamp(2.8rem,6vw,5rem)] transition-colors duration-700", dark && "!text-white")}>
         Inside the <Em>app.</Em>
       </h2>
@@ -116,10 +118,10 @@ export function ScreenTour({ project }: { project: AppProject }) {
 
   const rail = (
     <>
-      {intro}
+      {fx && intro}
       {project.flows.map((f, fi) => (
         <Fragment key={f.title}>
-          <div className="flex w-[44vw] shrink-0 flex-col justify-center sm:w-[13rem]">
+          <div className="flex w-[40vw] shrink-0 snap-start flex-col justify-center sm:w-[13rem]">
             <span className={cn("text-sm font-medium tabular-nums transition-colors duration-700", dark ? "text-white/50" : "text-mute")}>
               {String(fi + 1).padStart(2, "0")} / {String(project.flows.length).padStart(2, "0")}
             </span>
@@ -137,11 +139,15 @@ export function ScreenTour({ project }: { project: AppProject }) {
     <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0 rounded-[2.75rem] transition-colors duration-700 ease-[var(--ease-premium)]", dark ? "bg-night" : "bg-white/0")} />
   );
 
-  if (reduce) {
+  if (!fx) {
     return (
-      <section aria-labelledby="screens-heading" className="relative mx-3 py-16 sm:mx-5">
+      <section aria-labelledby="screens-heading" className="relative mx-3 py-16 sm:mx-5 sm:py-20">
         {bg}
-        <div className="relative flex gap-6 overflow-x-auto px-5 pb-6 sm:px-10">{rail}</div>
+        <div className="relative px-5 sm:px-10">{intro}</div>
+        <div className="no-scrollbar relative mt-10 flex snap-x snap-mandatory items-center gap-5 overflow-x-auto overscroll-x-contain px-5 pb-4 [scroll-padding-inline:1.25rem] sm:gap-8 sm:px-10 sm:[scroll-padding-inline:2.5rem]">
+          {rail}
+        </div>
+        <p className={cn("relative mt-4 px-5 text-sm transition-colors duration-700 sm:px-10", dark ? "text-white/50" : "text-mute")}>Swipe to see every screen.</p>
       </section>
     );
   }
